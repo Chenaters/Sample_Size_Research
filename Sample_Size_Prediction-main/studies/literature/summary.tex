@@ -1,0 +1,136 @@
+% Summary of papers
+\documentclass[
+11pt, % The default document font size, options: 10pt, 11pt, 12pt
+%oneside, % Two side (alternating margins) for binding by default, uncomment to switch to one side
+english, % ngerman for German
+singlespacing, % Single line spacing, alternatives: onehalfspacing or doublespacing
+%draft, % Uncomment to enable draft mode (no pictures, no links, overfull hboxes indicated)
+%nolistspacing, % If the document is onehalfspacing or doublespacing, uncomment this to set spacing in lists to single
+%liststotoc, % Uncomment to add the list of figures/tables/etc to the table of contents
+%toctotoc, % Uncomment to add the main table of contents to the table of contents
+%parskip, % Uncomment to add space between paragraphs
+%nohyperref, % Uncomment to not load the hyperref package
+headsepline, % Uncomment to get a line under the header
+%chapterinoneline, % Uncomment to place the chapter title next to the number on one line
+%consistentlayout, % Uncomment to change the layout of the declaration, abstract and acknowledgements pages to match the default layout
+]{MastersDoctoralThesis} % The class file specifying the document structure
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+ \usepackage{mathrsfs}
+\usepackage{cite}
+\usepackage{mathpazo} % Use the Palatino font by default
+
+ 
+
+\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
+
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	inner=2.5cm, % Inner margin
+	outer=3.8cm, % Outer margin
+	bindingoffset=.5cm, % Binding offset
+	top=1.5cm, % Top margin
+	bottom=1.5cm, % Bottom margin
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+\begin{document}
+
+\chapter{Summary} 
+
+\label{Summary}
+\begin{enumerate}
+
+
+\item Minimum sample size for developing a multivariable
+prediction model: Part I – Continuous outcomes
+
+When we are using linear regression to predict contimuous outcomes,Four criteria for obtaining a suitable sample size are presented in this article. 
+\begin{itemize}
+    \item  ensure a shrinkage factor 
+    $$S_{c} = 1 + \frac{p-2}{n ln(1-(\frac{R^{2}_{adj}(n-p-1)+p}{(n-1)}))}\le 0.9$$
+    \item  ensure a small absolute
+difference in $R^{2}_{adj}$ and $R^{2}_{app}$
+$$\frac{p(1-R^{2}_{adj})}{(n-1)}\le \delta$$
+    \item precise estimate of the residual standard deviation. 
+    \\MMOE for estimating $\sigma_{model}$)
+    $$MMOE = \sqrt{max(\frac{\chi_{1-\frac{\alpha}{2},n-p-1)}^{2}}{n-p-1},\frac{n-p-1}{\chi_{\frac{\alpha}{2},n-p-1}})}$$
+    \item precise estimate of the mean predicted outcome value $1.0\le MMOE \le 1.1$
+    $$MMOE = t_{1-\frac{0.05}{2},n-p-1}\sqrt{\frac{\sigma^{2}_{null}(1-R^{2}_{adj})}{n}}$$  
+\end{itemize}
+
+This paper starts with avoiding overfitting while preserving accurate prediction performance. The global shrinkage factor is applied  to all estimated predictor effects to adjust for overfitting. As the calculation of sample size shoule be done before the model fitting, we use $R^{2}_{adj}$ as an unbiased estimate of $R^{2}_{app}$. The difference between $R^{2}_{adj}$ and $R^{2}_{app}$ represents the optimism in the developed model's apparent proportion of variance explained.\\
+
+\item Minimum sample size for developing a multivariable prediction model: PART II - binary and time-to-event outcomes
+
+Basically the same idea as in continuous outcome. For binary outcome, the author considered the events per predictor parameter, EPP.  \begin{itemize}
+\item Small optimism in predictor effect estimates as defined by a global shrinkage factor of $\le0.9$
+\item Small absolute difference of $\le 0.05$ in the model's apparent and adjusted Nagelkerke's $R^2$
+$$R^{2}_{Nagelkerke_app}-R^{2}_{Nagelkerke_adj} = \frac{R^{2}_{CS\_app}}{max(R^{2}_{CS\_app})}-\frac{R^{2}_{CS\_adj}}{max(R^{2}_{CS\_adj})}$$
+The $R^{2}_{CS\_adj}$ can be derived by LR statistic,  $pseudo R^2$ statistics, C statistic or directly $R^{2}_{CS\_adj}$ from existing models.
+\item Precise estimation of the overall risk or rate in the population.
+the margin of error in outcome proportion estimates $\hat{\phi}$ for a null model is (in $95\%$)
+$$1.96\sqrt{\frac{\hat{\phi}(1-\hat{\phi})}{n}}$$
+we recommend a more stringent margin of error $\le 0.05$.
+
+\end{itemize}
+\item A note on estimating the Cox-Snell $R^2$ from a reported C-statistic (AUROC) to inform sample size calculations for developing a prediction model with a binary outcome
+
+\begin{itemize}
+\item Simulate a large dataset (eg, one million participants)
+\item Assign an outcome of $Y_{i} =0$ (no event) or $Y_{i} =1$ (event) based on sampling from a $Bernoulli (\phi)$ distribution, where $\phi$ is the outcome proportion in the article reporting the existing prediction model
+\item Simulate $LP_{i}$ values for every participant assuming ${LP}_{i} \sim N(0,1)$ in the non-events group and ${LP}_{i} \sim N(\mu,1)$ in the events group, where $\mu = \sqrt{2}\phi^{-1}(C)$.
+\item Fit a logistic regression to the simulated data; that is,
+$$Y_{i} \sim Bernoulli(p_i),
+logit(p_{i}) = \alpha + \beta LP_{i}$$
+This fitted model will have the same C statistic. The estimated values of coefficients ensure
+a perfect calibration-in-the-large (=0) and calibration slope (=1), respectively, in new data from the same assumed target population. We can obtain the $R^{2}_{CS}$for this fitted logistic regression model post estimation
+
+\end{itemize}
+
+\item Copas Using regression models for prediction: shrinkage and regression to the mean
+
+When we are using the standard multiple regression model with response variable $Y$ distributed as
+$$Y\sim N(\alpha +{\beta}^\mathrm{T}X, \sigma^2)$$
+The reason of shrinkage occurrence is explained by ‘There is a sense in which the estimated model fits the data too well - shrinkage occurs because any unusual random features of the original data will be reflected in the predictions but not be replicated in a set of independent observations’. This may be because of the uniqueness of each set of data. The values of response variable for the new patients will be closer to the overall mean than we would expect from an uncritical application of least squares or maximum likelihood.
+
+If the same set of data is used both to select the covariate and to fit the model, then the values of the coefficients will be biased and the shrinkage of the predictor will be even more marked. This is because that if a regression coefficient is by chance overestimated (in absolute value) then it will be more likely to be selected than if it happened to be underestimated, hence the covariates which end up being selected for the model are likely to have larger coefficients. This means that the LS predictor will give too wide a range of values, high values of prediction$\hat{y}$ will be too high and low values of $\hat{y}$ will be too small. \\
+ 
+\item  Sample size and the accuracy of predictors made from multiple regression equations- RICHARD SAWYER
+
+The paper gives approximation function of measure prediction accuracy(mean absolute error) in terms of sample size and the number of predictors. The accuracy in estimating multiple regression coefficients depends on sample size and estimation error in estimating the coefficients propagates error in prediction. With  multivariable normal assumption, we have approximations
+$$ MAE \doteq \sigma\prime\sqrt{\frac{2}{\pi}}$$
+where $\sigma\prime = \sqrt{MSE}$, and an inflation factor $K=\sqrt{\frac{(n+1)(n-2)}{[n(n-p-2)]}}>1$ from moment approximation with $M=1$. Controlling inflation factor K between $5\%$ and $10\%$ corresponds to the subject-to-variable ratio of 10 to 1, which is a well-known rulf of thumb.
+
+
+\item Sample size for prediction of quantitative and binary outcomes based on cohort study
+\begin{itemize}
+\item Cohen's $f^2$: one of the most common method for calculating the effect size of each of the variables or construct. Cohen categorized effect size as small($\ge 0,02$), medium($\ge 0.15$) or large($\ge0.35$). $$f^2 = \frac{R^2}{1-R^2}$$
+\item measure how well the factors explains / contributes to the model: $f^2$ for quantiative outcomes, AUC and Cox and Snell $R^2$ for binary ourcome.
+
+
+\end{itemize}
+
+\item Sample Sizes When Using Multiple Linear Regression for Prediction
+
+Multiple correlation coefficient is a measure of how well a given variable can be predicted using a linear function of a set of other variables.  Higher values indicate higher predictability of the dependent variable from the independent variables, with a value of 1 indicating that the predictions are exactly correct and a value of 0 indicating that no linear combination of the independent variables is a better predictor than is the fixed mean of the dependent variable. The basic idea of finding the minimum sample size in this paper is to find the sample regression(with replications) that is most similar to the population regression. The criteria in this paper is the proportion of the correlation coefficients produced by sample regression replications which expected to ba large enough than $\tau$. The higer $\tau$ means better prediction. It turns out that as the value of $\rho^2$ decreases and as the number of predictor variables $p$ increases, the recommended sample size $n$ increases at an increasing rate.
+
+\item COMPUTER EXPERIMENTS: PREDICTION ACCURACY,
+SAMPLE SIZE AND MODEL COMPLEXITY REVISITED
+
+In this paper the author provide the interrelationship of sample size $n$, complexity of the model represented by vector of hyperparameters $\theta$ and prediction accuracy. The integrated MSPE (IMSPE) is used as measure of prediction accuracy here.  By minimizing the IMSPE we can expect to improve the predictive ability of the Kriging predictor. The Root Average Unexplained Variability (RAUV) of predictor $\hat{y}$ is proposed as a measure of expected prediction error on designing
+a computer experiment.
+$$RAUV(\hat{y};\mathscr{D},\theta)=\sqrt{\frac{IMSPE(\hat{y};\mathscr{D},\theta)}{\sigma^2}}$$
+ requiring $RAUV\le 0.05$ means that we want the square root of the average squared
+length of our prediction intervals to shrink by $95\%$ once data is observed, explaining at least $100(1-{\varepsilon}^{2})\%$ of the variability of y(x) by the model.
+\begin{itemize}
+\item Let ${\lambda_k}$ be the set of eigenvalues of $R (x, \prime{x} ; \theta)$. Let $n_c$ be the
+critical sample size required to achieve $RAUV \le \varepsilon$ for some $\varepsilon >0$. Then 
+$$n_c \ge min\{n: \sqrt{\sum_{k\ge n+1}\lambda_k}\le\varepsilon\}=min\{n:\sum^{n}_{k=1}\lambda_k\ge1-\varepsilon^2\}.$$
+we can derive analytically the required sample size for a given average level of prediction accuracy.
+The result of simulation, for a fixed sample size, the average unexplained variability grows fairly rapidly as the number of active factors increases. The more complex the response surface and the more active inputs influencing the response, the larger the sample size required. When the model is simple, the Gaussian process does an admirable job at computer model emulation.
+\end{itemize}
+
+\end{enumerate}
+\end{document}

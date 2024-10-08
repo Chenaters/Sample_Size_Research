@@ -1,0 +1,240 @@
+\documentclass[12pt]{report}
+% Basic Package Imports
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage{grffile}
+\usepackage{makecell}
+\usepackage{ytableau}
+
+%Packages
+\usepackage{amssymb,amsmath, amsthm, graphicx, color,subfigure, cancel,commath,ifthen,natbib, bm,alltt, graphicx,float}
+\newcommand\commentout[1]{}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\usepackage{xr} 
+\newcommand{\nc}{\newcommand}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\SD}{\mathrm{SD}}
+\newcommand{\SNR}{\text{SNR}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Cor}{\mathrm{Cor}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\SIGMA}{\bm{\Sigma}}
+\newcommand{\BETA}{\bm{\beta}}
+\newcommand{\GAMMA}{\bm{\gamma}}
+
+\newtheorem{defi}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{obs}{Observation}
+\newtheorem{cor}{Corollary}
+\newtheorem{lem}{Lemma}
+\newtheorem{ass}{Assumption}
+
+% Formatting
+\usepackage{setspace}
+\setlength{\textheight}{8.63in}
+\setlength{\textwidth}{5.9in}
+\setlength{\topmargin}{-0.2in}
+\setlength{\oddsidemargin}{0.3in}
+\setlength{\evensidemargin}{0.3in}
+\setlength{\headsep}{0.0in}
+
+% Document header formatting
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\rightmark}
+\setlength{\headsep}{0.2in}
+
+
+\begin{document}
+\thispagestyle{fancy}
+
+%===================================================
+\title{\bf Result comparison for covariance matrix generated and linear generated data in simulation}
+%\author{...
+%\and
+%...
+%}
+\date{}
+\maketitle
+% 
+% \begin{abstract}
+%...
+%
+%
+%\bigskip 
+%
+%\noindent \textbf{KEYWORDS:} 
+% \end{abstract}
+%%===================================================
+%%END: frontmatter
+%
+%%BEGIN: \section{Introduction}\label{sec:Intro}
+%%===================================================
+%\newpage
+%
+
+%=======================
+
+\section{Aim}
+
+To validate the results of adding predictors sequentially, we used two measures: the PMSE (Predictive Mean Squared Error) and the correlation value between the predicted and true values. Each result was calculated by taking the mean of 1000 iterations. We generated the data using two methods: a linear model and a covariance matrix.
+
+
+For the linear model method, we generated the response variable using multi-normal predictors, given the covariance matrix, and calculated $\sigma_k^2 = \sigma_{00}-\bm{\sigma'\Sigma^{-1}\sigma}$, the coefficients $\beta$ is calculated by $\bm{\Sigma^{-1}\sigma}$ For the covariance matrix method, we generated the response variable directly using the covariance matrix.
+
+Our assumption was that the results from the two different methods should be the same or almost the same. We compared the results using the PMSE and the correlation value between the prediction and true value, as shown in the following tables.
+
+\section{Result}
+For a PMSE, the result is shown in \ref{table:PMSElinear} and \ref{table:PMSEcov}we found that the results from the two methods were similar for most scenarios as expected. The trend on PMSE when adding significant or insignificant predictors was also the same. In terms of the correlation value between the true value and predictions, as shown in \ref{table:CORRlinear} and \ref{table:CORRcov}, the results are similar too. A further comparison between the calculated PMSE and simulated PMSE will be provided in the thesis.
+
+
+
+
+\begin{table}[h!]
+    \centering\resizebox{\linewidth}{!}{ 
+    \begin{tabular}{||c c c c c c c c c c c||}
+    \hline
+      \makecell[c]{Sample\\ Size} & \makecell[c]{Basic \\Model} & Comorbidities & \makecell[c]{Pain\\Locations} & Medications & \makecell[c]{Physical\\Functioning} & \makecell[c]{Depressive\\Symptoms} & \makecell[c]{Life\\Satisfaction} & \makecell[c]{LOC\\chance} & \makecell[c]{LOC\\powerful} & \makecell[c]{LOC\\internal} \\ \hline
+ \hline
+       
+30 & 1.1550 & 0.9927 & 0.9753 & 1.0254 & 1.0019 & 1.0468 & 1.0848 & 0.9956 & 1.0431 & 1.0807 \\ \hline
+        60 & 1.0829 & 0.9237 & 0.8950 & 0.9252 & 0.8905 & 0.9092 & 0.9252 & 0.8344 & 0.8515 & 0.8602 \\ \hline
+        90 & 1.0575 & 0.8956 & 0.8621 & 0.8823 & 0.8411 & 0.8491 & 0.8546 & 0.7620 & 0.7687 & 0.7662 \\ \hline
+        120 & 1.0376 & 0.8751 & 0.8382 & 0.8534 & 0.8091 & 0.8111 & 0.8110 & 0.7179 & 0.7186 & 0.7108 \\ \hline
+        150 & 1.0244 & 0.8617 & 0.8227 & 0.8340 & 0.7873 & 0.7851 & 0.7811 & 0.6880 & 0.6851 & 0.6733 \\ \hline
+        180 & 1.0146 & 0.8515 & 0.8109 & 0.8196 & 0.7714 & 0.7663 & 0.7598 & 0.6666 & 0.6610 & 0.6469 \\ \hline
+        210 & 1.0073 & 0.8439 & 0.8020 & 0.8087 & 0.7592 & 0.7522 & 0.7437 & 0.6506 & 0.6432 & 0.6273 \\ \hline
+        240 & 1.0009 & 0.8374 & 0.7945 & 0.7996 & 0.7492 & 0.7408 & 0.7308 & 0.6378 & 0.6288 & 0.6117 \\ \hline
+        270 & 0.9960 & 0.8323 & 0.7888 & 0.7925 & 0.7413 & 0.7316 & 0.7204 & 0.6276 & 0.6174 & 0.5991 \\ \hline
+        300 & 0.9923 & 0.8283 & 0.7842 & 0.7869 & 0.7352 & 0.7244 & 0.7121 & 0.6192 & 0.6081 & 0.5890 \\ \hline
+        330 & 0.9891 & 0.8248 & 0.7800 & 0.7818 & 0.7296 & 0.7179 & 0.7048 & 0.6119 & 0.6000 & 0.5803 \\ \hline
+        360 & 0.9859 & 0.8215 & 0.7763 & 0.7773 & 0.7247 & 0.7123 & 0.6985 & 0.6058 & 0.5932 & 0.5729 \\ \hline
+        390 & 0.9833 & 0.8186 & 0.7730 & 0.7734 & 0.7204 & 0.7074 & 0.6931 & 0.6005 & 0.5873 & 0.5665 \\ \hline
+        420 & 0.9810 & 0.8162 & 0.7702 & 0.7700 & 0.7167 & 0.7031 & 0.6884 & 0.5957 & 0.5820 & 0.5608 \\ \hline
+        450 & 0.9788 & 0.8140 & 0.7677 & 0.7670 & 0.7134 & 0.6994 & 0.6841 & 0.5915 & 0.5773 & 0.5557 \\ \hline
+        480 & 0.9770 & 0.8120 & 0.7654 & 0.7642 & 0.7105 & 0.6960 & 0.6804 & 0.5878 & 0.5732 & 0.5513 \\ \hline
+        510 & 0.9752 & 0.8101 & 0.7633 & 0.7617 & 0.7078 & 0.6930 & 0.6770 & 0.5845 & 0.5696 & 0.5473 \\ \hline
+        540 & 0.9739 & 0.8086 & 0.7616 & 0.7597 & 0.7055 & 0.6904 & 0.6740 & 0.5816 & 0.5663 & 0.5438 \\ \hline
+        570 & 0.9726 & 0.8073 & 0.7600 & 0.7578 & 0.7035 & 0.6880 & 0.6713 & 0.5789 & 0.5634 & 0.5406 \\ \hline
+        600 & 0.9714 & 0.8060 & 0.7585 & 0.7560 & 0.7015 & 0.6857 & 0.6687 & 0.5764 & 0.5606 & 0.5376 \\ \hline
+\end{tabular}}
+\caption{Prediction Mean Square Error by sequentially added predictors over the “basic” 3 predictors, PMSE( using y = XB +error)}
+\label{table:PMSElinear}
+\end{table}
+
+
+  \begin{table}[h!]
+    \centering\resizebox{\linewidth}{!}{ 
+    \begin{tabular}{||c c c c c c c c c c c||}
+    \hline
+      \makecell[c]{Sample\\ Size} & \makecell[c]{Basic \\Model} & Comorbidities & \makecell[c]{Pain\\Locations} & Medications & \makecell[c]{Physical\\Functioning} & \makecell[c]{Depressive\\Symptoms} & \makecell[c]{Life\\Satisfaction} & \makecell[c]{LOC\\chance} & \makecell[c]{LOC\\powerful} & \makecell[c]{LOC\\internal} \\ \hline
+ \hline  
+30 & 1.1291 & 0.9936 & 0.9737 & 1.0336 & 1.0021 & 1.0435 & 1.0837 & 0.9929 & 1.0443 & 1.0860 \\ \hline
+        60 & 1.0744 & 0.9265 & 0.8960 & 0.9303 & 0.8897 & 0.9088 & 0.9249 & 0.8301 & 0.8490 & 0.8634 \\ \hline
+        90 & 1.0479 & 0.8946 & 0.8600 & 0.8839 & 0.8390 & 0.8473 & 0.8533 & 0.7590 & 0.7663 & 0.7690 \\ \hline
+        120 & 1.0308 & 0.8747 & 0.8372 & 0.8546 & 0.8074 & 0.8099 & 0.8103 & 0.7156 & 0.7162 & 0.7122 \\ \hline
+        150 & 1.0192 & 0.8612 & 0.8220 & 0.8353 & 0.7863 & 0.7847 & 0.7818 & 0.6867 & 0.6835 & 0.6753 \\ \hline
+        180 & 1.0103 & 0.8511 & 0.8105 & 0.8211 & 0.7706 & 0.7663 & 0.7609 & 0.6657 & 0.6596 & 0.6487 \\ \hline
+        210 & 1.0043 & 0.8442 & 0.8025 & 0.8109 & 0.7591 & 0.7527 & 0.7455 & 0.6504 & 0.6419 & 0.6291 \\ \hline
+        240 & 0.9983 & 0.8376 & 0.7948 & 0.8015 & 0.7492 & 0.7411 & 0.7325 & 0.6376 & 0.6277 & 0.6133 \\ \hline
+        270 & 0.9935 & 0.8323 & 0.7887 & 0.7940 & 0.7411 & 0.7316 & 0.7220 & 0.6272 & 0.6161 & 0.6006 \\ \hline
+        300 & 0.9897 & 0.8280 & 0.7839 & 0.7879 & 0.7344 & 0.7239 & 0.7133 & 0.6187 & 0.6066 & 0.5900 \\ \hline
+        330 & 0.9865 & 0.8244 & 0.7797 & 0.7827 & 0.7288 & 0.7173 & 0.7060 & 0.6116 & 0.5987 & 0.5812 \\ \hline
+        360 & 0.9836 & 0.8213 & 0.7760 & 0.7782 & 0.7239 & 0.7117 & 0.6996 & 0.6055 & 0.5918 & 0.5737 \\ \hline
+        390 & 0.9812 & 0.8186 & 0.7728 & 0.7743 & 0.7198 & 0.7069 & 0.6943 & 0.6002 & 0.5859 & 0.5672 \\ \hline
+        420 & 0.9789 & 0.8160 & 0.7699 & 0.7708 & 0.7161 & 0.7026 & 0.6894 & 0.5955 & 0.5807 & 0.5616 \\ \hline
+        450 & 0.9768 & 0.8138 & 0.7675 & 0.7678 & 0.7128 & 0.6988 & 0.6852 & 0.5913 & 0.5761 & 0.5565 \\ \hline
+        480 & 0.9753 & 0.8120 & 0.7654 & 0.7653 & 0.7100 & 0.6956 & 0.6815 & 0.5877 & 0.5720 & 0.5520 \\ \hline
+        510 & 0.9737 & 0.8103 & 0.7635 & 0.7628 & 0.7074 & 0.6926 & 0.6782 & 0.5844 & 0.5684 & 0.5481 \\ \hline
+        540 & 0.9723 & 0.8088 & 0.7618 & 0.7608 & 0.7052 & 0.6900 & 0.6753 & 0.5815 & 0.5652 & 0.5445 \\ \hline
+        570 & 0.9709 & 0.8073 & 0.7600 & 0.7587 & 0.7029 & 0.6874 & 0.6724 & 0.5787 & 0.5621 & 0.5412 \\ \hline
+        600 & 0.9697 & 0.8060 & 0.7585 & 0.7568 & 0.7009 & 0.6851 & 0.6698 & 0.5762 & 0.5594 & 0.5382 \\ \hline
+\end{tabular}}
+\caption{Prediction Mean Square Error by sequentially added predictors over the “basic” 3 predictors, PMSE( using covariance matrix)}
+\label{table:PMSEcov}
+\end{table}
+
+
+
+  \begin{table}[h!]
+    \centering\resizebox{\linewidth}{!}{ 
+    \begin{tabular}{||c c c c c c c c c c c||}
+    \hline
+      \makecell[c]{Sample\\ Size} & \makecell[c]{Basic \\Model} & Comorbidities & \makecell[c]{Pain\\Locations} & Medications & \makecell[c]{Physical\\Functioning} & \makecell[c]{Depressive\\Symptoms} & \makecell[c]{Life\\Satisfaction} & \makecell[c]{LOC\\chance} & \makecell[c]{LOC\\powerful} & \makecell[c]{LOC\\internal} \\ \hline
+ \hline  
+30 & 0.1110 & 0.3377 & 0.3778 & 0.3709 & 0.4104 & 0.4069 & 0.4151 & 0.4781 & 0.4798 & 0.4894 \\ \hline
+        60 & 0.1400 & 0.3722 & 0.4160 & 0.4101 & 0.4528 & 0.4574 & 0.4664 & 0.5356 & 0.5427 & 0.5565 \\ \hline
+        90 & 0.1547 & 0.3917 & 0.4358 & 0.4328 & 0.4786 & 0.4855 & 0.4971 & 0.5682 & 0.5770 & 0.5919 \\ \hline
+        120 & 0.1664 & 0.4045 & 0.4501 & 0.4479 & 0.4951 & 0.5035 & 0.5164 & 0.5883 & 0.5980 & 0.6137 \\ \hline
+        150 & 0.1748 & 0.4130 & 0.4593 & 0.4586 & 0.5067 & 0.5170 & 0.5305 & 0.6027 & 0.6130 & 0.6295 \\ \hline
+        180 & 0.1823 & 0.4199 & 0.4668 & 0.4671 & 0.5157 & 0.5271 & 0.5411 & 0.6132 & 0.6242 & 0.6408 \\ \hline
+        210 & 0.1872 & 0.4250 & 0.4724 & 0.4735 & 0.5226 & 0.5346 & 0.5491 & 0.6211 & 0.6326 & 0.6494 \\ \hline
+        240 & 0.1914 & 0.4291 & 0.4770 & 0.4787 & 0.5281 & 0.5407 & 0.5555 & 0.6274 & 0.6393 & 0.6563 \\ \hline
+        270 & 0.1956 & 0.4329 & 0.4809 & 0.4831 & 0.5329 & 0.5459 & 0.5610 & 0.6327 & 0.6449 & 0.6622 \\ \hline
+        300 & 0.1987 & 0.4358 & 0.4839 & 0.4867 & 0.5366 & 0.5500 & 0.5654 & 0.6372 & 0.6496 & 0.6670 \\ \hline
+        330 & 0.2015 & 0.4384 & 0.4869 & 0.4900 & 0.5400 & 0.5539 & 0.5695 & 0.6411 & 0.6537 & 0.6712 \\ \hline
+        360 & 0.2036 & 0.4405 & 0.4892 & 0.4927 & 0.5428 & 0.5570 & 0.5727 & 0.6442 & 0.6570 & 0.6746 \\ \hline
+        390 & 0.2057 & 0.4427 & 0.4915 & 0.4952 & 0.5454 & 0.5598 & 0.5757 & 0.6471 & 0.6599 & 0.6777 \\ \hline
+        420 & 0.2075 & 0.4443 & 0.4933 & 0.4973 & 0.5476 & 0.5623 & 0.5782 & 0.6496 & 0.6626 & 0.6804 \\ \hline
+        450 & 0.2092 & 0.4458 & 0.4949 & 0.4992 & 0.5496 & 0.5644 & 0.5805 & 0.6519 & 0.6650 & 0.6829 \\ \hline
+        480 & 0.2108 & 0.4474 & 0.4965 & 0.5010 & 0.5514 & 0.5664 & 0.5826 & 0.6539 & 0.6671 & 0.6851 \\ \hline
+        510 & 0.2123 & 0.4486 & 0.4979 & 0.5025 & 0.5530 & 0.5681 & 0.5844 & 0.6557 & 0.6690 & 0.6870 \\ \hline
+        540 & 0.2136 & 0.4499 & 0.4992 & 0.5040 & 0.5545 & 0.5698 & 0.5862 & 0.6573 & 0.6707 & 0.6888 \\ \hline
+        570 & 0.2148 & 0.4509 & 0.5003 & 0.5053 & 0.5559 & 0.5713 & 0.5878 & 0.6589 & 0.6723 & 0.6904 \\ \hline
+        600 & 0.2159 & 0.4518 & 0.5013 & 0.5065 & 0.5571 & 0.5727 & 0.5893 & 0.6602 & 0.6738 & 0.6919 \\ \hline
+\end{tabular}}
+\caption{Correlation between true value and prediction by sequentially added predictors over the “basic” 3 predictors, CORR( using XB+error)}
+\label{table:CORRlinear}
+\end{table}
+
+  \begin{table}[h!]
+    \centering\resizebox{\linewidth}{!}{ 
+    \begin{tabular}{||c c c c c c c c c c c||}
+    \hline
+      \makecell[c]{Sample\\ Size} & \makecell[c]{Basic \\Model} & Comorbidities & \makecell[c]{Pain\\Locations} & Medications & \makecell[c]{Physical\\Functioning} & \makecell[c]{Depressive\\Symptoms} & \makecell[c]{Life\\Satisfaction} & \makecell[c]{LOC\\chance} & \makecell[c]{LOC\\powerful} & \makecell[c]{LOC\\internal} \\ \hline
+ \hline  
+ 
+30 & 0.1210 & 0.3252 & 0.3684 & 0.3584 & 0.4012 & 0.4009 & 0.4074 & 0.4729 & 0.4753 & 0.4752 \\ \hline
+        60 & 0.1464 & 0.3657 & 0.4115 & 0.4052 & 0.4516 & 0.4561 & 0.4659 & 0.5370 & 0.5436 & 0.5498 \\ \hline
+        90 & 0.1594 & 0.3868 & 0.4328 & 0.4288 & 0.4762 & 0.4841 & 0.4957 & 0.5673 & 0.5763 & 0.5858 \\ \hline
+        120 & 0.1701 & 0.4007 & 0.4472 & 0.4450 & 0.4933 & 0.5026 & 0.5149 & 0.5876 & 0.5978 & 0.6096 \\ \hline
+        150 & 0.1789 & 0.4108 & 0.4573 & 0.4563 & 0.5054 & 0.5161 & 0.5286 & 0.6019 & 0.6129 & 0.6257 \\ \hline
+        180 & 0.1850 & 0.4180 & 0.4648 & 0.4646 & 0.5143 & 0.5259 & 0.5388 & 0.6124 & 0.6239 & 0.6377 \\ \hline
+        210 & 0.1900 & 0.4233 & 0.4705 & 0.4712 & 0.5214 & 0.5337 & 0.5469 & 0.6204 & 0.6326 & 0.6469 \\ \hline
+        240 & 0.1943 & 0.4279 & 0.4756 & 0.4769 & 0.5272 & 0.5400 & 0.5535 & 0.6268 & 0.6394 & 0.6542 \\ \hline
+        270 & 0.1977 & 0.4316 & 0.4795 & 0.4814 & 0.5319 & 0.5452 & 0.5589 & 0.6322 & 0.6450 & 0.6600 \\ \hline
+        300 & 0.2010 & 0.4348 & 0.4829 & 0.4853 & 0.5361 & 0.5497 & 0.5637 & 0.6368 & 0.6498 & 0.6652 \\ \hline
+        330 & 0.2037 & 0.4376 & 0.4860 & 0.4887 & 0.5396 & 0.5536 & 0.5678 & 0.6406 & 0.6538 & 0.6695 \\ \hline
+        360 & 0.2058 & 0.4398 & 0.4884 & 0.4915 & 0.5426 & 0.5568 & 0.5712 & 0.6438 & 0.6573 & 0.6731 \\ \hline
+        390 & 0.2079 & 0.4418 & 0.4906 & 0.4940 & 0.5451 & 0.5597 & 0.5741 & 0.6467 & 0.6603 & 0.6763 \\ \hline
+        420 & 0.2096 & 0.4436 & 0.4926 & 0.4961 & 0.5474 & 0.5622 & 0.5768 & 0.6492 & 0.6630 & 0.6791 \\ \hline
+        450 & 0.2115 & 0.4452 & 0.4943 & 0.4981 & 0.5494 & 0.5644 & 0.5791 & 0.6515 & 0.6654 & 0.6817 \\ \hline
+        480 & 0.2131 & 0.4468 & 0.4959 & 0.4999 & 0.5513 & 0.5665 & 0.5813 & 0.6536 & 0.6677 & 0.6840 \\ \hline
+        510 & 0.2144 & 0.4481 & 0.4973 & 0.5015 & 0.5529 & 0.5683 & 0.5832 & 0.6554 & 0.6695 & 0.6860 \\ \hline
+        540 & 0.2157 & 0.4491 & 0.4985 & 0.5029 & 0.5544 & 0.5698 & 0.5849 & 0.6570 & 0.6712 & 0.6878 \\ \hline
+        570 & 0.2168 & 0.4502 & 0.4996 & 0.5042 & 0.5557 & 0.5713 & 0.5865 & 0.6585 & 0.6728 & 0.6895 \\ \hline
+        600 & 0.2178 & 0.4511 & 0.5007 & 0.5054 & 0.5570 & 0.5727 & 0.5879 & 0.6599 & 0.6742 & 0.6910 \\ \hline
+ \end{tabular}}
+\caption{Correlation between true value and prediction by sequentially added predictors over the “basic” 3 predictors, CORR( using covariance matrix)}
+\label{table:CORRcov}
+\end{table}
+%----------------------------------
+%\bibliographystyle{ims}
+%\bibliography{PredictionSampleSize}
+%\bibliography{allMyReferences}
+%----------------------------------
+
+
+
+
+\end{document}
+

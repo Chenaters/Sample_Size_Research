@@ -1,0 +1,178 @@
+\documentclass[11pt]{article}
+%common citations: yu1989fixed,
+%Page Format control
+%-------------------------------------
+%formatting post: 
+%https://texblog.org/2012/03/01/latex-page-line-and-font-settings/
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\onehalfspacing
+\usepackage{fancyhdr}
+\usepackage{multirow}
+
+
+%Packages
+\usepackage{amssymb,amsmath, amsthm, graphicx, color,subfigure, cancel,commath,ifthen,natbib, bm,alltt, graphicx,float}
+%external definitions
+%-------------------------------------
+%\input{HeaderBH}
+%multiline comment
+\newcommand\commentout[1]{}
+%-------------------------------------
+
+%-------
+%controllig equation numbering
+%https://tex.stackexchange.com/questions/42726/align-but-show-one-equation-%number-at-the-end
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+%or use align with \nonumber
+%-------
+
+\usepackage{xr} %These two lines allow cross  reference from the supplementary file. 
+\externaldocument{CombDiscreteTests_Suppl}
+\newcommand{\nc}{\newcommand}
+%\newcommand{\E}{\mathrm{E}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\SD}{\mathrm{SD}}
+\newcommand{\SNR}{\text{SNR}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Cor}{\mathrm{Cor}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\SIGMA}{\bm{\Sigma}}
+\newcommand{\BETA}{\bm{\beta}}
+\newcommand{\GAMMA}{\bm{\gamma}}
+
+
+%environments
+%=======================
+\newtheorem{defi}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{obs}{Observation}
+\newtheorem{cor}{Corollary}
+\newtheorem{lem}{Lemma}
+\newtheorem{ass}{Assumption}
+%=======================
+
+
+\begin{document}
+\thispagestyle{fancy}
+
+%===================================================
+\title{\bf Prediction Mean Square Error Calculation based on PMSE Improvement}
+%\author{...
+%\and
+%...
+%}
+\date{}
+\maketitle
+% 
+% \begin{abstract}
+%...
+%
+%
+%\bigskip 
+%
+%\noindent \textbf{KEYWORDS:} 
+% \end{abstract}
+%%===================================================
+%%END: frontmatter
+%
+%%BEGIN: \section{Introduction}\label{sec:Intro}
+%%===================================================
+%\newpage
+%
+
+
+
+
+\lhead{Yifan Ma} 
+\rhead{Kerridge Proof.} 
+\cfoot{\thepage\ of \pageref{LastPage}}
+
+
+
+
+
+
+
+
+
+The proof of Errors of Prediction in Multiple Regression
+ with Stochastic Regressor Variables - D. Kerridge and Sample size and the accuracy predictions made from multiple regression equations - Richard Sawyer.
+\\
+Consider p-dimensional vectors $\boldsymbol{x_1},...,\boldsymbol{x_n}$ are given as a random sample from multivariate normal population $N(\mu, \Sigma)$, corresponding to observations $y_1,y_2,...,y_n$. We assume that for each $y_i$, we have $$y_i = \beta + \boldsymbol{X_{i}'A}+\epsilon_i,  \quad \epsilon_i \sim N(0, \sigma^2)$$
+$\beta$ is the constant coefficient and $\boldsymbol{A}$ is the coefficient matrix. Let $\boldsymbol{\bar{x}}$ be the mean over random sample $i=1,2,...,n$, and let 
+$$\boldsymbol{S= \sum_{i,j}(x_i-\bar{x})(x_i-\bar{x})'}$$
+Let $(y^{*},\boldsymbol{x^{*'}})$ be an additional independent observation and $y^{*}$ to be predicted by 
+$$\hat{y}= \beta+\boldsymbol{{x^{*}}'\widehat{A}}= \bar{y}-\boldsymbol{\bar{x}'\widehat{A}}+\boldsymbol{{x^{*}}'\widehat{A}}=
+\bar{y}+\boldsymbol{(x^{*}-\bar{x})'\widehat{A}}$$
+where $A$ is estimated by least square estimation
+$$\boldsymbol{\widehat{A}}= \boldsymbol{S^{-1}}\sum_{i}y_i(\boldsymbol{x_{i}-\bar{x}})$$
+The prediction error is 
+\begin{equation}
+\begin{aligned}
+y^{*}-\hat{y}&=\beta + \boldsymbol{{X^{*}}'A}+\epsilon_{*}-\bar{y}-\boldsymbol{(x^{*}-\bar{x})'\widehat{A}}\\
+&=\boldsymbol{(x^{*}-\bar{x})'(A-\widehat{A})}+\epsilon^{*}+\bar{\epsilon}
+\end{aligned}
+\end{equation}
+We argue that the conditional distribution is $\boldsymbol{A-\widehat{A} | x_{1},...,x_{n},x^{*}}\sim N(0,\sigma^{2}\boldsymbol{S^{-1})}$.Thus the unconditional distribution is like (the exact distribution of $y^{*}-\hat{y}$ cannot be obtained) 
+$$y^{*}-\hat{y}|\boldsymbol{x_1,...,x_n,x^{*}}\sim N(0,[\boldsymbol{(x^{*}-\bar{x})'S^{-1}(x^{*}-\bar{x})}+1+\frac{1}{n}]\sigma^{2}).$$
+But $(1+\frac{1}{n})^{-1}(n-1)\boldsymbol{(x^{*}-\bar{x})'S^{-1}(x^{*}-\bar{x})}$ is distributed like $Hotelling-T^{2}(p,n-1)=(n-1)\frac{p}{n-p}F_{p,n-p}$. Denote $T^{2}=\boldsymbol{[x^{*}-\bar{x}]'S^{-1}[x^{*}-\bar{x}]}$, the expactation of PMSE is 
+\begin{equation}
+\begin{aligned}
+E[(y^{*}-\hat{y})^{2}]&=E\{E[(y^{*}-\hat{y})^{2}|\boldsymbol{x_1,...,x_n,x^{*}}\}\\
+&=E\{E[z^{2}\sigma^{2}(T^{2}+1+\frac{1}{n})|T^{2}]\}\\
+&= \sigma^{2}E[(T^{2}+1+\frac{1}{n})]\\
+&=\sigma^{2}[(1+\frac{1}{n})\frac{k}{n-p}E(F_{p,n-p})+1+\frac{1}{n}]\\
+&=\sigma^{2}[(1+\frac{1}{n})(\frac{k}{n-p}\frac{n-p}{n-p-2}+1)]\\
+&=\sigma^{2}(1+\frac{1}{n})(\frac{n-2}{n-p-2})\\
+&=\sigma^{2}\frac{(n+1)(n-2)}{n(n-p-2)}
+\end{aligned}
+\end{equation}
+
+
+
+$Proporsition$: Let $M$ be a positive integer. Then 
+$$E[(y^{*}-\hat{y})^{2M-1}]=0$$
+when $2M\le n-p$;
+$$E[(y^{*}-\hat{y})^{2M}]=\frac{\sigma^{2M}\frac{(2M)!}{M!}{(\frac{n+1}{2n}})^{M}\Pi^{M}_{j=1}(n-2j)}{\prod^{M}_{j=1}(n-p-2j)}$$
+when $2M\le n-p-1$.
+
+$Proof$: The conditional distribution of $y^{*}-\hat{y}$ given $\boldsymbol{x_1,...,x_n,x^{*}}$ is $$N(0,\sigma^{2}(1+\frac{1}{n})[1+(\frac{p}{n-p}F(\boldsymbol{x_1,...,x_n,x^{*}}))])$$ by  KERRIDGE(1967). 
+
+The unconditional distribution of  $y^{*}-\hat{y}$ is asymptotically normal with mean 0 and variance $\sigma^{2}$
+By symmetry of normal distribution, the odd moments in the unconditional distribution of $y^{*}-\hat{y}$ are 0. The unconditional even moments, 
+$$E[(y^{*}-\hat{y})^{2M}]= E\{E[(y^{*}-\hat{y})^{2M}|\boldsymbol{x_1,...,x_n,x^{*}}]\}$$
+By properties of the normal distribution, for any non-negative integer M, $E[(x-\mu)^{2M}]=\sigma^{p}(p-1)!!$,
+
+\begin{equation}
+\begin{aligned}
+&E\{E[(y^{*}-\hat{y})^{2M}|\boldsymbol{x_1,...,x_n,x^{*}}]\}\\
+=&E\{[\sigma^{2}(1+\frac{1}{n})(1+\frac{p}{n-p}F(\boldsymbol{x_1,...,x_n,x^{*}})]\textbf{\emph{}}^{M}(2M-1)!!\}\\
+=&\sigma^{2M}(1+\frac{1}{n})^{M}(2M-1)!!E[(1+\frac{p}{n-p}F(\boldsymbol{x_1,...,x_n,x^{*}}))^M]\\
+=&\sigma^{2M}(1+\frac{1}{n})^{M}\frac{(2M-1)!}{2^{M-1}(M-1)!}E[(1+\frac{p}{n-p}F(\boldsymbol{x_1,...,x_n,x^{*}}))^M]\\
+=&\sigma^{2M}(\frac{n+1}{2n})^{M}\frac{2(2M-1)!}{(M-1)!}E[(1+\frac{p}{n-p}F(\boldsymbol{x_1,...,x_n,x^{*}}))^M]\\
+=&\sigma^{2M}(\frac{n+1}{2n})^{M}\frac{2M(2M-1)...M(M-1)...1}{M(M-1)...1}E[(1+\frac{p}{n-p}F(\boldsymbol{x_1,...,x_n,x^{*}}))^M]\\
+=&\sigma^{2M}(\frac{n+1}{2n})^{M}\frac{(2M)!}{M!}E[(1+\frac{p}{n-p}F(\boldsymbol{x_1,...,x_n,x^{*}}))^M]
+\end{aligned}
+\end{equation}
+By binomial theorem, the latter expected value is equal to  
+\begin{equation}
+\begin{aligned}
+&\sum^{M}_{j=0}{M \choose j}(\frac{p}{n-p})^{j}E(F^{j})\\
+=&\sum^{M}_{j=0}{M \choose j}\frac{\Gamma(\frac{p}{2}+j)\Gamma(\frac{n-p}{2}-j)}{\Gamma(\frac{p}{2})\Gamma(\frac{n-p}{2})}\\
+=&\sum^{M}_{j=0}{M \choose j}\frac{(\frac{p}{2}+j-1)!(\frac{n-p}{2}-j-1)!}{(\frac{p}{2}-1)!(\frac{n-p}{2}-1)!}\\
+=&\sum^{M}_{j=0}{M \choose j}\frac{(\frac{p}{2}+j-1)...(\frac{p}{2}+j-j)(\frac{p}{2}-1)...1}{(\frac{p}{2}-1)(\frac{p}{2}-2)...1}\frac{(\frac{n-p}{2}-j-1)(\frac{n-p}{2}-j-2)...1}{(\frac{n-p}{2}-1)...(\frac{n-p}{2}-j)(\frac{n-p}{2}-j-1)...1}\\
+=&\sum^{M}_{j=0}{M\choose j}\frac{\prod^{j}_{k=1}(\frac{p}{2}+k-1)}{\prod^{j}_{k=1}(\frac{n-p}{2}-k)}\\
+=&\sum^{M}_{j=0}{M\choose j}\frac{\prod^{j}_{k=1}p+2(k-1)}{\prod^{j}_{k=1}(n-p-2k)}\\
+=&1+\sum^{M}_{j=1}{M\choose j}\frac{\prod^{j}_{k=1}p+2(k-1)}{\prod^{j}_{k=1}(n-p-2k)}
+\end{aligned}
+\end{equation}
+Take $M=1$, it follows that $$MSE = E[(y^{*}-\hat{y})^{2}]=\sigma^{2}\frac{(n+1)(n-2)}{n(n-p-2)}$$same as Kerridge paper.
+
+\end{document}

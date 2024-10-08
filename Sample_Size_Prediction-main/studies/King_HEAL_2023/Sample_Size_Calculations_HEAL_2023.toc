@@ -1,0 +1,6 @@
+\contentsline {section}{\numberline {1}Overview}{1}{section.1}% 
+\contentsline {section}{\numberline {2}Sample size by statistical power}{2}{section.2}% 
+\contentsline {section}{\numberline {3}Sample size by predictive model-related criteria}{3}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}Quantitative outcomes}{3}{subsection.3.1}% 
+\contentsline {subsection}{\numberline {3.2}Binary outcomes}{3}{subsection.3.2}% 
+\contentsline {section}{\numberline {4}Sample size by predictive accuracy}{3}{section.4}% 

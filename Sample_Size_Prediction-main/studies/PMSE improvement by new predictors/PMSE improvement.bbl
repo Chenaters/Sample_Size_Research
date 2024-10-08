@@ -1,0 +1,20 @@
+\begin{thebibliography}{2}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Narula(1974)}]{narula1974predictive}
+\textsc{Narula, S.~C.} (1974).
+\newblock Predictive mean square error and stochastic regressor variables.
+\newblock \textit{Journal of the Royal Statistical Society: Series C (Applied
+  Statistics)}, \textbf{23} 11--17.
+
+\bibitem[{Sawyer(1982)}]{sawyer1982sample}
+\textsc{Sawyer, R.} (1982).
+\newblock Sample size and the accuracy of predictions made from multiple
+  regression equations.
+\newblock \textit{Journal of Educational Statistics}, \textbf{7} 91--104.
+
+\end{thebibliography}

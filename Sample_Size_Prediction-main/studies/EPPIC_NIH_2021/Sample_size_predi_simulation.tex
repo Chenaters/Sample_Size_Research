@@ -1,0 +1,410 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={Sample size for prediction of quantitative and binary outcomes based on cohort study},
+            pdfauthor={ZWu},
+            colorlinks=true,
+            linkcolor=Maroon,
+            filecolor=Maroon,
+            citecolor=Blue,
+            urlcolor=blue,
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb} 
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\title{Sample size for prediction of quantitative and binary outcomes based on
+cohort study}
+\author{ZWu}
+\date{28 November, 2021}
+
+\begin{document}
+\maketitle
+
+For EPPIC\_2021 application (PI Jean King. Project/Core PIs: Korkin,
+Ruiz).
+
+Consider a cohort study of three groups: MBSR, acupuncture, and control,
+each has same sample size n. The total sample size is 3n.
+
+\hypertarget{predict-quantiative-outcome-based-on-regression-model-assumptions}{%
+\section{Predict quantiative outcome based on regression model
+assumptions}\label{predict-quantiative-outcome-based-on-regression-model-assumptions}}
+
+Sample size for pediction accuracy of quantiative outcomes based on
+simulations.
+
+Consider a linear mixed effect model as the true underlying model:
+\[Y_{ij} = \eta_{ij}(X) + \epsilon_{ij}\], where
+\[\eta_{ij}(X) = \beta_0 + b_i + \beta_{acup}*acup_{ij} + \beta_{mbsr}*mbsr_{ij} + \beta_{sex}*sex_{ij} + \beta_{age}*age_{ij} + \beta_{edu}*edu_{ij} + \beta_{len}*len_{ij} + \beta_{base}*base_{ij} + \beta_{conc}*conc_{ij} + \sum_{k=1}^p\beta_k x_{kij} + \sum_{l=1}^L \gamma_l*acup_{ij}*z_{lij} + \sum_{m=1}^M \gamma_m*mbsr_{ij}*z_{mij}.\]
+and
+\[b_i \sim N(0, \sigma^2_i) \quad \text{ and } \quad \epsilon_{ij} \overset{iid}{\sim} N(0, \sigma^2).\]
+
+Interpretation:
+
+\begin{itemize}
+\item $Y_{ij}$: quantitative response variable of pain reduction (i.e., TreatmentImpact, after a given period of time since the beginning of treatment) for the $j$th individual in the $i$th racial group. Positive value means pain reduces. 
+\item $\beta_0$: a "natural" pain reduction corresponds to no-treatment (no acupuncture nor MBSR) and all other covariates being 0.
+\item $b_i \sim N(0, \sigma^2_i)$: The mixed-effect (clustering effect) of the $i$th racial group. Individuals in the same racial group have the same $b_i$ value so that their pair-wise covariance is $\sigma^2_i$.  
+
+\item $acup = 1$ if acupuncture treatment, $=0$ o.w. $\beta_{acup}$ is the effectof acupuncture. 
+\item $mbsr = 1$ if MBSR treatment, $=0$ o.w. $\beta_{mbsr}$ is the effectof MBSR.
+\item $sex = 1$ if male, $=0$ if female. $\beta_{sex}$ is the effect of sex. 
+\item $age$: standardized age value (mean 0 and sd 1). $\beta_{age}$ is the effect of age. 
+\item $edu$: education level: 0 / 1, 50\% each. 
+\item $len$: duration length of pain. short or long: 0 / 1, 50\% each. 
+\item $bas$: Baseline pain score. standardized. 
+\item $conc$: presence of certain concomitant diseases: 0/1, 50\% each. 
+
+\item $x_k$: standardized value of the $k$th PainMarker, $k=1, ..., p$. $\beta_k$'s are the corresponding effects. They are from OMICS- and biopsychosocial PainMarkers. 
+\item $z_{lij}$ and $z_{mij}$ are modifiers for acupuncture and MBSR, respectively. They are from OMICS- and biopsychosocial PainMarkers.
+
+\item The error SD $\sigma$ can be used to adjust the relative effects (or signal-to-noise ratio) regarding $\beta$ parameters, and the variation explained model ($R^2$). 
+
+\item Cohen's $$f^2=R^2/(1-R^2)=\frac{\sigma^2_i + \beta_{acup}^2Var(acup) + \beta_{mbsr}^2Var(mbsr) + \beta_{sex}^2Var(sex) + \beta_{age}^2Var(age)  + \sum_{k=1}^p\beta_k^2 Var(x_k)}{\sigma^2}$$, where R^2 is the coefficient of determination, the proportion of the variation in the dependent variable that is predictable from the independent variable(s). 
+\end{itemize}
+
+Considerations:
+
+\begin{itemize}
+\item $b_i$: consider 3 groups, roughly equal numbers in the sample.
+\item $\beta_{acup}$, $\beta_{mbsr}$, $\beta_{sex}$, and $\beta_{sex}$ are used to set/control their $R^2$, i.e., the percentage of variation explained by these "basic" factors. 
+\item $\beta_{sex}$: Consider males are easier to reduce pain than females. Assume 50% recruited are males.
+\item $\beta_k$, $\gamma_l$, $\gamma_m$ are used to set the percentage of variation explained by these extra factors.
+
+\item Interaction terms are for Hypothesis 1 saying that the effects of treatments are "modulated by biopsychosocial factors".  
+\item This study does address the aim of clustering patients ("Clustering and discovery of EPPIC-TreatmentPhenotypes" in Project 3). If some factors/markers are positively and some are negatively interacted with acupuncture/MBSR, then we could decide which treatment is better for them based on their markers. [Check Hong's project for AbbVie on subgrouping patients for drug treatment.]  
+\end{itemize}
+
+\hypertarget{predict-binary-outcome-based-on-logistic-model-assumptions}{%
+\section{Predict binary outcome based on logistic model
+assumptions}\label{predict-binary-outcome-based-on-logistic-model-assumptions}}
+
+Consider a generalized linear mixed effect model as the true underlying
+model:
+
+\[E(P(Y_{ij}=1|X)) = \frac{1}{1+exp(-\eta_{ij}(X))},\] where \(X\) is
+the matrix of covariate data, and \(\eta_{ij}(X)\) is same as above
+(except that the coefficient values could be different)
+
+Interpretation:
+
+\begin{itemize}
+\item $Y_{ij}$: binary response variable of TreatmentResponse for the $j$th individual in the $i$th racial group. $1$ for pain relief, $0$ for no relief. 
+\item $\beta_0$: the baseline pain relieve probability when no interventions and all other covariates being 0. Together with othe terms, we can adjust $\beta_0$ to control the prevalence of $Y$.  
+\item We considered the ORs of some predictors based on Tables 2 and 3 of \cite{witt2011patient} "Patient characteristics and variation in treatment outcomes: which patients benefit most from acupuncture for chronic pain?"
+\end{itemize}
+
+Considerations:
+
+We use AUC to measure how well the factors explains / contributes to the
+model. AUC and Cox and Snell R2 are connected
+(\url{https://onlinelibrary.wiley.com/doi/full/10.1002/sim.8806}). Both
+are used to represent how well the factors explains the model (Cox and
+Snell R2 is an extension of R2 for measuring the percentage of variation
+explained in regression). Both are interchangeably used for calculating
+the minimum sample size based on the criterion regarding Nagelkerke's
+R-squared value. See The formula by given in Fig 5 of paper
+\cite{riley2020calculating}:
+\url{https://www.research.manchester.ac.uk/portal/files/161373531/bmj.m441.full.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a=}\DecValTok{1}\NormalTok{;}
+\CommentTok{#  }
+\CommentTok{#   library(MASS)}
+\CommentTok{#   library(nlme);}
+\CommentTok{#   source("/Users/zheyangwu/ResearchDoc/Computation/CodingLibraries/myRLibrary/Prediction/Lib_Prediction.R");  }
+\CommentTok{#   source("/Users/zheyangwu/ResearchDoc/Computation/CodingLibraries/myRLibrary/Simulations/Simulate_Data/Lib_simu_genetic_data.R"); }
+\CommentTok{#   source("/Users/zheyangwu/ResearchDoc/Computation/CodingLibraries/myRLibrary/Prediction/generate_response_formula.R");   }
+\CommentTok{# }
+\CommentTok{# }
+\CommentTok{# }
+\CommentTok{# }
+\CommentTok{# ###Parameter setting}
+\CommentTok{# }
+\CommentTok{#   ###Parameters on the effects / coefficients}
+\CommentTok{#   beta0 = -0.5; #For binary trait, the risk at X=0 is 1/(1+exp(-beta0)). The average risk (prevalence) at given coefficients and predictors can be calculated using the code from function get.Y.logit: First set beta0=0, then run the code to get Xmatrix, then set XData=Xmatrix, then use the code in get.Y.logit to get Xbeta, then choose beta0's value such that mean(Y) reach the wanted prevalence. }
+\CommentTok{#                      # Y = array(NA, length(Xbeta));}
+\CommentTok{#                      #  for (i in 1:length(Y)) \{}
+\CommentTok{#                      #    Py1x = 1/(1 + exp(-Xbeta[i]) - beta0); # P(y=1 | x) based on logistic model}
+\CommentTok{#                      #    Y[i] = ifelse(runif(1) < Py1x, 1, 0);}
+\CommentTok{#                      #  \}}
+\CommentTok{#                      #  mean(Y); #prevalance of Y.}
+\CommentTok{#  }
+\CommentTok{#   #beta0 = -7; # for binary trait. Risk when X=0 is 1/(1+exp(7))=0.0009110512. Also, at the given coefficients and factors, beta0 = -7 makes the prevalence of Y roughly 0.5. }
+\CommentTok{#   #beta0 = -3; # for binary trait. Risk when X=0 is 1/(1+exp(3))=0.04742587. Also, at the given coefficients and factors, beta0 = -3 makes the prevalence of Y, i.e., mean(Y), roughly 0.7. }
+\CommentTok{# }
+\CommentTok{# }
+\CommentTok{#   raceN = 3; #Number of racial groups}
+\CommentTok{#   sigma.race = 1; #pair-wise covariance among individuals in the same racial group}
+\CommentTok{#   beta.race = 1; #treat the "coefficient" of the mix-effect b_i be 1. }
+\CommentTok{# }
+\CommentTok{#   beta.acup = log(4.9); #6; #Coeff of acupuncture}
+\CommentTok{#   beta.mbsr = log(4.9); #6; #Coeff of mbsr}
+\CommentTok{#   beta.sex = log(1.1); #1;}
+\CommentTok{#   beta.age = log(1.25); #-1; }
+\CommentTok{#   beta.edu = log(1.26); #1;}
+\CommentTok{#   beta.len = log(1.13); #1;}
+\CommentTok{#   beta.bas = log(0.80);#1;}
+\CommentTok{#   beta.conc = log(0.77); #1;}
+\CommentTok{# }
+\CommentTok{#   markerN = 10; #The # of PainMarkers}
+\CommentTok{#   beta.biom.v = 2; #=1; #The value of the coeff of the biomarkers}
+\CommentTok{#   beta.biom = rep(beta.biom.v, markerN); #Coeff of the biomarkers}
+\CommentTok{#   names.xbiom = paste("xbiom", 1:markerN, sep=""); #variable names for biomarkers}
+\CommentTok{# }
+\CommentTok{#   mdfN.acup = 4; #The # of modifiers for acupuncture}
+\CommentTok{#   beta.mdf.acup.v=2; #The value of the coeff of accupunctur's modifiers}
+\CommentTok{#   beta.mdf.acup = rep(beta.mdf.acup.v, mdfN.acup); #Vector of coeffs of accupunctur's modifiers }
+\CommentTok{#   gama.acup.v = 2; #The value of the coeff of the modifier*acupucture interaction terms.}
+\CommentTok{#   gama.acup = rep(gama.acup.v, mdfN.acup); #Vector of coeffs of the modifier*acupucture interaction terms.}
+\CommentTok{# }
+\CommentTok{#   names.mdf.acup = paste("zmdfAcup", 1:mdfN.acup, sep=""); #variable names of the modifiers for acupuncture}
+\CommentTok{# }
+\CommentTok{#   mdfN.mbsr = 4; #The # of modifiers for MBSR}
+\CommentTok{#   beta.mdf.mbsr.v=2; #The value of the coeff of MBSR's modifiers}
+\CommentTok{#   beta.mdf.mbsr = rep(beta.mdf.mbsr.v, mdfN.mbsr); #Vector of coeffs of accupunctur's modifiers }
+\CommentTok{#   gama.mbsr.v = 2; #The value of the coeff of the modifier*MBSR interaction terms.}
+\CommentTok{#   gama.mbsr = rep(gama.mbsr.v, mdfN.mbsr); #Vector of coeffs of the modifier*MBSR interaction terms.}
+\CommentTok{# }
+\CommentTok{#   names.mdf.mbsr = paste("zmdfMBSR", 1:mdfN.mbsr, sep=""); #variable names of the modifiers for MBSR}
+\CommentTok{# }
+\CommentTok{#   errSD=1; #The SD of error term }
+\CommentTok{# }
+\CommentTok{# ###Parametters on prodiction process}
+\CommentTok{#   isRandomCV=T; #Random cross-validation in prediction }
+\CommentTok{#   nfold=5; #The number of folds in cross-validation}
+\CommentTok{#   nrepeat=2; #number of repeats of cross-validation}
+\CommentTok{# }
+\CommentTok{# ###Parameters on simulations}
+\CommentTok{#   simuN = 100; #The number of simulations.}
+\CommentTok{# }
+\CommentTok{# ###Data simulation and prediction outcomes}
+\CommentTok{#   predProp = c(0, 0.25, 0.5, 0.75, 1); #Proportion of true predictors besides names.basic that are included in prediction model. }
+\CommentTok{#   models = vector(mode = "list", length(predProp)); #prediction models .}
+\CommentTok{#   outputs = vector(mode = "list", length(predProp)); #prediction outputs .}
+\CommentTok{# }
+\CommentTok{# ###Parameters on data}
+\CommentTok{# groupSampleSizes = seq(20, 400, by=20);}
+\CommentTok{# #groupSampleSizes = seq(500, 2000, by=100);}
+\CommentTok{# #groupSampleSizes = seq(150, 500, by=50);}
+\CommentTok{# AUC = array(NA, dim=c(length(groupSampleSizes), length(predProp))); #Store AUC over sample sizes and proportions of predictors used. }
+\CommentTok{# for(gi in 1:length(groupSampleSizes))\{}
+\CommentTok{#   groupSampleSize = groupSampleSizes[gi]; #sample size for each of the three groups: control, mbsr, and acupuncture. }
+\CommentTok{# }
+\CommentTok{# ###Looping through simulations}
+\CommentTok{#   R2.controls = array(NA, simuN); #Store the R2 of the controlling predictors.}
+\CommentTok{#   for(i in 1:simuN) \{}
+\CommentTok{#     ###Generate data}
+\CommentTok{#     x0 = rep(1, groupSampleSize*3);}
+\CommentTok{#     }
+\CommentTok{#     #The mixed-effect term for racial group }
+\CommentTok{#     xrace = sample(1:raceN, size=groupSampleSize*3, replace=T, prob=rep(1/raceN, raceN));}
+\CommentTok{#       #Assume equal chance for each racial group to be sampled. }
+\CommentTok{#     b.xrace = array(NA, dim=groupSampleSize*3); #b.xrace is the vector of b_i values. }
+\CommentTok{#     for (racei in 1:raceN)\{ b.xrace[which(xrace==racei)] = rnorm(1, sd=sigma.race); \}}
+\CommentTok{#       #assign the same b_i value for the all in the ith racial group. }
+\CommentTok{#     }
+\CommentTok{#     #The "basic" factors}
+\CommentTok{#     xacup = c(rep(0, groupSampleSize*2), rep(1, groupSampleSize)); #acupuncture group indicator}
+\CommentTok{#     xmbsr = c(rep(0, groupSampleSize), rep(1, groupSampleSize), rep(0, groupSampleSize)); #MBSR group indicator}
+\CommentTok{#     xsex = rbinom(n=groupSampleSize*3, size=1, prob=0.5); #50% recruited are males??}
+\CommentTok{#     xage = rnorm(n=groupSampleSize*3, mean=0, sd=1); #standardized age. }
+\CommentTok{#     xedu = rbinom(n=groupSampleSize*3, size=1, prob=0.5);}
+\CommentTok{#     xlen = rbinom(n=groupSampleSize*3, size=1, prob=0.5);}
+\CommentTok{#     xbas = rnorm(n=groupSampleSize*3, mean=0, sd=1);}
+\CommentTok{#     xconc = rbinom(n=groupSampleSize*3, size=1, prob=0.5);}
+\CommentTok{#     }
+\CommentTok{#     #PainMarker data}
+\CommentTok{#     xbiom = data.frame(matrix(rnorm(n=groupSampleSize*3*markerN), ncol=markerN)); #Assume biomarker values are N(0,1);}
+\CommentTok{#     names(xbiom) = names.xbiom; }
+\CommentTok{#     }
+\CommentTok{#     #acupuncture-modifier data}
+\CommentTok{#     zmdfAcup = data.frame(matrix(rnorm(n=groupSampleSize*3*mdfN.acup), ncol=mdfN.acup)); #Assume acupuncture-modifier values are N(0,1);}
+\CommentTok{#     names(zmdfAcup) = names.mdf.acup;}
+\CommentTok{# }
+\CommentTok{#     #mbsr-modifier data}
+\CommentTok{#     zmdfMBSR = data.frame(matrix(rnorm(n=groupSampleSize*3*mdfN.mbsr), ncol=mdfN.mbsr)); #Assume acupuncture-modifier values are N(0,1);}
+\CommentTok{#     names(zmdfMBSR) = names.mdf.mbsr;}
+\CommentTok{#         }
+\CommentTok{#     Xmatrix = cbind(x0, b.xrace, xacup, xmbsr, xsex, xage, xedu, xlen, xbas, xconc, xbiom, zmdfAcup, zmdfMBSR);}
+\CommentTok{#     }
+\CommentTok{#     #### Generate response }
+\CommentTok{#     names.mainEff  = c("x0", "b.xrace", "xacup", "xmbsr", "xsex", "xage", "xedu", "xlen", "xbas", "xconc", names.xbiom, names.mdf.acup, names.mdf.mbsr);}
+\CommentTok{#     coeffs.mainEff = c(beta0, beta.race, beta.acup, beta.mbsr, beta.sex, beta.age, beta.edu, beta.len, beta.bas, beta.conc, beta.biom, beta.mdf.acup, beta.mdf.mbsr);}
+\CommentTok{#     names.trt = c("xacup", "xmbsr"); #variable names of the treatments}
+\CommentTok{#     names.mdf = list(names.mdf.acup, names.mdf.mbsr); #variable names of the modifiers corresponding to the treatments. Require: Each element is a verctor of modifier names corresponding to the treatment in names.trt.}
+\CommentTok{#     coeffs.interaction = list(gama.acup, gama.mbsr); #coefficients of the treatment-modifier interaction terms. Require: Consistent with names.trt and names.mdf.}
+\CommentTok{#     }
+\CommentTok{#     }
+\CommentTok{#     # ####----Quantitative Response-----}
+\CommentTok{#     # resp = get.Y.reg(XData=Xmatrix, names.mainEff, coeffs.mainEff, names.trt, names.mdf, coeffs.interaction, errSD=errSD);}
+\CommentTok{#     # #print(resp$R2); #proportion of variation explained by all predictors}
+\CommentTok{#     # }
+\CommentTok{#     # #Calculate the R^2 of the controlling predictors}
+\CommentTok{#     # vars.control = c(varBeta0=0, varRace=sigma.race^2, varAcup=(1/3)*(1-1/3), varMbsr=(1/3)*(1-1/3), varSex=(1/2)*(1-1/2), varAge=1, varEdu=.25, varLen=0.25, varBas=1, varConc=0.25); #, varBiom=rep(1, markerN));}
+\CommentTok{#     # betas.control = c(beta0, beta.race, beta.acup, beta.mbsr, beta.sex, beta.age, beta.edu, beta.len, beta.bas, beta.conc); #, beta.biom, beta.mdf.acup, beta.mdf.mbsr);}
+\CommentTok{#     # R2.controls[i] = sum(vars.control*betas.control^2)/var(resp$Y);}
+\CommentTok{# }
+\CommentTok{#     ####----Binary Response-----}
+\CommentTok{#     resp = get.Y.logit(XData=Xmatrix, names.mainEff, coeffs.mainEff, names.trt, names.mdf, coeffs.interaction);}
+\CommentTok{#     }
+\CommentTok{#     ####Combine data for analysis }
+\CommentTok{#     xrace = as.factor(xrace); #Convert race into factor variable, which is used in data analysis.}
+\CommentTok{#     dat = data.frame(Y=resp$Y, Xmatrix, xrace);}
+\CommentTok{#     }
+\CommentTok{#     }
+\CommentTok{#     ####Predictive analysis}
+\CommentTok{#     names.control = c("xrace", "xacup", "xmbsr", "xsex", "xage", "xedu", "xlen", "xbas", "xconc"); #Controlling factors in prediction models}
+\CommentTok{#     names.trt.all =  c("xacup", "xmbsr"); #All possible treatments that could have interaction effects. }
+\CommentTok{#     for (mi in 1:length(predProp))\{}
+\CommentTok{#       ##Create model formula based on proportion of predictors used. }
+\CommentTok{#       xbiom.used    = round(length(names.xbiom)*predProp[mi]);}
+\CommentTok{#       mdf.acup.used = round(length(names.mdf.acup)*predProp[mi]);}
+\CommentTok{#       mdf.mbsr.used = round(length(names.mdf.mbsr)*predProp[mi]);}
+\CommentTok{#       names.main=c(names.control, names.xbiom[0:xbiom.used], names.mdf.acup[0:mdf.acup.used], names.mdf.mbsr[0:mdf.mbsr.used]);}
+\CommentTok{#       if (predProp[mi]==0) \{}
+\CommentTok{#         names.trt = NULL;}
+\CommentTok{#       \} else\{}
+\CommentTok{#         names.trt = names.trt.all;}
+\CommentTok{#         names.mdf = list(names.mdf.acup[0:mdf.acup.used], names.mdf.mbsr[0:mdf.mbsr.used]);}
+\CommentTok{#       \}}
+\CommentTok{#       models[[mi]]= formula.f.r(names.main=names.main, names.trt=names.trt, names.mdf=names.mdf, names.random=c("1"), names.group=c("xrace"));}
+\CommentTok{#     }
+\CommentTok{#       # }\AlertTok{###}\CommentTok{ ---- Predict quantitative outcome ----}
+\CommentTok{#       # #out = meanPredEvaluCV.lme(fixed=models[[mi]]$fixed, dat=dat, randomf=models[[mi]]$random, model_R='lme', predLevel=1, loopn=nrepeat, cvNumber=nfold); #Prediction by lme. }
+\CommentTok{#       # out = meanPredEvaluCV.lme(fixed=models[[mi]]$fixed, dat=dat, randomf=NULL, model_R='lm', loopn=nrepeat, cvNumber=nfold); #Prediciton by lm. }
+\CommentTok{#       # outputs[[mi]] = rbind(outputs[[mi]], t(c(MSE=out[1], L2normRatio=out[2], L1normRatio=out[3], correlation=out[4], MSEoverObsVar=out[5])));}
+\CommentTok{#       }
+\CommentTok{#       }
+\CommentTok{#       }\AlertTok{###}\CommentTok{ ---- Predict quantitative outcome ----}
+\CommentTok{#       out = predEvaluCV.glm(formula=models[[mi]]$fixed, dat=dat, nfold=nfold, nrepeat=nrepeat, isRandomCV=isRandomCV);}
+\CommentTok{#       #outputs[[mi]] = rbind(outputs[[mi]], t(c(prob=out[1], sensi=out[2], speci=out[3], AUC=out[4])));}
+\CommentTok{#       outputs[[mi]] = rbind(outputs[[mi]], t(unlist(out)));}
+\CommentTok{#     }
+\CommentTok{#     \}}
+\CommentTok{#   \}}
+\CommentTok{#   }
+\CommentTok{#   # #True underlying model}
+\CommentTok{#   print(c(sampleSize=groupSampleSize*3, raceN=raceN, sigma.race = sigma.race,  beta.acup = beta.acup,}
+\CommentTok{#     beta.mbsr = beta.mbsr, beta.sex = beta.sex, beta.age = beta.age, beta.edu=beta.edu, beta.len=beta.len, beta.bas=beta.bas, beta.conc=beta.conc, markerN = markerN, beta.biom.v = beta.biom.v,}
+\CommentTok{#     mdfN.acup=mdfN.acup, beta.mdf.acup.v=beta.mdf.acup.v, gama.acup.v=gama.acup.v,}
+\CommentTok{#     mdfN.mbsr=mdfN.mbsr, beta.mdf.mbsr.v=beta.mdf.mbsr.v, gama.mbsr.v=gama.mbsr.v));}
+\CommentTok{#   }
+\CommentTok{#   # #R2 of controlling predictors}
+\CommentTok{#   # mean(R2.controls); }
+\CommentTok{#   }
+\CommentTok{#   #Prediction accuracies}
+\CommentTok{#   for (mi in 1:length(predProp))\{}
+\CommentTok{#     # print(predProp[mi]);}
+\CommentTok{#     # print(models[[mi]]$fixed);}
+\CommentTok{#     # print(apply(outputs[[mi]], 2, mean));}
+\CommentTok{#     # print(apply(outputs[[mi]], 2, quantile, probs=c(0.05, 0.95)));}
+\CommentTok{#     }
+\CommentTok{#     AUC[gi, mi] = apply(outputs[[mi]], 2, mean)[4];}
+\CommentTok{#   \}}
+\CommentTok{# \} }
+\CommentTok{# cbind(groupSampleSizes*3, AUC); }
+\CommentTok{#     }
+\end{Highlighting}
+\end{Shaded}
+
+\end{document}

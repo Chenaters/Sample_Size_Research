@@ -1,0 +1,246 @@
+\chapter{Example}
+\externaldocument{Introduction,LiteratureReview, Methods, Example, Discussion, Conclusion}
+\section{Data}
+The study utilizes the analytical result outlined in the previous section. The dataset utilized in this study was based on the findings reported by pain study \cite{baker2008chronicpain}. However, as the paper only provided a correlation matrix, a standard deviation of $\bm\SD = \bm1$ was used to derive the covariance matrix.
+
+In the calculation, the full regression model included $k = 12$ predictors, while the reduced regression model included the first $p = 3$ predictors. The basic predictors included in the full and reduced regression models were Age, Education, and Income. The remaining $p_2 = k-p = 9$ predictors were classified as non-basic and included Comorbidities, Pain locations, Medications, Physical functioning, Depressive symptoms, Life satisfaction, LOC-chance, LOC-powerful, and LOC-internal.
+
+Given the correlation matrix provided by \cite{baker2008chronicpain}, and assuming the covariates were standardized, the covariance matrix can be obtained using the formula: $\bm\Sigma^* = diag(\bm {SD}) \times \bm\Cor \times diag(\bm {SD})$, where $\bm\Cor$ is the correlation matrix given and $\bm\SD$ is standard deviation vector. The response variable, Pain intensity, and the $k = 12$ predictors were assumed to follow a multivariate normal distribution with mean $\bm{\mu}^* = \boldsymbol{0}$ and covariance matrix $\bm{\Sigma^*}$, which is presented below in Equation(\ref{eq:Sigma}).
+
+ \scriptsize{
+\begin{equation}\label{eq:Sigma}
+\bm{\Sigma}^* =
+\left[\begin{array}{ccccccccccccc}
+  1&   -0.24& 0.00 &-0.03& 0.45 &0.33 &0.26& 0.39 &-0.21& -0.05& 0.10& 0.16 &0.34\\
+  &1 &-0.21& -0.05 &-0.27 &-0.21& -0.09& 0.00 &0.27& 0.09 &0.34& 0.00 &-0.05 \\
+  & & 1&0.46& -0.19& 0.00& -0.19 &-0.14 &0.12& -0.24 &-0.29& -0.02& -0.13\\
+  & & & 1&-0.30& -0.04 &-0.18& -0.16& 0.16 &-0.05& -0.02& 0.07& -0.10 \\
+  & & & & 1&0.20& 0.64 &0.34 &-0.14& 0.20& 0.00 &0.03& 0.14 \\
+  & & & & & 1&0.33 &0.34& -0.07 &0.02& -0.1& -0.07& 0.11\\
+  & & & & & & 1& 0.46& -0.25 &0.15& -0.05 &-0.07 &0.18\\
+  & & & & & & & 1&-0.17& 0.13& 0.13 &-0.03& 0.26\\
+  & & & & & & & & 1& -0.03 &0.08 &0.03 &-0.57\\
+  & & & & & & & & & 1&0.68 &0.19& 0.10\\
+  & & & & & & & & & & 1&0.20 &0.09\\
+  & & & & & & & & & & & 1& 0.05\\
+ & & & & & & & & & & & &1
+ \end{array}\right].
+ \end{equation}
+ }
+ \normalsize
+
+
+\section{Calculation}
+
+The relationship between $pPMSEr$, sample size, and Cohen's $f^2$ was examined. According to \cite{baker2008chronicpain}, the predictors were categorized into demographic, health, and psychological factors. The reduced regression model only included demographic factors, while the full regression model considered both health and psychological factors while controlling for the reduced predictors.
+  
+ The variances of the error terms in the full and reduced regression models were calculated as follows: $$\sigma^2_k = \sigma_{00} - \boldsymbol{\sigma}' \boldsymbol{\Sigma}^{-1} \boldsymbol{\sigma} = 0.4687399,\sigma^2_p = \sigma_{00} - \boldsymbol{\sigma_1}' \boldsymbol{\Sigma_{11}}^{-1} \boldsymbol{\sigma_1} = 0.9393167.$$ Here, $\sigma_{00}$ represents the variance of the response, which was standardized to 1.
+
+
+
+\subsection{Predictor Effects}
+The full model effects were obtained using Equation(\ref{eq:full.reg.coeff}), and the calculated result is as shown in  Equation(\ref{eq:full.coeff}). 
+\begin{equation}\begin{aligned}
+\label{eq:full.coeff}
+\boldsymbol{\beta} &= \boldsymbol{\Sigma}^{-1}\boldsymbol{\sigma} \\
+&= (-0.13,  0.07,  0.10,  0.50,  0.23, -0.15,  0.18, -0.05, -0.47,  0.43,  0.14,  0.21). 
+\end{aligned}\end{equation}
+
+Notably, the coefficients calculated in this study differ from Equation(\ref{eq:paper.coef}) presented in Table 2 of \cite{baker2008chronicpain} as Equation(\ref{eq:paper.coef}),
+\begin{equation}\begin{aligned}
+\label{eq:paper.coef}\boldsymbol{\beta^*} = (-0.20, -0.03, -0.02, -0.04, 0.12, 0.18, 0.26, 0.25, -0.01, 0.08, -0.26, 0.21),\end{aligned}\end{equation}
+as the Equation(\ref{eq:full.coeff}) considers all predictors in the full model, whereas Equation(\ref{eq:paper.coef}) was computed with added-up predictors controlling for prior sets of predictors. 
+
+On the other hand, the reduced-model effects, given in Equation(\ref{eq:redu.coeff}), were calculated using only the three demographic basic predictors. The effects for demographic factors in the reduced-model $\boldsymbol{\beta}_1^\sharp$ were found to be closer to Equation(\ref{eq:paper.coef}) in the coefficients presented in \cite{baker2008chronicpain} than the calculated effects Equation(\ref{eq:full.coeff}) in the full model effects, as adding all predictors in the model would change the effect of previous predictors, especially when the predictors are not significant.
+
+\begin{equation}\begin{aligned}
+\label{eq:redu.coeff}
+\boldsymbol{\beta}_1^\sharp &= \boldsymbol{\Sigma}_{11}^{-1}\boldsymbol{\sigma}_1\\
+&=(-0.25 , -0.04,  -0.02).
+\end{aligned}\end{equation}
+
+
+
+\subsection{pPMSEr}
+
+The prediction mean square error is used to measure the prediction accuracy and the calculated PMSE is as shown in Table \ref{table:PMSEcalcu}. The table provides the calculated PMSE by Equation(\ref{equation:PMSE}) and Equation(\ref{equation:PMSE1}) by adding predictors sequentially for each sample size from 30 to 600. 
+
+\begin{table}[h!]
+    \centering\resizebox{\linewidth}{!}{ 
+    \begin{tabular}{||c c c c c c c c c c c||}
+    \hline
+      \makecell[c]{Sample\\ Size} & \makecell[c]{Basic \\Model} & Comorbidities & \makecell[c]{Pain\\Locations} & Medications & \makecell[c]{Physical\\Functioning} & \makecell[c]{Depressive\\Symptoms} & \makecell[c]{Life\\Satisfaction} & \makecell[c]{LOC\\chance} & \makecell[c]{LOC\\powerful} & \makecell[c]{LOC\\internal} \\ \hline
+ \hline
+
+30 & 1.0871 & 0.9322 & 0.9073 & 0.9366 & 0.8996 & 0.9121 & 0.9280 & 0.8318 & 0.8427 & 0.8476 \\ \hline
+        60 & 1.0071 & 0.8444 & 0.8025 & 0.8075 & 0.7549 & 0.7436 & 0.7333 & 0.6357 & 0.6212 & 0.6009 \\ \hline
+        90 & 0.9833 & 0.8191 & 0.7732 & 0.7727 & 0.7172 & 0.7013 & 0.6863 & 0.5903 & 0.5721 & 0.5488 \\ \hline
+        120 & 0.9719 & 0.8071 & 0.7595 & 0.7565 & 0.6999 & 0.6820 & 0.6652 & 0.5701 & 0.5506 & 0.5262 \\ \hline
+        150 & 0.9651 & 0.8001 & 0.7515 & 0.7472 & 0.6899 & 0.6710 & 0.6531 & 0.5587 & 0.5384 & 0.5135 \\ \hline
+        180 & 0.9607 & 0.7954 & 0.7462 & 0.7411 & 0.6834 & 0.6638 & 0.6454 & 0.5514 & 0.5307 & 0.5054 \\ \hline
+        210 & 0.9576 & 0.7922 & 0.7425 & 0.7368 & 0.6789 & 0.6588 & 0.6400 & 0.5462 & 0.5252 & 0.4998 \\ \hline
+        240 & 0.9553 & 0.7898 & 0.7398 & 0.7336 & 0.6755 & 0.6552 & 0.6360 & 0.5425 & 0.5213 & 0.4957 \\ \hline
+        270 & 0.9535 & 0.7879 & 0.7377 & 0.7311 & 0.6729 & 0.6523 & 0.6329 & 0.5396 & 0.5182 & 0.4925 \\ \hline
+        300 & 0.9520 & 0.7864 & 0.7360 & 0.7292 & 0.6709 & 0.6501 & 0.6304 & 0.5373 & 0.5158 & 0.4900 \\ \hline
+        330 & 0.9509 & 0.7852 & 0.7346 & 0.7276 & 0.6692 & 0.6482 & 0.6285 & 0.5354 & 0.5138 & 0.4880 \\ \hline
+        360 & 0.9499 & 0.7842 & 0.7335 & 0.7263 & 0.6678 & 0.6467 & 0.6268 & 0.5339 & 0.5122 & 0.4863 \\ \hline
+        390 & 0.9491 & 0.7833 & 0.7326 & 0.7252 & 0.6666 & 0.6454 & 0.6254 & 0.5326 & 0.5109 & 0.4849 \\ \hline
+        420 & 0.9484 & 0.7826 & 0.7317 & 0.7242 & 0.6656 & 0.6443 & 0.6243 & 0.5315 & 0.5097 & 0.4837 \\ \hline
+        450 & 0.9478 & 0.7820 & 0.7310 & 0.7234 & 0.6648 & 0.6434 & 0.6232 & 0.5305 & 0.5087 & 0.4827 \\ \hline
+        480 & 0.9472 & 0.7814 & 0.7304 & 0.7227 & 0.6640 & 0.6426 & 0.6224 & 0.5297 & 0.5078 & 0.4818 \\ \hline
+        510 & 0.9467 & 0.7809 & 0.7299 & 0.7221 & 0.6633 & 0.6419 & 0.6216 & 0.5289 & 0.5071 & 0.4810 \\ \hline
+        540 & 0.9463 & 0.7805 & 0.7294 & 0.7215 & 0.6628 & 0.6412 & 0.6209 & 0.5283 & 0.5064 & 0.4803 \\ \hline
+        570 & 0.9460 & 0.7801 & 0.7289 & 0.7210 & 0.6622 & 0.6406 & 0.6203 & 0.5277 & 0.5058 & 0.4797 \\ \hline
+        600 & 0.9456 & 0.7798 & 0.7286 & 0.7205 & 0.6618 & 0.6401 & 0.6197 & 0.5272 & 0.5052 & 0.4791 \\ \hline  
+\hline
+\end{tabular}}
+\caption{Prediction Mean Square Error from the calculation by sequentially added predictors over the basic 3 predictors}
+\label{table:PMSEcalcu}
+\end{table}
+
+
+The “improvement” of prediction by adding the new $k-p=9$ health and psychological predictors with sample size $n = 181$, as \cite{baker2008chronicpain}, can be measured by the “percentage of PMSE reduction”:
+$$\begin{aligned}
+\hat{pPMSEr} &= \left(\frac{PMSE_1 - PMSE}{PMSE_1} \right)\times 100\%\\
+&= \left(1 - \frac{\sigma_k^2}{\sigma_p^2} \cdot \frac{n-p-2}{n-k-2}\right)\times 100\% = 47.40\%.
+\end{aligned}$$
+The prediction mean square error measures the expected squared distance between the prediction for a specific value and what the true value is whereas $pPMSEr$ is used to demonstrate how much accuracy the added $k-p = 9$ predictors bring to the model. In this example, the introduction of psychological predictors into the model increased the model's prediction accuracy by 47.40\%.
+
+\subsection{Efficient Sample Size}
+Generally speaking, PMSE will decrease as the sample size increases, so pPMSEr will increase as the sample size increases, that is, the larger the sample size, the better the prediction effect. However, the positive impact of sample size increase on prediction accuracy is limited. It shows that the prediction accuracy is stable when the sample size equals or exceeds a threshold. After the threshold, the increase in sample size is not cost-efficient to increase prediction accuracy. 
+
+The threshold as efficient sample size with specific efficiency $1-\alpha = 0.9 $(e.g., 90\% of the largest pPMSEr at $n=\infty$). 
+$$
+n^* = p+2+(k-p)\left(\frac{EVR}{\alpha(1-EVR)}+1\right) = 103.6\approx 104,
+$$
+where $EVR = \frac{\sigma_k^2}{\sigma_p^2}=0.499$.
+The actual used sample size in the paper is 181, which means the $rPMSEp$ should be greater than 0.1. On the flip side, with 181 sample size, the efficiency $1-\alpha = 0.953$. The pPMSEr we obtained with sample size of 181 could reach 95.3\% of the largest pPMSEr at $n=\infty$.
+
+
+\subsection{Cohen's $f^2$}
+
+The $R^2$ for full and reduced regression models are 
+
+$$R^2 = \frac{\sigma_{00}-\sigma^2_k}{\sigma_{00}} = \frac{\boldsymbol{\sigma}' \boldsymbol{\Sigma}^{-1} \boldsymbol{\sigma}}{\sigma_{00}} = 0.53126, 
+R_1^2 = \frac{\sigma_{00}-\sigma^2_p}{\sigma_{00}} = \frac{\boldsymbol{\sigma_1}' \boldsymbol{\Sigma}_{11}^{-1} \boldsymbol{\sigma}_1}{\sigma_{00}} = 0.0606,$$
+corresponding to $R^2$ given in \cite{baker2008chronicpain} written below:
+$$R^2 = 0.44, R_1^2 = 0.06.$$
+It is noteworthy that the calculated $R^2$ deviates from the $R^2$ reported in the paper. This inconsistency can be attributed to the fact that the paper's full model was obtained by controlling for previous predictors, which may have amplified the effects of insignificant predictors. By the definition of the squared multiple correlations $R^2$ and Equation(\ref{eq:errorVarRatio-f2}), Cohen's $f^2$ can be calculated $f_2^2 = 0.3328571$, that is, the new $k-p = 9$ predictors have large effect size since $f_2^2 \ge 0.15$ for Cohen's $f_2^2$ interpretation.
+
+
+
+
+\section{Simulation}
+
+The simulation aims to investigate the impact of sample size and the inclusion of non-basic predictors on prediction accuracy.  Our hypothesis is that as more variables are added, the efficient sample size will decrease, resulting in a stable prediction accuracy that does not significantly improve with the addition of a larger sample size. To generate our data, we used the covariate matrix $\boldsymbol{\Sigma}$ from Equation(\ref{eq:Sigma}). The simulation result using covariance generated response is also consistent with the result using the linear model with generated predictors data and error term with variance $\sigma_k^2$. The comparison between the two ways to generate the response variable is provided in the Appendix.
+
+The basic model contained three demographic predictors, while the non-basic predictors were sequentially added to the model. For each iteration, a new response is generated to be considered as future value. We simulated the prediction mean square error (PMSE) and the correlation between the future value and prediction by taking the mean of 5000 iterations. The resulting PMSE and correlation values are presented in Table \ref{table:PMSE} and Table \ref{table:Corr}, respectively.
+
+
+
+\begin{table}[h!]
+    \centering\resizebox{\linewidth}{!}{ 
+    \begin{tabular}{||c c c c c c c c c c c||}
+    \hline
+      \makecell[c]{Sample\\ Size} & \makecell[c]{Basic \\Model} & Comorbidities & \makecell[c]{Pain\\Locations} & Medications & \makecell[c]{Physical\\Functioning} & \makecell[c]{Depressive\\Symptoms} & \makecell[c]{Life\\Satisfaction} & \makecell[c]{LOC\\chance} & \makecell[c]{LOC\\powerful} & \makecell[c]{LOC\\internal} \\ \hline
+ \hline
+
+30 & 1.0947 & 0.9452 & 0.9356 & 0.9639 & 0.9406 & 0.9549 & 0.9846 & 0.8684 & 0.8744 & 0.8674 \\ \hline
+        60 & 1.0487 & 0.8859 & 0.8599 & 0.8771 & 0.8370 & 0.8407 & 0.8531 & 0.7485 & 0.7460 & 0.7313 \\ \hline
+        90 & 1.0319 & 0.8712 & 0.8343 & 0.8469 & 0.8017 & 0.7988 & 0.8000 & 0.6956 & 0.6879 & 0.6700 \\ \hline
+        120 & 1.0115 & 0.8483 & 0.8102 & 0.8193 & 0.7716 & 0.7662 & 0.7625 & 0.6604 & 0.6504 & 0.6323 \\ \hline
+        150 & 1.0016 & 0.8376 & 0.7978 & 0.8036 & 0.7544 & 0.7478 & 0.7410 & 0.6415 & 0.6301 & 0.6099 \\ \hline
+        180 & 0.9947 & 0.8291 & 0.7867 & 0.7907 & 0.7402 & 0.7322 & 0.7237 & 0.6252 & 0.6135 & 0.5926 \\ \hline
+        210 & 0.9894 & 0.8265 & 0.7828 & 0.7854 & 0.7337 & 0.7238 & 0.7137 & 0.6160 & 0.6024 & 0.5805 \\ \hline
+        240 & 0.9840 & 0.8228 & 0.7782 & 0.7792 & 0.7272 & 0.7157 & 0.7044 & 0.6071 & 0.5919 & 0.5701 \\ \hline
+        270 & 0.9840 & 0.8206 & 0.7753 & 0.7757 & 0.7236 & 0.7105 & 0.6988 & 0.6007 & 0.5844 & 0.5617 \\ \hline
+        300 & 0.9807 & 0.8162 & 0.7694 & 0.7690 & 0.7164 & 0.7025 & 0.6904 & 0.5945 & 0.5776 & 0.5544 \\ \hline
+        330 & 0.9762 & 0.8119 & 0.7644 & 0.7634 & 0.7099 & 0.6951 & 0.6830 & 0.5877 & 0.5707 & 0.5475 \\ \hline
+        360 & 0.9731 & 0.8087 & 0.7606 & 0.7592 & 0.7057 & 0.6905 & 0.6777 & 0.5835 & 0.5659 & 0.5423 \\ \hline
+        390 & 0.9695 & 0.8061 & 0.7576 & 0.7553 & 0.7021 & 0.6867 & 0.6737 & 0.5792 & 0.5618 & 0.5380 \\ \hline
+        420 & 0.9673 & 0.8045 & 0.7558 & 0.7532 & 0.7002 & 0.6842 & 0.6702 & 0.5756 & 0.5583 & 0.5346 \\ \hline
+        450 & 0.9657 & 0.8027 & 0.7533 & 0.7504 & 0.6971 & 0.6810 & 0.6667 & 0.5720 & 0.5541 & 0.5302 \\ \hline
+        480 & 0.9649 & 0.8019 & 0.7522 & 0.7492 & 0.6959 & 0.6797 & 0.6650 & 0.5694 & 0.5514 & 0.5276 \\ \hline
+        510 & 0.9659 & 0.8019 & 0.7522 & 0.7490 & 0.6954 & 0.6787 & 0.6633 & 0.5670 & 0.5486 & 0.5245 \\ \hline
+        540 & 0.9648 & 0.8003 & 0.7510 & 0.7476 & 0.6935 & 0.6766 & 0.6611 & 0.5657 & 0.5473 & 0.5229 \\ \hline
+        570 & 0.9640 & 0.7997 & 0.7503 & 0.7469 & 0.6920 & 0.6749 & 0.6589 & 0.5635 & 0.5449 & 0.5204 \\ \hline
+        600 & 0.9619 & 0.7968 & 0.7469 & 0.7433 & 0.6886 & 0.6713 & 0.6550 & 0.5602 & 0.5417 & 0.5171 \\ \hline 
+\hline
+\end{tabular}}
+\caption{Prediction Mean Square Error from simulation by sequentially added predictors over the basic 3 predictors}
+\label{table:PMSE}
+\end{table}
+
+Table \ref{table:PMSE} presents the PMSE values for each sample size by adding non-basic predictors sequentially. As the sample size increased, the PMSE decreased for all regression models. However, as some of the non-basic predictors were added, such as Medications, Depressive Symptoms, the PMSE increased, indicating that these predictors may not be improving the prediction accuracy. We also observed that adding more non-basic predictors led to a decreasing marginal gain in prediction accuracy with an increasing sample size.
+
+The results presented in Table \ref{table:PMSE} provide empirical validation for the theoretical findings reported in Table \ref{table:PMSEcalcu}. The simulation results demonstrate consistent patterns across each added predictor. The absolute value of difference for each parameter setting is observed to be less than 0.05, confirming that the estimation formulas for PMSE for full and reduced models are adequate.
+Specifically, the calculated $pPMSEr$ for a sample size of $n=181$ is $47.40\%$. However, the simulated result yields an empirical $\hat{pPMSEr}$ of $40.42\%$ for the same sample size, indicating notably lower prediction accuracy than the calculation expected. 
+$$\begin{aligned}
+pPMSEr &= \left(\frac{PMSE_1 - PMSE}{PMSE_1} \right)\times 100\%\\
+&= \frac{0.9947-0.5926}{0.9947}= 40.42\%,
+\end{aligned}$$  
+This discrepancy may be attributed to the potential introduction of random error due to the inclusion of insignificant predictors, which can diminish the amount of variance explained and increase the effective sample size $n^*$ needed. Since we considered the correlation in the definition of the error term in Equation(\ref{eq:sigmak2}), the phenomenon may potentially trace back to a low correlation between response and predictors. Thus, it may be necessary to increase the sample size to offset the negative impact of adding insignificant predictors on prediction accuracy. Since 7 out of the 12 predictors we are using are insignificant, only an efficiently large sample size, such as $n=600$, can offset the impact with simulated $pPMSEr = 46.24\%$, which is closer to the theoretical result for $n = 600$, $pPMSEr = 49.33\%$.
+
+\begin{table}[h!]
+    \centering
+    \resizebox{\linewidth}{!}{ 
+    \begin{tabular}{||c c c c c c c c c c c||}
+    \hline
+      \makecell[c]{Sample\\ Size} & \makecell[c]{Basic \\Model} & Comorbidities & \makecell[c]{Pain\\Locations} & Medications & \makecell[c]{Physical\\Functioning} & \makecell[c]{Depressive\\Symptoms} & \makecell[c]{Life\\Satisfaction} & \makecell[c]{LOC\\chance} & \makecell[c]{LOC\\powerful} & \makecell[c]{LOC\\internal} \\ \hline
+ \hline
+
+30 & 0.1210 & 0.3252 & 0.3684 & 0.3584 & 0.4012 & 0.4009 & 0.4074 & 0.4729 & 0.4753 & 0.4752 \\ \hline
+        60 & 0.1464 & 0.3657 & 0.4115 & 0.4052 & 0.4516 & 0.4561 & 0.4659 & 0.5370 & 0.5436 & 0.5498 \\ \hline
+        90 & 0.1594 & 0.3868 & 0.4328 & 0.4288 & 0.4762 & 0.4841 & 0.4957 & 0.5673 & 0.5763 & 0.5858 \\ \hline
+        120 & 0.1701 & 0.4007 & 0.4472 & 0.4450 & 0.4933 & 0.5026 & 0.5149 & 0.5876 & 0.5978 & 0.6096 \\ \hline
+        150 & 0.1789 & 0.4108 & 0.4573 & 0.4563 & 0.5054 & 0.5161 & 0.5286 & 0.6019 & 0.6129 & 0.6257 \\ \hline
+        180 & 0.1850 & 0.4180 & 0.4648 & 0.4646 & 0.5143 & 0.5259 & 0.5388 & 0.6124 & 0.6239 & 0.6377 \\ \hline
+        210 & 0.1900 & 0.4233 & 0.4705 & 0.4712 & 0.5214 & 0.5337 & 0.5469 & 0.6204 & 0.6326 & 0.6469 \\ \hline
+        240 & 0.1943 & 0.4279 & 0.4756 & 0.4769 & 0.5272 & 0.5400 & 0.5535 & 0.6268 & 0.6394 & 0.6542 \\ \hline
+        270 & 0.1977 & 0.4316 & 0.4795 & 0.4814 & 0.5319 & 0.5452 & 0.5589 & 0.6322 & 0.6450 & 0.6600 \\ \hline
+        300 & 0.2010 & 0.4348 & 0.4829 & 0.4853 & 0.5361 & 0.5497 & 0.5637 & 0.6368 & 0.6498 & 0.6652 \\ \hline
+        330 & 0.2037 & 0.4376 & 0.4860 & 0.4887 & 0.5396 & 0.5536 & 0.5678 & 0.6406 & 0.6538 & 0.6695 \\ \hline
+        360 & 0.2058 & 0.4398 & 0.4884 & 0.4915 & 0.5426 & 0.5568 & 0.5712 & 0.6438 & 0.6573 & 0.6731 \\ \hline
+        390 & 0.2079 & 0.4418 & 0.4906 & 0.4940 & 0.5451 & 0.5597 & 0.5741 & 0.6467 & 0.6603 & 0.6763 \\ \hline
+        420 & 0.2096 & 0.4436 & 0.4926 & 0.4961 & 0.5474 & 0.5622 & 0.5768 & 0.6492 & 0.6630 & 0.6791 \\ \hline
+        450 & 0.2115 & 0.4452 & 0.4943 & 0.4981 & 0.5494 & 0.5644 & 0.5791 & 0.6515 & 0.6654 & 0.6817 \\ \hline
+        480 & 0.2131 & 0.4468 & 0.4959 & 0.4999 & 0.5513 & 0.5665 & 0.5813 & 0.6536 & 0.6677 & 0.6840 \\ \hline
+        510 & 0.2144 & 0.4481 & 0.4973 & 0.5015 & 0.5529 & 0.5683 & 0.5832 & 0.6554 & 0.6695 & 0.6860 \\ \hline
+        540 & 0.2157 & 0.4491 & 0.4985 & 0.5029 & 0.5544 & 0.5698 & 0.5849 & 0.6570 & 0.6712 & 0.6878 \\ \hline
+        570 & 0.2168 & 0.4502 & 0.4996 & 0.5042 & 0.5557 & 0.5713 & 0.5865 & 0.6585 & 0.6728 & 0.6895 \\ \hline
+        600 & 0.2178 & 0.4511 & 0.5007 & 0.5054 & 0.5570 & 0.5727 & 0.5879 & 0.6599 & 0.6742 & 0.6910 \\ \hline \hline
+\end{tabular}}
+\caption{Correlation between the true value and prediction changes by sequentially added predictors over the basic 3 predictors}
+\label{table:Corr}
+\end{table}
+
+Table \ref{table:Corr} presents the correlation values for each sample size by adding predictors sequentially. The result is simulated using 5000 iterations using 5-fold cross-validation. We observed a similar pattern as with $PMSE$: the correlation increased with increasing sample size but decreased as some insignificant non-basic predictors were added. Additionally, we observed a similar diminishing marginal gain in prediction accuracy with the inclusion of more non-basic predictors.
+
+
+
+The calculation of the efficient sample size for each model with a significance level of $\alpha = 0.1$ (i.e., the sample size that attains 90\% of the largest pPMSEr as $n$ approaches infinity) is provided as a reference in Tables \ref{table:PMSE} and \ref{table:Corr}, as demonstrated in Table \ref{table:effn}.
+
+
+\begin{table}
+\centering
+\resizebox{\linewidth}{!}{ 
+\begin{tabular}
+{||c c c c c c c c c||}
+ \hline
+\makecell[c]{Basic \\ Predictors} &Comorbidities & \makecell[c]{Pain\\ Locations} & Medications & \makecell[c]{Physical \\ Functioning} & \makecell[c]{Depressive \\Symptoms} & \makecell[c]{Life\\ Satisfaction} & \makecell[c]{LOC\\-Chance} & \makecell[c]{LOC\\-Powerful} \\ [0.5ex] 
+ \hline\hline
+ 103.6487 & 137.1353 & 143.9351 & 129.5519 & 141.2487 & 129.9053 & 113.9951 & 206.2313 & 191.7463\\[1ex]
+ \hline
+\end{tabular}}
+\caption{Efficient sample size $n^*$ by sequentially added predictors over the basic 3 predictors}
+ \label{table:effn}
+\end{table}
+
+Upon attaining the efficient sample size $n^*$, for each model, it is anticipated that the $rPMSEp$, $PMSE$, and correlations will remain stable, as the sample size continues to increase. This discovery lends support to the definition used to determine efficient sample size $n^*$. The low correlation between variables and response variables may result in a reduced possibility of obtaining statistically significant results. Furthermore, the presence of non-significant predictors can have an impact on the estimation of the efficient sample size $n^*$, leading to an underestimation of the efficient sample size necessary to achieve a prediction accuracy level. The incorporation of insignificant predictors, such as Medications, Depressive Symptoms, Life Satisfaction, and LOC-internal, into the model, is expected to result in an increase in the efficient sample size $n^*$, as opposed to a decrease for significant predictors. The inclusion of such predictors is unlikely to enhance the predictive performance, it is probable to weaken it instead. Moreover, it is unlikely to provide additional information but rather introduce random errors. Consequently, a larger sample size would be required to achieve the same level of prediction accuracy. Conversely, the significant predictors can be readily identified by an increase in $pPMSEr$, a decrease in $PMSE$, or a less efficient sample size $n^*$.
+
+To summarize, our simulation study demonstrates that adding significant non-basic predictors can decrease the effective sample size and improve prediction accuracy when the sample size is enough. However, including additional insignificant predictors may lead to extra randomness and reduced prediction accuracy instead of contributing to variance explanation. Therefore, careful consideration of the choice of predictors to include in the model is necessary, taking into account both the sample size and the objectives of the analysis. The calculated formulas are proven to be adequate to provide estimations for $PMSE$ when introducing predictors in the linear model.
+
+
+
+
+

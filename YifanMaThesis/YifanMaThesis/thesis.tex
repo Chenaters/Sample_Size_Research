@@ -1,0 +1,93 @@
+\documentclass[12pt]{report}
+% Basic Package Imports
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage{grffile}
+\usepackage{makecell}
+\usepackage{ytableau}
+
+%Packages
+\usepackage{amssymb,amsmath, amsthm, graphicx, color,subfigure, cancel,commath,ifthen,natbib, bm,alltt, graphicx,float}
+\newcommand\commentout[1]{}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\usepackage{xr} 
+\newcommand{\nc}{\newcommand}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\SD}{\mathrm{SD}}
+\newcommand{\SNR}{\text{SNR}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Cor}{\mathrm{Cor}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\SIGMA}{\bm{\Sigma}}
+\newcommand{\BETA}{\bm{\beta}}
+\newcommand{\GAMMA}{\bm{\gamma}}
+
+\newtheorem{defi}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{obs}{Observation}
+\newtheorem{cor}{Corollary}
+\newtheorem{lem}{Lemma}
+\newtheorem{ass}{Assumption}
+
+% Formatting
+\usepackage{setspace}
+\setlength{\textheight}{8.63in}
+\setlength{\textwidth}{5.9in}
+\setlength{\topmargin}{-0.2in}
+\setlength{\oddsidemargin}{0.3in}
+\setlength{\evensidemargin}{0.3in}
+\setlength{\headsep}{0.0in}
+
+% Document header formatting
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\rightmark}
+\setlength{\headsep}{0.2in}
+
+
+
+
+\begin{document}
+
+% Title, Abstract, and Acknowledgements
+\pagenumbering{gobble}
+\input{ThesisConventions/title.tex}
+\newpage
+\doublespacing
+\input{ThesisConventions/abstract.tex}
+\input{ThesisConventions/acknowledgements.tex}
+
+% Page Guides
+\pagenumbering{roman}
+\setcounter{page}{1}
+\tableofcontents
+%\listoffigures
+\listoftables
+\clearpage
+
+% Chapters
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\input{Chapters/Introduction.tex}
+\input{Chapters/LiteratureReview.tex}
+\input{Chapters/AnalyticalResult.tex}
+\input{Chapters/Example.tex}
+\input{Chapters/Discussion.tex}
+%\input{Chapters/Conclusion.tex}
+\clearpage
+
+% Bibliography
+\bibliographystyle{ims}
+\bibliography{PredictionSampleSize.bib}
+\input{Chapters/Appendix.tex}
+
+\end{document}

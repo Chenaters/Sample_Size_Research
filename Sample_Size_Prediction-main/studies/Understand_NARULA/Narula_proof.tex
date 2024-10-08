@@ -1,0 +1,292 @@
+\documentclass[11pt]{article}
+%common citations: yu1989fixed,
+%Page Format control
+%-------------------------------------
+%formatting post: 
+%https://texblog.org/2012/03/01/latex-page-line-and-font-settings/
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\onehalfspacing
+\usepackage{fancyhdr}
+\usepackage{multirow}
+
+
+%Packages
+\usepackage{amssymb,amsmath, amsthm, graphicx, color,subfigure, cancel,commath,ifthen,natbib, bm,alltt, graphicx,float}
+%external definitions
+%-------------------------------------
+%\input{HeaderBH}
+%multiline comment
+\newcommand\commentout[1]{}
+%-------------------------------------
+
+%-------
+%controllig equation numbering
+%https://tex.stackexchange.com/questions/42726/align-but-show-one-equation-%number-at-the-end
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+%or use align with \nonumber
+%-------
+
+\usepackage{xr} %These two lines allow cross  reference from the supplementary file. 
+\externaldocument{CombDiscreteTests_Suppl}
+\newcommand{\nc}{\newcommand}
+%\newcommand{\E}{\mathrm{E}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\SD}{\mathrm{SD}}
+\newcommand{\SNR}{\text{SNR}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Cor}{\mathrm{Cor}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\SIGMA}{\bm{\Sigma}}
+\newcommand{\BETA}{\bm{\beta}}
+\newcommand{\GAMMA}{\bm{\gamma}}
+
+
+%environments
+%=======================
+\newtheorem{defi}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{obs}{Observation}
+\newtheorem{cor}{Corollary}
+\newtheorem{lem}{Lemma}
+\newtheorem{ass}{Assumption}
+%=======================
+
+
+\begin{document}
+\thispagestyle{fancy}
+
+%===================================================
+\title{\bf Prediction Mean Square Error Calculation based on PMSE Improvement}
+%\author{...
+%\and
+%...
+%}
+\date{}
+\maketitle
+% 
+% \begin{abstract}
+%...
+%
+%
+%\bigskip 
+%
+%\noindent \textbf{KEYWORDS:} 
+% \end{abstract}
+%%===================================================
+%%END: frontmatter
+%
+%%BEGIN: \section{Introduction}\label{sec:Intro}
+%%===================================================
+%\newpage
+%
+
+%=======================
+\lhead{Yifan Ma} 
+\cfoot{\thepage\ of \pageref{LastPage}}
+
+Deduction of PMSE in Predictive Mean Square Error and
+ Stochastic Regressor Variables by  SUBHASH C. NARULA
+
+The response variable and the predictor variables follow a joint
+ (k+ 1)-variate normal distribution with unknown mean vector $\mu^{*}=[\mu_{0},\boldsymbol{\mu^{'}}]^{'}$, and unknown covariance matrix 
+$ \boldsymbol{\Sigma^{*}}  =    
+ \begin{bmatrix} 
+    \sigma_{00} & \boldsymbol{\sigma^{'}} \\  
+    \boldsymbol{\sigma} & \boldsymbol{\Sigma} \\  
+\end{bmatrix}$ . Let $\boldsymbol {z_1, z_2,..., z_n}$ be n independent (k-component vector) observations on the predictor variables, $\boldsymbol{x_i=z_i-\bar{z}}$. Let $ \boldsymbol{S^{*}}  =    
+ \begin{bmatrix} 
+    s_{00} & \boldsymbol{s^{'}} \\  
+    \boldsymbol{s} & \boldsymbol{S} \\  
+\end{bmatrix}$ be sample covariance matrix, where 
+$$s_{00}=\sum{\frac{(y_i-\bar{y})^2}{n-1}},\boldsymbol{s}=\sum{\frac{(y_i-\bar{y})\boldsymbol{x_i}}{n-1}}, \boldsymbol{S}=\sum{\frac{\boldsymbol{x_{i}x_{i}^{'}}}{n-1}}
+$$
+We assume the correct the model(1.1)
+$$\boldsymbol{y=\alpha+ \beta_1z_1+\beta_2z_2+...+\beta_kz_k+\epsilon}$$
+The LSE prediction equation 
+$$
+\boldsymbol{\hat{y}}=\bar{y}+\boldsymbol{\hat{\beta_1}}(\boldsymbol{z_1}-\bar{z_1})+\boldsymbol{\hat{\beta_2}}(\boldsymbol{z_2}-\bar{z_2})+...+\boldsymbol{\hat{\beta_k}}(\boldsymbol{z_k}-\bar{z_k})=\bar{y}+\boldsymbol{X'\hat{\beta}}$$
+$$\hat{y_i}=\bar{y}+\boldsymbol{x_{i}'\hat{\beta}}
+$$
+
+For any given $\boldsymbol{z_i}$, 
+$$\begin{aligned}
+E(y_i|\boldsymbol{z_i})&=\alpha + \boldsymbol{\beta z_i}\\
+&= \mu_{0}-\boldsymbol{\sigma^{'}\Sigma^{-1}\mu} + \boldsymbol{\sigma'\Sigma^{-1}z_i}\\
+&=\mu_0+\boldsymbol{\sigma^{'}\Sigma^{-1}(z_i-\mu)}
+\end{aligned}$$
+where $\alpha=\mu_{0}-\boldsymbol{\sigma^{'}\Sigma^{-1}\mu}, \boldsymbol{\beta=\sigma^{'}\Sigma^{-1}}$. Thus $\hat{\alpha}=\bar{y}-\boldsymbol{s'S^{-1}\bar{x}},\boldsymbol{\hat{\beta}}=\boldsymbol{S^{-1}s}$.
+
+
+The conditional predictive mean square error by 
+$$\begin{aligned}
+E[(y_0-\hat{y_0})^2|\boldsymbol{z_0}]
+&=E[(\alpha+\boldsymbol{(z_0-\mu)'\beta}+\epsilon_0-\bar{y}-\boldsymbol{x_{0}'\hat{\beta}}|\boldsymbol{z_0})^2]\\
+&=E[(\alpha+\boldsymbol{(z_0-\mu)'\beta+\epsilon_0}-\alpha-(\boldsymbol{\bar{z}-\mu)'\beta-\bar{\epsilon}-x_0'\beta|z_0})^2]\\&=E[(\boldsymbol{x_{0}'\beta}-\boldsymbol{\bar{x}'\beta}+\epsilon_0-\bar{\epsilon}-\boldsymbol{x_{0}'\hat{\beta}}|\boldsymbol{z_0})^2]\\
+&=E[(\boldsymbol{x_{0}'\beta}+(\epsilon_0-\bar{\epsilon})-\boldsymbol{x_{0}'\hat{\beta}}|\boldsymbol{z_0})^2]\\
+&=E[(\boldsymbol{x_0'\beta}+(\epsilon_0-\bar{\epsilon}))^2+(\boldsymbol{x_0'\hat{\beta}})^2-2(\boldsymbol{x_0'\beta}+(\epsilon_0-\bar{\epsilon}))\boldsymbol{x_0'\hat{\beta}}|\boldsymbol{z_0}]\\
+&=E[(\boldsymbol{x_0'\beta})^2+(\epsilon_0-\bar{\epsilon})^2+(\boldsymbol{x_0'\hat{\beta}})^2
+-2\boldsymbol{x_0'\beta x_0'\hat{\beta}}|\boldsymbol{z_0}]\\
+&=\boldsymbol{\beta'}E(\boldsymbol{x_0x_0'}|\boldsymbol{z_0})\boldsymbol{\beta}+E[(\epsilon_0-\bar{\epsilon})^2|\boldsymbol{z_0}]+E[(\boldsymbol{x_0'\hat{\beta}})^2|\boldsymbol{z_0}]-2\boldsymbol{\beta'}E[\boldsymbol{x_0x_0'\hat{\beta}}|\boldsymbol{z_0}]
+\end{aligned}$$
+By Lemma A1, Lemma A3, Lemma A7
+$$\begin{aligned}
+&E(\boldsymbol{\tilde{\beta_1}}|\boldsymbol{X_1})=\boldsymbol{\beta_1}+\boldsymbol{\Sigma_{11}^{-1}\Sigma_{12}\beta_{2}} = \boldsymbol{\Phi_1} \label{lemmaA1}\\
+&E(\boldsymbol{x_{01}x_{01}'}|\boldsymbol{z_0})=(\boldsymbol{z_{01}}-\boldsymbol{\mu_1})(\boldsymbol{z_{01}}-\boldsymbol{\mu_1})'+\frac{\boldsymbol{\Sigma_{11}}}{n}\label{LemmaA3}\\
+&E(\boldsymbol{x_0x_0'}|\boldsymbol{z_0})=(\boldsymbol{z_0-\mu})(\boldsymbol{z_0}-\boldsymbol{\mu})'+\frac{\boldsymbol{\Sigma}}{n}\label{LemmaA3.1}\\
+&
+\begin{aligned}E[(\boldsymbol{x_{01}'\tilde{\beta_1}})^2|\boldsymbol{z_0}]
+=&\sigma_p^2 \left[(\boldsymbol{z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)}+\frac{p}{n}\right]\frac{1}{n-p-2}\\
+&+\boldsymbol{\Phi_1'\Sigma_{11}\Phi_1}\frac{1}{n}+\boldsymbol{\Phi_{1}'(z_{01}-\mu_{1})(z_{01}-\mu_1)'\Phi_1}\label{LemmaA7}
+\end{aligned}\\
+&\boldsymbol{\sigma'\Sigma^{-1}}
+\begin{bmatrix}
+\boldsymbol{\Sigma_{11}}\\ \boldsymbol{\Sigma_{21}}\end{bmatrix}=\sigma_1'\label{LemmaA9}
+\end{aligned}
+$$
+
+The conditional PMSE can be written as
+$$\begin{aligned}
+E[(y_0-\hat{y_0})^2|\boldsymbol{z_0}]
+&=\boldsymbol{\beta'}E(\boldsymbol{x_0x_0'}|\boldsymbol{z_0})\boldsymbol{\beta}+E[(\epsilon_0-\bar{\epsilon})^2|\boldsymbol{z_0}]+E[(\boldsymbol{x_0'\hat{\beta}})^2|\boldsymbol{z_0}]-2\boldsymbol{\beta'}E[\boldsymbol{x_0x_0'\hat{\beta}}|\boldsymbol{z_0}]\\
+&\begin{aligned}=&\boldsymbol{\beta}' \left[\boldsymbol{(z_0-\mu)(z_0-\mu)'}+\frac{\boldsymbol{\Sigma}}{n} \right]\boldsymbol{\beta}+\sigma_k^2 \left(1+\frac{1}{n}\right)\\
+&+\sigma_{k}^2 \left[\boldsymbol{(z_0-\mu)'\Sigma^{-1}(z_0-\mu)}+\frac{k}{n} \right]\frac{1}{n-k-2}\\
+&+\frac{1}{n}\boldsymbol{\Phi'\Sigma\Phi}+\boldsymbol{\Phi'(z_{0}-\mu)(z_{0}-\mu)'\Phi}-2\boldsymbol{\beta'}\left[\boldsymbol{(z_0-\mu)(z_0-\mu)'}+\frac{\boldsymbol{\Sigma}}{n} \right]\boldsymbol{\beta}
+\end{aligned}\\
+&=\sigma_k^2\left(1+\frac{1}{n}\right)+\sigma_k^2 \left[\boldsymbol{(z_0-\mu)'\Sigma^{-1}(z_0-\mu)}+\frac{k}{n} \right]\frac{1}{n-k-2}
+\end{aligned}$$
+Since $\boldsymbol{\Phi}$ is the notation of expectation of $\boldsymbol{\tilde{\beta_1}}$, when we are using all predictors, the LSE is unbiased, which means $\boldsymbol{\Phi} = \boldsymbol{\beta}$. 
+
+The unconditional PMSE
+$$\begin{aligned}
+E[(y_0-\hat{y_0})^2]&=E\{E[(y_0-\hat{y_0})^2|\boldsymbol{z_0}]\}\\
+&=E\left[\sigma_k^2\left(1+\frac{1}{n}\right)+\sigma_k^2 \left[\boldsymbol{(z_0-\mu)'\Sigma^{-1}(z_0-\mu)}+\frac{k}{n} \right]\frac{1}{n-k-2}\right]\\
+&=\sigma_k^2\left(1+\frac{1}{n}\right)+\sigma_k^2 E\left[\boldsymbol{(z_0-\mu)'\Sigma^{-1}(z_0-\mu)}+\frac{k}{n} \right]\frac{1}{n-k-2}\\
+&=\sigma_k^2\left(1+\frac{1}{n}\right)+\sigma_k^2 \left(k+\frac{k}{n} \right)\frac{1}{n-k-2}\\
+&=\sigma_k^2\left(1+\frac{1}{n}\right)\left(1+\frac{1}{n-k-2}\right)\\
+&=\sigma_k^2\left(1+\frac{1}{n}\right)\left(\frac{n-2}{n-k-2}\right)\\
+\end{aligned}
+$$
+For subset, we partition the k-component vector of predictor variables into two parts, $\boldsymbol{Z=[Z_{1},Z_{2}],X=[X_1,X_2],x_1'=[x_{i1}',x_{i2}'],\mu'=[\mu_1',\mu_2'] ,\sigma'=[\sigma_1',\sigma_2'],s'=[s_1',s_2'],}$ $\boldsymbol{\Sigma}=\begin{bmatrix} 
+\boldsymbol{\Sigma_{11}} & \boldsymbol{\Sigma_{12}}\\  
+   \boldsymbol{ \Sigma_{21}} & \boldsymbol{\Sigma_{22}} \\  
+\end{bmatrix},\boldsymbol{S}=\begin{bmatrix} 
+    \boldsymbol{S_{11} }& \boldsymbol{S_{12}} \\  
+    \boldsymbol{S_{21}} & \boldsymbol{S_{22}} \\  
+\end{bmatrix}$
+
+, so the subset prediction equation is given by $$\tilde{y_i}=\bar{y}+\boldsymbol{x_{i1}'\tilde{\beta_1}}$$ where $\boldsymbol{\tilde{\beta_1}=S_{11}^{-1}s_1}$. By LemmaA1, LemmaA3, LemmaA7, $\boldsymbol{\Phi_1=\beta_1+\Sigma^{-1}_{11}\Sigma_{12}\beta_2}$, the conditional PMSE at $z_0$ is given by 
+$$
+\begin{aligned}
+E[(y_0-\tilde{y_0})^2|\boldsymbol{z_0}]
+&=E[(\boldsymbol{x_{0}'\beta}+\epsilon_0-\bar{\epsilon}-\boldsymbol{x_{01}'\tilde{\beta_1}}|\boldsymbol{z_0})^2]\\
+&= E[(\boldsymbol{x_0'\beta})^2+(\boldsymbol{x_{01}'\tilde{\beta_1}})^2-2\boldsymbol{x_0'\beta x_{01}'\tilde{\beta_1}}+(\epsilon_0-\bar{\epsilon})^2+2(\boldsymbol{x_0'\beta-x_{01}'\tilde{\beta_1}})(\epsilon_0-\bar{\epsilon})|\boldsymbol{z_0}]\\
+&= E[(\boldsymbol{x_0'\beta})^2|\boldsymbol{z_0}]+E[\boldsymbol{x_{01}'\tilde{\beta_1}})^2|\boldsymbol{z_0}]-2E[\boldsymbol{x_0'\beta x_{01}'\tilde{\beta_1}|z_0}]+E[(\epsilon_0-\bar{\epsilon})^2|\boldsymbol{z_0}]\\
+&\quad+2E[(\boldsymbol{x_0'\beta-x_{01}'\tilde{\beta_1}})(\epsilon_0-\bar{\epsilon})|\boldsymbol{z_0}]
+\end{aligned}$$
+where 
+$$E[(\boldsymbol{x_0'\beta})^2|\boldsymbol{z_0}]=\boldsymbol{\beta}\left[\boldsymbol{(z_0-\mu)(z_0-\mu)'}+\frac{\boldsymbol{\Sigma}}{n}\right]\boldsymbol{\beta}$$
+$$\begin{aligned}E[(\boldsymbol{x_{01}'\tilde{\beta_1}})^2|\boldsymbol{z_0}]
+=&\sigma_p^2 \left[(\boldsymbol{z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)}+\frac{p}{n}\right]\frac{1}{n-p-2}\\
+&+\boldsymbol{\Phi_1'\Sigma_{11}\Phi_1}\frac{1}{n}+\boldsymbol{\Phi_{1}'(z_{01}-\mu_{1})(z_{01}-\mu_1)'\Phi_1},\label{LemmaA7}
+\end{aligned}
+$$
+$$E[(\epsilon_0-\bar{\epsilon})^2|\boldsymbol{z_0}]=\sigma_k^2+\frac{1}{n}\sigma_k^2,$$
+$$\begin{aligned}
+E[(\boldsymbol{x_0'\beta-x_{01}'\tilde{\beta_1}})(\epsilon_0-\bar{\epsilon})|\boldsymbol{z_0}]
+&=E[(\boldsymbol{x_0'\beta-x_{01}'\tilde{\beta_1}})\epsilon_0|\boldsymbol{z_0}]-E[(\boldsymbol{x_0'\beta-x_{01}'\tilde{\beta_1}})\bar{\epsilon}|\boldsymbol{z_0}]=0
+\end{aligned}$$
+(but $\bar{\epsilon}=0$ is not necessary)
+
+Equation 3.6 could be written as
+$$\begin{aligned}
+&=\sigma_p^2 \left[(\boldsymbol{z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)}+\frac{p}{n}\right]\frac{1}{n-p-2}+\boldsymbol{\Phi_1'\Sigma_{11}\Phi_1}\frac{1}{n}+\boldsymbol{\Phi_{1}'(z_{01}-\mu_{1})(z_{01}-\mu_1)'\Phi_1}\\
+&\quad+\boldsymbol{\beta}\boldsymbol{(z_0-\mu)(z_0-\mu)'\beta}+\boldsymbol{\beta'\Sigma}\boldsymbol{\beta}\frac{1}{n} -2\boldsymbol{\beta'}E(\boldsymbol{x_0x_{01}'}|\boldsymbol{z_0})\boldsymbol{\Phi_1}+\sigma_k^2+\frac{1}{n}\sigma_k^2\\
+&=\sigma_k^2+\frac{1}{n}(\sigma_p^2+\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1-\sigma'\Sigma^{-1}\sigma})+[\boldsymbol{(z_{0}-\mu)'\beta}]^2+[\boldsymbol{(z_{01}-\mu_1)'\Phi_1}]^2\\
+&\quad+\sigma_p^2 \left[(\boldsymbol{z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)}+\frac{p}{n}\right]\frac{1}{n-p-2}\\
+&\quad+\boldsymbol{\beta'\Sigma\beta}\frac{1}{n}+\boldsymbol{\Phi_1'\Sigma_{11}\Phi_1}\frac{1}{n}-2\boldsymbol{\beta'}E(\boldsymbol{x_0x_{01}'}|\boldsymbol{z_0})\boldsymbol{\Phi_1}\\
+&=\sigma_k^2+\frac{1}{n}\sigma_p^2+\sigma_p^2 \left[(\boldsymbol{z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)}+\frac{p}{n}\right]\frac{1}{n-p-2}
++[\boldsymbol{(z_{0}-\mu)'\beta}]^2+[\boldsymbol{(z_{01}-\mu_1)'\Phi_1}]^2\\
+&\quad+\frac{1}{n}\boldsymbol{\beta'\Sigma\beta}+\frac{1}{n}\boldsymbol{\Phi_1'\Sigma_{11}\Phi_1}+\frac{1}{n}\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1}-\frac{1}{n}\boldsymbol{\sigma'\Sigma^{-1}\sigma}-2\boldsymbol{\beta'}E(\boldsymbol{x_0x_{01}'}|\boldsymbol{z_0})\boldsymbol{\Phi_1}
+\end{aligned}$$
+
+where $$E(\boldsymbol{x_0x_{01}'}|\boldsymbol{z_0})=E\left[\begin{bmatrix}
+\boldsymbol{x_{01}x_{01}'}\\
+\boldsymbol{x_{02}x_{01}'}
+\end{bmatrix}|\boldsymbol{z_0}\right]=\begin{bmatrix}\boldsymbol{
+(z_{01}-\mu_1)(z_{01}-\mu_1)'+\Sigma_{11}/n}\\
+\boldsymbol{(z_{02}-\mu_2)(z_{01}-\mu_1)'+\Sigma_{21}/n}
+\end{bmatrix}$$
+$$\boldsymbol{\sigma'\Sigma^{-1}\sigma=\beta'\Sigma\beta}, \boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1=\beta_1'\Sigma_{11}\beta_1}$$
+so 
+$$\begin{aligned}
+\boldsymbol{\beta'}E(\boldsymbol{x_0x_{01}'}|\boldsymbol{z_0})\boldsymbol{\Phi_1}
+=&[\boldsymbol{\beta_1'(z_{01}-\mu_1)(z_{01}-\mu_1)'+\beta_1'\Sigma_{11}}/n+\boldsymbol{\beta_2'(z_{02}-\mu_2)(z_{01}-\mu_1)'+\beta_2'\Sigma_{21}}/n]\boldsymbol{\Phi_1}\\
+=&\boldsymbol{\beta_1'(z_{01}-\mu_1)(z_{01}-\mu_1)'\Phi_1}+\boldsymbol{\beta_2'(z_{02}-\mu_2)(z_{01}-\mu_1)'\Phi_1}+\boldsymbol{\sigma_1'\Phi_1}/n\\
+\end{aligned}$$
+
+In addition to a few terms appearing in 3.6a, other terms would be equal to
+$$\begin{aligned}
+&\quad\frac{1}{n}\boldsymbol{\beta'\Sigma\beta}+\frac{1}{n}\boldsymbol{\Phi_1'\Sigma_{11}\Phi_1}+\frac{1}{n}\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1}-\frac{1}{n}\boldsymbol{\sigma'\Sigma^{-1}\sigma}-\frac{2}{n}\boldsymbol{\sigma_1'\Phi_1}\\
+&=\frac{1}{n}\boldsymbol{\Phi_1'\Sigma_{11}\Phi_1}+\frac{1}{n}\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1}-\frac{2}{n}\boldsymbol{\sigma_1'\Phi_1}\\
+&=\frac{1}{n}\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1}+\frac{1}{n}\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1}-\frac{2}{n}\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1}=0
+\end{aligned}$$
+in which $\Phi_1 = \boldsymbol{\Sigma_{11}^{-1}\sigma_1}$
+
+
+
+
+The conditional PMSE is equal to (3.6a)
+$$\begin{aligned}
+E[(y_0-\tilde{y_0})^2|\boldsymbol{z_0}] &= \sigma_k^2+\frac{\sigma_p^2}{n}+\sigma_p^2\left[\boldsymbol{(z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)'}+\frac{p}{n}\right]\frac{1}{n-p-2}\\
+&\quad+[\boldsymbol{(z_0-\mu)'\beta-(z_{01}-\mu_1)'\Phi_1}]^2\\
+&=\sigma_k^2+\frac{\sigma_p^2}{n}+\sigma_p^2\left[\boldsymbol{(z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)'}+\frac{p}{n}\right]\frac{1}{n-p-2}\\
+&\quad+[\boldsymbol{(z_{01}-\mu_1)'\beta_1+(z_{02}-\mu_2)'-(z_{01}-\mu_1)'(\beta_1+\Sigma_{11}^{-1}\Sigma_{12}\beta_2)}]^2\\
+&=\sigma_k^2+\frac{\sigma_p^2}{n}+\sigma_p^2\left[\boldsymbol{(z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)'}+\frac{p}{n}\right]\frac{1}{n-p-2}\\
+&\quad+[\boldsymbol{(z_{02}-\mu_2)'-(z_{01}-\mu_1)'\Sigma_{11}^{-1}\Sigma_{12}\beta_2}]^2
+\end{aligned}$$
+
+
+Take expectation
+$$\begin{aligned}
+E[(y_0-\tilde{y_0})^2]
+&=E[E(y_0-\tilde{y_0})^2|\boldsymbol{z_0}]\\
+&=E\{\sigma_k^2+\frac{\sigma_p^2}{n}+\sigma_p^2\left[\boldsymbol{(z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)'}+\frac{p}{n}\right]\frac{1}{n-p-2}\\
+&\quad+[\boldsymbol{(z_0-\mu)'\beta-(z_{01}-\mu_1)'\Phi_1}]^2\}\\
+&=\sigma_p^2+\frac{\sigma_p^2}{n}+\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1-\sigma'\Sigma^{-1}\sigma}+\sigma_p^2\left(p+\frac{p}{n}\right)\frac{1}{n-p-2}\\
+&\quad+E[\boldsymbol{\beta'(z_0-\mu)(z_0-\mu)'\beta+\Phi_1'(z_{01}-\mu_1)(z_{01}-\mu_1)'\Phi_1}\\
+&\quad-2\boldsymbol{\beta'(z_0-\mu)(z_{01}-\mu_1)'\Phi_1}]
+\end{aligned}$$
+The expectation term is equal to
+$$\begin{aligned}
+&\boldsymbol{\beta'\Sigma\beta+\Phi_1'\Sigma_{11}\Phi_1-2\beta'}
+\begin{bmatrix}\boldsymbol{\Sigma_{11}}\\
+\boldsymbol{\Sigma_{21}}\end{bmatrix}\boldsymbol{\Phi_1}
+\end{aligned}$$
+The unconditional PMSE 
+
+$$\begin{aligned}
+E[(y_0-\tilde{y_0})^2] 
+&= \sigma_p^2(1+\frac{1}{n})(n-2)/(n-p-2)\\
+&\quad+\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1-\sigma'\Sigma^{-1}\sigma}+\boldsymbol{\beta'\Sigma\beta+\Phi_1'\Sigma_{11}\Phi_1-2\beta'}
+\begin{bmatrix}\boldsymbol{\Sigma_{11}}\\
+\boldsymbol{\Sigma_{21}}\end{bmatrix}\boldsymbol{\Phi_1}\\
+&= \sigma_p^2(1+\frac{1}{n})(n-2)/(n-p-2)\\
+&\quad+\boldsymbol{\Phi_1'\Sigma_{11}\Phi_1-\beta'\Sigma\beta}+\boldsymbol{\beta'\Sigma\beta+\Phi_1'\Sigma_{11}\Phi_1-2\beta'}
+\begin{bmatrix}\boldsymbol{\Sigma_{11}}\\
+\boldsymbol{\Sigma_{21}}\end{bmatrix}\boldsymbol{\Phi_1}\\
+&= \sigma_p^2(1+\frac{1}{n})(n-2)/(n-p-2)
+\end{aligned}$$
+
+Thus, the unconditional PMSE $=\sigma_p^2(1+\frac{1}{n})(n-2)/(n-p-2)$
+
+
+
+
+\end{document}

@@ -1,0 +1,11 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Prediction Mean Square Error from the calculation by sequentially added predictors over the basic 3 predictors}}{19}{table.4.1}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Prediction Mean Square Error from simulation by sequentially added predictors over the basic 3 predictors}}{22}{table.4.2}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Correlation between the true value and prediction changes by sequentially added predictors over the basic 3 predictors}}{23}{table.4.3}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Efficient sample size $n^*$ by sequentially added predictors over the basic 3 predictors}}{24}{table.4.4}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Absolute Value of Difference Between the Empirical Distribution Function and Approximation Distribution Function}}{41}{table.6.1}%

@@ -1,0 +1,51 @@
+\begin{thebibliography}{5}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Cherkin et~al.(2016)Cherkin, Sherman, Balderson, Cook, Anderson,
+  Hawkes, Hansen and Turner}]{cherkin2016effect}
+\textsc{Cherkin, D.~C.}, \textsc{Sherman, K.~J.}, \textsc{Balderson, B.~H.},
+  \textsc{Cook, A.~J.}, \textsc{Anderson, M.~L.}, \textsc{Hawkes, R.~J.},
+  \textsc{Hansen, K.~E.} and \textsc{Turner, J.~A.} (2016).
+\newblock Effect of mindfulness-based stress reduction vs cognitive behavioral
+  therapy or usual care on back pain and functional limitations in adults with
+  chronic low back pain: a randomized clinical trial.
+\newblock \textit{Jama}, \textbf{315} 1240--1249.
+
+\bibitem[{Green and MacLeod(2016)}]{green2016simr}
+\textsc{Green, P.} and \textsc{MacLeod, C.~J.} (2016).
+\newblock Simr: an r package for power analysis of generalized linear mixed
+  models by simulation.
+\newblock \textit{Methods in Ecology and Evolution}.
+
+\bibitem[{Morone et~al.(2016)Morone, Greco, Moore, Rollman, Lane, Morrow, Glynn
+  and Weiner}]{morone2016mind}
+\textsc{Morone, N.~E.}, \textsc{Greco, C.~M.}, \textsc{Moore, C.~G.},
+  \textsc{Rollman, B.~L.}, \textsc{Lane, B.}, \textsc{Morrow, L.~A.},
+  \textsc{Glynn, N.~W.} and \textsc{Weiner, D.~K.} (2016).
+\newblock A mind-body program for older adults with chronic low back pain: a
+  randomized clinical trial.
+\newblock \textit{JAMA internal medicine}, \textbf{176} 329--337.
+
+\bibitem[{Riley et~al.(2019{\natexlab{a}})Riley, Snell, Ensor, Burke,
+  Harrell~Jr, Moons and Collins}]{riley2019minimum}
+\textsc{Riley, R.~D.}, \textsc{Snell, K.~I.}, \textsc{Ensor, J.},
+  \textsc{Burke, D.~L.}, \textsc{Harrell~Jr, F.~E.}, \textsc{Moons, K.~G.} and
+  \textsc{Collins, G.~S.} (2019{\natexlab{a}}).
+\newblock Minimum sample size for developing a multivariable prediction model:
+  Part i--continuous outcomes.
+\newblock \textit{Statistics in medicine}, \textbf{38} 1262--1275.
+
+\bibitem[{Riley et~al.(2019{\natexlab{b}})Riley, Snell, Ensor, Burke,
+  Harrell~Jr, Moons and Collins}]{riley2019minimums}
+\textsc{Riley, R.~D.}, \textsc{Snell, K.~I.}, \textsc{Ensor, J.},
+  \textsc{Burke, D.~L.}, \textsc{Harrell~Jr, F.~E.}, \textsc{Moons, K.~G.} and
+  \textsc{Collins, G.~S.} (2019{\natexlab{b}}).
+\newblock Minimum sample size for developing a multivariable prediction model:
+  Part ii-binary and time-to-event outcomes.
+\newblock \textit{Statistics in medicine}, \textbf{38} 1276--1296.
+
+\end{thebibliography}

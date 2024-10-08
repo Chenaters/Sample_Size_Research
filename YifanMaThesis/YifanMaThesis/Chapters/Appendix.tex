@@ -1,0 +1,334 @@
+\chapter{Appendix}
+
+\section{Proof for Subset PMSE}
+\label{Proof for Subset PMSE}
+The purpose of section \ref{Proof for Subset PMSE} is to provide comprehensive proof of the work of \cite{narula1974predictive}. While \cite{narula1974predictive} provides a valuable theoretical framework for PMSE, the derivation of the formula is not fully elucidated. As such, this appendix aims to fill in the gaps and provide a clear and rigorous proof of the PMSE formula for stochastic regressor variables. Through this analysis, we hope to deepen our understanding of the PMSE and its relevance in statistical modeling.
+
+The response variable and the predictor variables follow a joint
+ $(k+ 1)$-variate normal distribution with unknown mean vector $\mu^{*}=[\mu_{0},\boldsymbol{\mu^{'}}]^{'}$, and covariance matrix 
+$$ \boldsymbol{\Sigma^{*}}  =    
+ \begin{bmatrix} 
+    \sigma_{00} & \boldsymbol{\sigma^{'}} \\  
+    \boldsymbol{\sigma} & \boldsymbol{\Sigma} \\  
+\end{bmatrix}.$$ 
+
+Let $\boldsymbol {z_1, z_2,..., z_n}$ be n independent (k-component vector) observations on the predictor variables, $\boldsymbol{x_i=z_i-\bar{z}}$. Let $ \boldsymbol{S^{*}}  =    
+ \begin{bmatrix} 
+    s_{00} & \boldsymbol{s^{'}} \\  
+    \boldsymbol{s} & \boldsymbol{S} \\  
+\end{bmatrix}$ be sample covariance matrix, where 
+$$s_{00}=\sum{\frac{(y_i-\bar{y})^2}{n-1}},\boldsymbol{s}=\sum{\frac{(y_i-\bar{y})\boldsymbol{x_i}}{n-1}}, \boldsymbol{S}=\sum{\frac{\boldsymbol{x_{i}x_{i}^{'}}}{n-1}}.
+$$
+We assume the correct model as follows,
+$$\boldsymbol{y=\alpha+ \beta_1z_1+\beta_2z_2+...+\beta_kz_k+\epsilon},$$
+Meanwhile, the LSE prediction equation 
+$$
+\boldsymbol{\hat{y}}=\bar{y}+\boldsymbol{\hat{\beta_1}}(\boldsymbol{z_1}-\bar{z_1})+\boldsymbol{\hat{\beta_2}}(\boldsymbol{z_2}-\bar{z_2})+...+\boldsymbol{\hat{\beta_k}}(\boldsymbol{z_k}-\bar{z_k})=\bar{y}+\boldsymbol{X'\hat{\beta}},$$
+$$\hat{y_i}=\bar{y}+\boldsymbol{x_{i}'\hat{\beta}}.
+$$
+
+For any given $\boldsymbol{z_i}$, 
+$$\begin{aligned}
+E(y_i|\boldsymbol{z_i})&=\alpha + \boldsymbol{\beta z_i}\\
+&= \mu_{0}-\boldsymbol{\sigma^{'}\Sigma^{-1}\mu} + \boldsymbol{\sigma'\Sigma^{-1}z_i}\\
+&=\mu_0+\boldsymbol{\sigma^{'}\Sigma^{-1}(z_i-\mu)},
+\end{aligned}$$
+where $\alpha=\mu_{0}-\boldsymbol{\sigma^{'}\Sigma^{-1}\mu}, \boldsymbol{\beta=\sigma^{'}\Sigma^{-1}}$. Thus $\hat{\alpha}=\bar{y}-\boldsymbol{s'S^{-1}\bar{x}},\boldsymbol{\hat{\beta}}=\boldsymbol{S^{-1}s}$.
+
+
+The conditional predictive mean square error by 
+$$\begin{aligned}
+E[(y_0-\hat{y_0})^2|\boldsymbol{z_0}]
+&=E[(\alpha+\boldsymbol{(z_0-\mu)'\beta}+\epsilon_0-\bar{y}-\boldsymbol{x_{0}'\hat{\beta}}|\boldsymbol{z_0})^2]\\
+&=E[(\alpha+\boldsymbol{(z_0-\mu)'\beta+\epsilon_0}-\alpha-(\boldsymbol{\bar{z}-\mu)'\beta-\bar{\epsilon}-x_0'\beta|z_0})^2]\\&=E[(\boldsymbol{x_{0}'\beta}-\boldsymbol{\bar{x}'\beta}+\epsilon_0-\bar{\epsilon}-\boldsymbol{x_{0}'\hat{\beta}}|\boldsymbol{z_0})^2]\\
+&=E[(\boldsymbol{x_{0}'\beta}+(\epsilon_0-\bar{\epsilon})-\boldsymbol{x_{0}'\hat{\beta}}|\boldsymbol{z_0})^2]\\
+&=E[(\boldsymbol{x_0'\beta}+(\epsilon_0-\bar{\epsilon}))^2+(\boldsymbol{x_0'\hat{\beta}})^2-2(\boldsymbol{x_0'\beta}+(\epsilon_0-\bar{\epsilon}))\boldsymbol{x_0'\hat{\beta}}|\boldsymbol{z_0}]\\
+&=E[(\boldsymbol{x_0'\beta})^2+(\epsilon_0-\bar{\epsilon})^2+(\boldsymbol{x_0'\hat{\beta}})^2
+-2\boldsymbol{x_0'\beta x_0'\hat{\beta}}|\boldsymbol{z_0}]\\
+&=\boldsymbol{\beta'}E(\boldsymbol{x_0x_0'}|\boldsymbol{z_0})\boldsymbol{\beta}+E[(\epsilon_0-\bar{\epsilon})^2|\boldsymbol{z_0}]+E[(\boldsymbol{x_0'\hat{\beta}})^2|\boldsymbol{z_0}]-2\boldsymbol{\beta'}E[\boldsymbol{x_0x_0'\hat{\beta}}|\boldsymbol{z_0}].
+\end{aligned}$$
+
+By following equations, corresponding Lemma A1, Lemma A3, Lemma A3.1, Lemma A7, Lemma A9 proven by \cite{narula1974predictive},
+
+\begin{equation}\label{LemmaA1}
+E(\boldsymbol{\tilde{\beta_1}}|\boldsymbol{X_1})=\boldsymbol{\beta_1}+\boldsymbol{\Sigma_{11}^{-1}\Sigma_{12}\beta_{2}} = \boldsymbol{\Phi_1}, 
+\end{equation}
+
+\begin{equation}\label{LemmaA3}
+E(\boldsymbol{x_{01}x_{01}'}|\boldsymbol{z_0})=(\boldsymbol{z_{01}}-\boldsymbol{\mu_1})(\boldsymbol{z_{01}}-\boldsymbol{\mu_1})'+\frac{\boldsymbol{\Sigma_{11}}}{n},
+\end{equation}
+
+\begin{equation}\label{LemmaA3.1}
+E(\boldsymbol{x_0x_0'}|\boldsymbol{z_0})=(\boldsymbol{z_0-\mu})(\boldsymbol{z_0}-\boldsymbol{\mu})'+\frac{\boldsymbol{\Sigma}}{n},
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+\label{LemmaA7}
+E[(\boldsymbol{x_{01}'\tilde{\beta_1}})^2|\boldsymbol{z_0}]
+=&\sigma_p^2 \left[(\boldsymbol{z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)}+\frac{p}{n}\right]\frac{1}{n-p-2}\\
+&+\boldsymbol{\Phi_1'\Sigma_{11}\Phi_1}\frac{1}{n}+\boldsymbol{\Phi_{1}'(z_{01}-\mu_{1})(z_{01}-\mu_1)'\Phi_1},
+\end{aligned}\end{equation}
+
+\begin{equation}\label{LemmaA9}
+\boldsymbol{\sigma'\Sigma^{-1}}
+\begin{bmatrix}
+\boldsymbol{\Sigma_{11}}\\ \boldsymbol{\Sigma_{21}}\end{bmatrix}=\sigma_1',
+\end{equation}
+
+
+The conditional PMSE can be written as
+$$\begin{aligned}
+E[(y_0-\hat{y_0})^2|\boldsymbol{z_0}]
+&=\boldsymbol{\beta'}E(\boldsymbol{x_0x_0'}|\boldsymbol{z_0})\boldsymbol{\beta}+E[(\epsilon_0-\bar{\epsilon})^2|\boldsymbol{z_0}]+E[(\boldsymbol{x_0'\hat{\beta}})^2|\boldsymbol{z_0}]-2\boldsymbol{\beta'}E[\boldsymbol{x_0x_0'\hat{\beta}}|\boldsymbol{z_0}]\\
+&\begin{aligned}=&\boldsymbol{\beta}' \left[\boldsymbol{(z_0-\mu)(z_0-\mu)'}+\frac{\boldsymbol{\Sigma}}{n} \right]\boldsymbol{\beta}+\sigma_k^2 \left(1+\frac{1}{n}\right)\\
+&+\sigma_{k}^2 \left[\boldsymbol{(z_0-\mu)'\Sigma^{-1}(z_0-\mu)}+\frac{k}{n} \right]\frac{1}{n-k-2}\\
+&+\frac{1}{n}\boldsymbol{\Phi'\Sigma\Phi}+\boldsymbol{\Phi'(z_{0}-\mu)(z_{0}-\mu)'\Phi}-2\boldsymbol{\beta'}\left[\boldsymbol{(z_0-\mu)(z_0-\mu)'}+\frac{\boldsymbol{\Sigma}}{n} \right]\boldsymbol{\beta}
+\end{aligned}\\
+&=\sigma_k^2\left(1+\frac{1}{n}\right)+\sigma_k^2 \left[\boldsymbol{(z_0-\mu)'\Sigma^{-1}(z_0-\mu)}+\frac{k}{n} \right]\frac{1}{n-k-2}.
+\end{aligned}$$
+Since $\boldsymbol{\Phi}$ is the notation of expectation of $\boldsymbol{\tilde{\beta_1}}$, when we are using all predictors, the LSE is unbiased, which means $\boldsymbol{\Phi} = \boldsymbol{\beta}$. 
+
+The unconditional PMSE
+$$\begin{aligned}
+E[(y_0-\hat{y_0})^2]&=E\{E[(y_0-\hat{y_0})^2|\boldsymbol{z_0}]\}\\
+&=E\left[\sigma_k^2\left(1+\frac{1}{n}\right)+\sigma_k^2 \left[\boldsymbol{(z_0-\mu)'\Sigma^{-1}(z_0-\mu)}+\frac{k}{n} \right]\frac{1}{n-k-2}\right]\\
+&=\sigma_k^2\left(1+\frac{1}{n}\right)+\sigma_k^2 E\left[\boldsymbol{(z_0-\mu)'\Sigma^{-1}(z_0-\mu)}+\frac{k}{n} \right]\frac{1}{n-k-2}\\
+&=\sigma_k^2\left(1+\frac{1}{n}\right)+\sigma_k^2 \left(k+\frac{k}{n} \right)\frac{1}{n-k-2}\\
+&=\sigma_k^2\left(1+\frac{1}{n}\right)\left(1+\frac{1}{n-k-2}\right)\\
+&=\sigma_k^2\left(1+\frac{1}{n}\right)\left(\frac{n-2}{n-k-2}\right).\\
+\end{aligned}
+$$
+For subset, we partition the k-component vector of predictor variables into two parts, $\boldsymbol{Z=[Z_{1},Z_{2}],X=[X_1,X_2],x_1'=[x_{i1}',x_{i2}'],\mu'=[\mu_1',\mu_2'] ,\sigma'=[\sigma_1',\sigma_2'],s'=[s_1',s_2'],}$ $\boldsymbol{\Sigma}=\begin{bmatrix} 
+\boldsymbol{\Sigma_{11}} & \boldsymbol{\Sigma_{12}}\\  
+   \boldsymbol{ \Sigma_{21}} & \boldsymbol{\Sigma_{22}} \\  
+\end{bmatrix},\boldsymbol{S}=\begin{bmatrix} 
+    \boldsymbol{S_{11} }& \boldsymbol{S_{12}} \\  
+    \boldsymbol{S_{21}} & \boldsymbol{S_{22}} \\  
+\end{bmatrix},$
+
+so the subset prediction equation is given by $$\tilde{y_i}=\bar{y}+\boldsymbol{x_{i1}'\tilde{\beta_1}},$$ where $\boldsymbol{\tilde{\beta_1}=S_{11}^{-1}s_1}$. By LemmaA1, LemmaA3, LemmaA7, $\boldsymbol{\Phi_1=\beta_1+\Sigma^{-1}_{11}\Sigma_{12}\beta_2}$, the conditional PMSE at $z_0$ is given by 
+$$
+\begin{aligned}
+E[(y_0-\tilde{y_0})^2|\boldsymbol{z_0}]
+&=E[(\boldsymbol{x_{0}'\beta}+\epsilon_0-\bar{\epsilon}-\boldsymbol{x_{01}'\tilde{\beta_1}}|\boldsymbol{z_0})^2]\\
+&= E[(\boldsymbol{x_0'\beta})^2+(\boldsymbol{x_{01}'\tilde{\beta_1}})^2-2\boldsymbol{x_0'\beta x_{01}'\tilde{\beta_1}}+(\epsilon_0-\bar{\epsilon})^2+2(\boldsymbol{x_0'\beta-x_{01}'\tilde{\beta_1}})(\epsilon_0-\bar{\epsilon})|\boldsymbol{z_0}]\\
+&= E[(\boldsymbol{x_0'\beta})^2|\boldsymbol{z_0}]+E[\boldsymbol{x_{01}'\tilde{\beta_1}})^2|\boldsymbol{z_0}]-2E[\boldsymbol{x_0'\beta x_{01}'\tilde{\beta_1}|z_0}]+E[(\epsilon_0-\bar{\epsilon})^2|\boldsymbol{z_0}]\\
+&\quad+2E[(\boldsymbol{x_0'\beta-x_{01}'\tilde{\beta_1}})(\epsilon_0-\bar{\epsilon})|\boldsymbol{z_0}],
+\end{aligned}$$
+where 
+$$E[(\boldsymbol{x_0'\beta})^2|\boldsymbol{z_0}]=\boldsymbol{\beta}\left[\boldsymbol{(z_0-\mu)(z_0-\mu)'}+\frac{\boldsymbol{\Sigma}}{n}\right]\boldsymbol{\beta},$$
+$$\begin{aligned}E[(\boldsymbol{x_{01}'\tilde{\beta_1}})^2|\boldsymbol{z_0}]
+=&\sigma_p^2 \left[(\boldsymbol{z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)}+\frac{p}{n}\right]\frac{1}{n-p-2}\\
+&+\boldsymbol{\Phi_1'\Sigma_{11}\Phi_1}\frac{1}{n}+\boldsymbol{\Phi_{1}'(z_{01}-\mu_{1})(z_{01}-\mu_1)'\Phi_1},\label{LemmaA7}
+\end{aligned}
+$$
+$$E[(\epsilon_0-\bar{\epsilon})^2|\boldsymbol{z_0}]=\sigma_k^2+\frac{1}{n}\sigma_k^2,$$
+$$\begin{aligned}
+E[(\boldsymbol{x_0'\beta-x_{01}'\tilde{\beta_1}})(\epsilon_0-\bar{\epsilon})|\boldsymbol{z_0}]
+&=E[(\boldsymbol{x_0'\beta-x_{01}'\tilde{\beta_1}})\epsilon_0|\boldsymbol{z_0}]-E[(\boldsymbol{x_0'\beta-x_{01}'\tilde{\beta_1}})\bar{\epsilon}|\boldsymbol{z_0}]=0.
+\end{aligned}$$
+(but $\bar{\epsilon}=0$ is not necessary)
+
+Therefore, the conditional PMSE could be written as
+$$\begin{aligned}
+&=\sigma_p^2 \left[(\boldsymbol{z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)}+\frac{p}{n}\right]\frac{1}{n-p-2}+\boldsymbol{\Phi_1'\Sigma_{11}\Phi_1}\frac{1}{n}+\boldsymbol{\Phi_{1}'(z_{01}-\mu_{1})(z_{01}-\mu_1)'\Phi_1}\\
+&\quad+\boldsymbol{\beta}\boldsymbol{(z_0-\mu)(z_0-\mu)'\beta}+\boldsymbol{\beta'\Sigma}\boldsymbol{\beta}\frac{1}{n} -2\boldsymbol{\beta'}E(\boldsymbol{x_0x_{01}'}|\boldsymbol{z_0})\boldsymbol{\Phi_1}+\sigma_k^2+\frac{1}{n}\sigma_k^2\\
+&=\sigma_k^2+\frac{1}{n}(\sigma_p^2+\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1-\sigma'\Sigma^{-1}\sigma})+[\boldsymbol{(z_{0}-\mu)'\beta}]^2+[\boldsymbol{(z_{01}-\mu_1)'\Phi_1}]^2\\
+&\quad+\sigma_p^2 \left[(\boldsymbol{z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)}+\frac{p}{n}\right]\frac{1}{n-p-2}\\
+&\quad+\boldsymbol{\beta'\Sigma\beta}\frac{1}{n}+\boldsymbol{\Phi_1'\Sigma_{11}\Phi_1}\frac{1}{n}-2\boldsymbol{\beta'}E(\boldsymbol{x_0x_{01}'}|\boldsymbol{z_0})\boldsymbol{\Phi_1}\\
+&=\sigma_k^2+\frac{1}{n}\sigma_p^2+\sigma_p^2 \left[(\boldsymbol{z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)}+\frac{p}{n}\right]\frac{1}{n-p-2}
++[\boldsymbol{(z_{0}-\mu)'\beta}]^2+[\boldsymbol{(z_{01}-\mu_1)'\Phi_1}]^2\\
+&\quad+\frac{1}{n}\boldsymbol{\beta'\Sigma\beta}+\frac{1}{n}\boldsymbol{\Phi_1'\Sigma_{11}\Phi_1}+\frac{1}{n}\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1}-\frac{1}{n}\boldsymbol{\sigma'\Sigma^{-1}\sigma}-2\boldsymbol{\beta'}E(\boldsymbol{x_0x_{01}'}|\boldsymbol{z_0})\boldsymbol{\Phi_1},
+\end{aligned}$$
+
+where $$E(\boldsymbol{x_0x_{01}'}|\boldsymbol{z_0})=E\left[\begin{bmatrix}
+\boldsymbol{x_{01}x_{01}'}\\
+\boldsymbol{x_{02}x_{01}'}
+\end{bmatrix}|\boldsymbol{z_0}\right]=\begin{bmatrix}\boldsymbol{
+(z_{01}-\mu_1)(z_{01}-\mu_1)'+\Sigma_{11}/n}\\
+\boldsymbol{(z_{02}-\mu_2)(z_{01}-\mu_1)'+\Sigma_{21}/n}
+\end{bmatrix},$$
+$$\boldsymbol{\sigma'\Sigma^{-1}\sigma=\beta'\Sigma\beta}, \boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1=\beta_1'\Sigma_{11}\beta_1},$$
+so that
+$$\begin{aligned}
+\boldsymbol{\beta'}E(\boldsymbol{x_0x_{01}'}|\boldsymbol{z_0})\boldsymbol{\Phi_1}
+=&[\boldsymbol{\beta_1'(z_{01}-\mu_1)(z_{01}-\mu_1)'+\beta_1'\Sigma_{11}}/n\\
+&+\boldsymbol{\beta_2'(z_{02}-\mu_2)(z_{01}-\mu_1)'+\beta_2'\Sigma_{21}}/n]\boldsymbol{\Phi_1}\\
+=&\boldsymbol{\beta_1'(z_{01}-\mu_1)(z_{01}-\mu_1)'\Phi_1}+\boldsymbol{\beta_2'(z_{02}-\mu_2)(z_{01}-\mu_1)'\Phi_1}+\boldsymbol{\sigma_1'\Phi_1}/n.\\
+\end{aligned}$$
+
+The other terms in condition PMSE would be equal to
+$$\begin{aligned}
+&\quad\frac{1}{n}\boldsymbol{\beta'\Sigma\beta}+\frac{1}{n}\boldsymbol{\Phi_1'\Sigma_{11}\Phi_1}+\frac{1}{n}\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1}-\frac{1}{n}\boldsymbol{\sigma'\Sigma^{-1}\sigma}-\frac{2}{n}\boldsymbol{\sigma_1'\Phi_1}\\
+&=\frac{1}{n}\boldsymbol{\Phi_1'\Sigma_{11}\Phi_1}+\frac{1}{n}\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1}-\frac{2}{n}\boldsymbol{\sigma_1'\Phi_1}\\
+&=\frac{1}{n}\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1}+\frac{1}{n}\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1}-\frac{2}{n}\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1}=0,
+\end{aligned}$$
+in which $\Phi_1 = \boldsymbol{\Sigma_{11}^{-1}\sigma_1}$.
+
+
+
+The conditional PMSE is equal to
+$$\begin{aligned}
+E[(y_0-\tilde{y_0})^2|\boldsymbol{z_0}] &= \sigma_k^2+\frac{\sigma_p^2}{n}+\sigma_p^2\left[\boldsymbol{(z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)'}+\frac{p}{n}\right]\frac{1}{n-p-2}\\
+&\quad+[\boldsymbol{(z_0-\mu)'\beta-(z_{01}-\mu_1)'\Phi_1}]^2\\
+&=\sigma_k^2+\frac{\sigma_p^2}{n}+\sigma_p^2\left[\boldsymbol{(z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)'}+\frac{p}{n}\right]\frac{1}{n-p-2}\\
+&\quad+[\boldsymbol{(z_{01}-\mu_1)'\beta_1+(z_{02}-\mu_2)'-(z_{01}-\mu_1)'(\beta_1+\Sigma_{11}^{-1}\Sigma_{12}\beta_2)}]^2\\
+&=\sigma_k^2+\frac{\sigma_p^2}{n}+\sigma_p^2\left[\boldsymbol{(z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)'}+\frac{p}{n}\right]\frac{1}{n-p-2}\\
+&\quad+[\boldsymbol{(z_{02}-\mu_2)'-(z_{01}-\mu_1)'\Sigma_{11}^{-1}\Sigma_{12}\beta_2}]^2,
+\end{aligned}$$
+
+
+take expectation
+$$\begin{aligned}
+E[(y_0-\tilde{y_0})^2]
+&=E[E(y_0-\tilde{y_0})^2|\boldsymbol{z_0}]\\
+&=E\{\sigma_k^2+\frac{\sigma_p^2}{n}+\sigma_p^2\left[\boldsymbol{(z_{01}-\mu_1)'\Sigma_{11}^{-1}(z_{01}-\mu_1)'}+\frac{p}{n}\right]\frac{1}{n-p-2}\\
+&\quad+[\boldsymbol{(z_0-\mu)'\beta-(z_{01}-\mu_1)'\Phi_1}]^2\}\\
+&=\sigma_p^2+\frac{\sigma_p^2}{n}+\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1-\sigma'\Sigma^{-1}\sigma}+\sigma_p^2\left(p+\frac{p}{n}\right)\frac{1}{n-p-2}\\
+&\quad+E[\boldsymbol{\beta'(z_0-\mu)(z_0-\mu)'\beta+\Phi_1'(z_{01}-\mu_1)(z_{01}-\mu_1)'\Phi_1}\\
+&\quad-2\boldsymbol{\beta'(z_0-\mu)(z_{01}-\mu_1)'\Phi_1}]
+\end{aligned}.$$
+
+The expectation term $E[\boldsymbol{\beta'(z_0-\mu)(z_0-\mu)'\beta}$ is equal to
+$$\begin{aligned}
+&\boldsymbol{\beta'\Sigma\beta+\Phi_1'\Sigma_{11}\Phi_1-2\beta'}
+\begin{bmatrix}\boldsymbol{\Sigma_{11}}\\
+\boldsymbol{\Sigma_{21}}\end{bmatrix}\boldsymbol{\Phi_1}.
+\end{aligned}$$
+
+The unconditional PMSE 
+$$\begin{aligned}
+E[(y_0-\tilde{y_0})^2] 
+&= \sigma_p^2(1+\frac{1}{n})(n-2)/(n-p-2)\\
+&\quad+\boldsymbol{\sigma_1'\Sigma_{11}^{-1}\sigma_1-\sigma'\Sigma^{-1}\sigma}+\boldsymbol{\beta'\Sigma\beta+\Phi_1'\Sigma_{11}\Phi_1-2\beta'}
+\begin{bmatrix}\boldsymbol{\Sigma_{11}}\\
+\boldsymbol{\Sigma_{21}}\end{bmatrix}\boldsymbol{\Phi_1}\\
+&= \sigma_p^2(1+\frac{1}{n})(n-2)/(n-p-2)\\
+&\quad+\boldsymbol{\Phi_1'\Sigma_{11}\Phi_1-\beta'\Sigma\beta}+\boldsymbol{\beta'\Sigma\beta+\Phi_1'\Sigma_{11}\Phi_1-2\beta'}
+\begin{bmatrix}\boldsymbol{\Sigma_{11}}\\
+\boldsymbol{\Sigma_{21}}\end{bmatrix}\boldsymbol{\Phi_1}\\
+&= \sigma_p^2(1+\frac{1}{n})(n-2)/(n-p-2).
+\end{aligned}$$
+
+Thus, the unconditional PMSE $=\sigma_p^2(1+\frac{1}{n})(n-2)/(n-p-2)$
+
+
+\section{Distribution Approximation of PMSE}
+\subsection{Analytical Result}
+To investigate the unconditional prediction square error distribution of $(\hat{y}-y^*)^2$, we start with moments of $(\hat{y}-y^*)$, proven by \cite{sawyer1982sample}:
+Let $M$ be a positive integer. Then 
+$$\E\left[(\hat{y}-y^*)^{2M}\right] = \frac{\sigma^{2M}\frac{(2M)!}{M!}\left(\frac{n+1}{2n}\right)^M\prod^M_{j=1}(n-2j)}{\prod^M_{j=1}(n-p-2j)},$$
+when $2M\leq n-p-1$.
+
+If we consider the distribution $\hat{y}-y^*$ follows an asymptotically normal distribution, then $(\hat{y}-y^*)^{2}$ is likely to be approximate Gamma distribution, by the proposition above, 
+
+\begin{equation}\label{MSE}
+\E\left[(\hat{y}-y^*)^{2}\right]=\sigma^2\frac{(n+1)(n-2)}{n(n-p-2)},\end{equation}
+\begin{equation}\E\left[(\hat{y}-y^*)^{4}\right] =3\sigma^4\frac{(n+1)^2(n-2)(n-4)}{n^2(n-p-2)(n-p-4)},\end{equation}
+\begin{equation}\label{VarSE}
+\Var\left[(\hat{y}-y^*)^{2}\right]= \sigma^4 \frac{(n+1)^2 (n-2)}{n^2(n-p-2)}\left(\frac{3n-12}{n-p-4}-\frac{n-2}{n-p-2}\right).\end{equation}
+
+Applying method of moments, for $Gamma(\alpha,\beta)$ with shape-scale parameters
+$$\E(X^n)=\frac{\beta^n(n+\alpha-1)!}{(\alpha-1)!},$$
+$$\E X=\alpha\beta, \E X^2 = \alpha(\alpha+1)\beta^2,$$
+let
+$$\begin{cases}\E\left[(\hat{y}-y^*)^{2}\right]=\alpha\beta\\
+\E\left[(\hat{y}-y^*)^{2}\right]=\alpha(\alpha+1)\beta^2\end{cases}
+\Rightarrow
+\begin{cases}
+\alpha = \frac{(n-2)(n-p-4)}{3(n-4)(n-p-2)-(n-2)(n-p-4)}\\
+\beta = \sigma^2\frac{n+1}{n}\left(\frac{3(n-4)}{n-p-4}-\frac{n-2}{n-p-2}\right)
+\end{cases}$$
+Based on the normal assumption, we approximate the prediction square error as 
+\begin{equation}\label{gamma}
+Gamma\left(\frac{(n-2)(n-p-4)}{3(n-4)(n-p-2)-(n-2)(n-p-4)},\sigma^2\frac{n+1}{n}\left(\frac{3(n-4)}{n-p-4}-\frac{n-2}{n-p-2}\right)\right)\end{equation}
+
+
+For $n-p\geq 5$, the approximation using Gram-Charlier is
+\begin{equation}\label{normal1}
+P(\hat{y}-y^*\leq t) \doteq \Phi\left(\frac{t}{\sigma'}\right)+\frac{p}{4(n-2)(n-p-4)}\Phi^{(4)}\left(\frac{t}{\sigma'}\right),
+\end{equation}
+ where $\Phi$ is the standard normal distribution function, $\Phi^{(4)}$ is its fourth derivative, $$\sigma' = \sqrt{MSE} = \sigma \sqrt{\frac{(n+1)(n-2)}{n(n-p-2)}}.$$
+ 
+Though adding the second term may not even improve the approximation by \cite{sawyer1982sample} Appendix, we examine the approximation for $P((\hat{y}-y^*)^2\leq t)$ distribution.
+
+Denote $X = \hat{y}-y^*, Y = X^2= (\hat{y}-y^*)^2 $,
+$$\begin{aligned}
+F_Y(t) &= P(Y\leq t) = P(|\hat{y}-y^*|\leq \sqrt{t})\\
+		 &= P(\hat{y}-y^*\leq \sqrt{t})-P(\hat{y}-y^*\leq -\sqrt{t})\\
+		 &= \Phi(\frac{\sqrt{t}}{\sigma'})-\Phi(-\frac{\sqrt{t}}{\sigma'}) = 2 \Phi(\frac{\sqrt{t}}{\sigma'})-1 \quad(first \quad term),\\
+		 or\\
+		 &= \Phi(\frac{\sqrt{t}}{\sigma'})+\frac{p}{4(n-2)(n-p-4)}\Phi^{(4)}(\frac{\sqrt{t}}{\sigma'})\\
+		 &\quad-\Phi(-\frac{\sqrt{t}}{\sigma'})- \frac{p}{4(n-2)(n-p-4)}\Phi^{(4)}(-\frac{\sqrt{t}}{\sigma'})\quad(first\&second \quad term),\\
+\end{aligned}$$
+where $\Phi^{(4)}(t) = \frac{1}{\sigma^4}(t^4-6t^2+3)\Phi(t)$ for standard normal distribution by Gram-Charlier definition. Thus, the approximation using first two terms can be written as 
+\begin{equation}\label{normal2}
+\begin{aligned}
+&2\Phi(\frac{\sqrt{t}}{\sigma'})-1+ \frac{p}{4(n-2)(n-p-4)}\left\{\frac{1}{\sigma^4}\left[(\frac{\sqrt{t}}{\sigma'})^4-6(\frac{\sqrt{t}}{\sigma'})^2+3\right]\left(2\Phi(\frac{\sqrt{t}}{\sigma'})-1\right)\right\}\\
+=&\left(2\Phi(\frac{\sqrt{t}}{\sigma'})-1\right)\left( 1+\frac{p}{4\sigma^4(n-2)(n-p-4)}\left[\frac{t^2}{MSE^2}-6\frac{t}{MSE}+3\right]\right).
+\end{aligned}\end{equation}
+Plug in that $MSE = \sigma^2\frac{(n+1)(n-2)}{n(n-p-2)}$
+
+The results of the MAE approximation suggest that the normal distribution is a satisfactory approximation for the MSE distribution and that including the second term of the Gram-Charlier series is not necessary. Therefore, it may be reasonable to consider the use of the product of a constant and a Chi-square distribution with one degree of freedom, represented as 
+\begin{equation}\label{chis}\sigma^2 \chi^2_1,\end{equation}
+as a viable option for approximating the MSE distribution.
+
+
+
+
+
+
+
+
+
+
+\subsection{Approximation Simulation}
+
+In order to maintain consistency with the parameter settings employed in the MAE approximation, we retained the same values of $p$ (1, 2, 3, 5, 8, and 10) and sample sizes $n$ (25, 50, 75, and 100) for our simulation study. To satisfy the condition $n-p \geq 5$, we excluded the sample size of 10 for cases where $p$ was equal to 8 or 10, while also including a sample size of 100. For each parameter setting, we assumed a constant value for the mean of the predictors, denoted as $\boldsymbol{\mu}$, as well as a constant covariance between every pair of predictors, and also set the intercept of the linear model, $\alpha$, and the error variance, $\sigma^2$, as constant.\\
+
+To simulate the unconditional mean square error $(\hat{y}-y^*)^2$, we generated 10,000 random samples for each combination of $n$ and $p$. In each simulation, the response variable was generated using a linear relationship with the predictors, and the new data was drawn from a normal distribution with the same mean and variance as the predictors. We then calculated the empirical cumulative distribution function and compared it with the predicted values obtained from the Gram-Charlier approximations, gamma approximation, and chi-square approximation.
+\\
+
+The results of the simulation study are presented in Table \ref{table:MSEapprox}. In this table, $\hat{F}$ represents the empirical distribution function of $(\hat{y}-y^*)^2$, which corresponds to the true distribution $F$ of the MSE. $\hat{F}$ is calculated from the 10,000 random samples in each category defined by the values of $n$ and $p$. $F_1$ and $F_2$ denote the computed approximations to $F$ based on the first and second Gram-Charlier approximations, as Equation(\ref{normal1}) and Equation(\ref{normal2}) respectively. $F_3$ and $F_4$ correspond to the gamma distribution as equation Equation(\ref{gamma}) and chi-square distribution as Equation(\ref{chis}), respectively, as discussed previously. $MSE_{est}$ and $Var(SE)_{est}$ represent the estimated mean and variance, respectively, for the square error using equations Equation(\ref{MSE}) and Equation(\ref{VarSE}). To account for randomness in the simulation, several random seeds were employed.
+
+\begin{table}[h!]
+    \centering
+    \resizebox{\linewidth}{!}{ 
+    \begin{tabular}{||c | c c c c c c c||}
+    \hline
+      \makecell[c]{Number of Predictors \\$p$} & \makecell[c]{Sample Size \\$n$} & $\max \abs{\hat{F_t}-F_1}$  & $\max \abs{\hat{F_t}-F_2}$ & $\max \abs{\hat{F_t}-F_3}$ & $\max \abs{\hat{F_t}-F_4}$ & $\abs{MSE_{true}-MSE_{ep}}$ & $\abs{VarSE_{true}-VarSE_{ep}}$ \\ \hline
+ \hline
+
+        \multirow{4}*{1} & 10 & 0.0132 & 0.0078 & 0.0140 & 0.0123 & 0.0225 & 0.2350 \\ \cline{2-8}
+         & 25 & 0.0062 & 0.0059 & 0.0062 & 0.0069 & 0.0052 & 0.0163 \\ \cline{2-8}
+         & 50 & 0.0062 & 0.0063 & 0.0065 & 0.0062 & 0.0170 & 0.1008 \\ \cline{2-8}
+         & 75 & 0.0061 & 0.0061 & 0.0060 & 0.0063 & 0.0175 & 0.1722 \\ \hline
+         \multirow{4}*{2} & 10 & 0.0063 & 0.0206 & 0.0497 & 0.0057 & 0.0097 & 0.0204 \\ \cline{2-8}
+         & 25 & 0.0107 & 0.0115 & 0.0142 & 0.0102 & 0.0086 & 0.0739 \\ \cline{2-8}
+         & 50 & 0.0075 & 0.0078 & 0.0082 & 0.0064 & 0.0079 & 0.0200 \\ \cline{2-8}
+         & 75 & 0.0107 & 0.0106 & 0.0104 & 0.0084 & 0.0031 & 0.1118 \\ \hline
+         \multirow{4}*{3} & 10 & 0.0281 & 0.0132 & 0.0763 & 0.0284 & 0.0229 & 0.9169 \\ \cline{2-8}
+         & 25 & 0.0121 & 0.0101 & 0.0085 & 0.0104 & 0.0268 & 0.1493 \\ \cline{2-8}
+         & 50 & 0.0081 & 0.0085 & 0.0087 & 0.0074 & 0.0300 & 0.1267 \\ \cline{2-8}
+         & 75 & 0.0071 & 0.0070 & 0.0067 & 0.0100 & 0.0037 & 0.0419 \\ \hline
+         \multirow{4}*{5} & 10 & 0.0509 & 0.1252 & 0.2775 & 0.0507 & 0.0354 & 7.6245 \\ \cline{2-8}
+         & 25 & 0.0094 & 0.0063 & 0.0095 & 0.0094 & 0.0055 & 0.0873 \\ \cline{2-8}
+         & 50 & 0.0097 & 0.0094 & 0.0097 & 0.0126 & 0.0258 & 0.0533 \\ \cline{2-8}
+         & 75 & 0.0065 & 0.0067 & 0.0073 & 0.0092 & 0.0088 & 0.0014 \\ \hline
+         \multirow{4}*{8} & 25 & 0.0060 & 0.0076 & 0.0215 & 0.0069 & 0.0009 & 0.0075 \\ \cline{2-8}
+         & 50 & 0.0047 & 0.0056 & 0.0079 & 0.0058 & 0.0038 & 0.0537 \\ \cline{2-8}
+         & 75 & 0.0076 & 0.0078 & 0.0075 & 0.0076 & 0.0239 & 0.1107 \\ \cline{2-8}
+         & 100 & 0.0111 & 0.0114 & 0.0114 & 0.0105 & 0.0002 & 0.0385 \\ \hline
+         \multirow{4}*{10} & 25 & 0.0070 & 0.0120 & 0.0317 & 0.0067 & 0.0358 & 0.2587 \\ \cline{2-8}
+         & 50 & 0.0114 & 0.0129 & 0.0152 & 0.0093 & 0.0188 & 0.0632 \\ \cline{2-8}
+         & 75 & 0.0078 & 0.0084 & 0.0083 & 0.0083 & 0.0066 & 0.0119 \\ \cline{2-8}
+         & 100 & 0.0077 & 0.0078 & 0.0083 & 0.0074 & 0.0166 & 0.0365 \\   \hline\hline
+\end{tabular}}
+\caption{Absolute Value of Difference Between the Empirical Distribution Function and Approximation Distribution Function}
+\label{table:MSEapprox}
+\end{table}
+
+
+To evaluate the performance of each approximation, we calculated the absolute value of the maximum difference between the estimated distribution function and the empirical distribution function for different random seeds. Although we identified the best-performing approximation for each category, the differences between the four estimates were not statistically significant and were generally below 0.015, with the exception of the case where $(p,n) = (5,10)$. In this case, the variance of the square error estimation deviated from the empirical square error variance, indicating that a larger inflation factor $K$ may lead to poor accuracy of the approximation. Taking this into account, we determined that the chi-square approximation was the best-performing approximation for the case where $(p,n) = (5,10)$.
+

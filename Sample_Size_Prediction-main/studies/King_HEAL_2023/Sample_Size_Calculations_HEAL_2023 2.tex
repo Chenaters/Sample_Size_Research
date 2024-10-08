@@ -1,0 +1,306 @@
+\documentclass[12pt]{article}
+%\documentstyle[asa,11pt,graphics]{article}
+%\documentstyle[asa]{article}
+
+%---Packages recommanded by Excel2LaTeX ---
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{rotating}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{bigstrut}
+%---
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor = blue
+}
+\usepackage{mathrsfs, natbib}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{fancyref}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{bm}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+
+\DeclareMathOperator*{\argmax}{argmax} % thin space, limits underneath in displays
+
+\makeatletter % make @ act like a letter
+%\@addtoreset{equation}{section}
+\makeatother  % make @ act like a non-letter
+
+\def\theequation{\thesection.\arabic{equation}}
+\def\theequation{\arabic{equation}}
+
+\renewcommand{\theequation}{\arabic{equation}}
+%\@addtoreset{equation}{section}
+\hoffset=-0.675in
+
+\advance\topmargin by -0.75truein
+\oddsidemargin=0.675truein
+\evensidemargin=0.675truein
+\advance\textheight by 1.25truein
+\setlength\textwidth{6.5in}
+\vsize=9.0in
+%\setstretch{1.60}
+%%\vsize=9.2in
+
+\def\mybibliography#1{{\begin{center} \bf References \end{center}}\list
+ {}{\setlength{\leftmargin}{1em}\setlength{\labelsep}{0pt}
+\itemindent=-\leftmargin}
+ \def\newblock{\hskip .02em plus .20em minus -.07em}
+ \sloppy\clubpenalty4000\widowpenalty4000
+ \sfcode`\.=1000\relax}
+\newbox\TempBox \newbox\TempBoxA
+\def\uw#1{%
+  \ifmmode\setbox\TempBox=\hbox{$#1$}\else\setbox\TempBox=\hbox{#1}\fi%
+  \setbox\TempBoxA=\hbox to \wd\TempBox{\hss\char'176\hss}%
+  \rlap{\copy\TempBox}\smash{\lower9pt\hbox{\copy\TempBoxA}}%
+}
+\newbox\TempBox \newbox\TempBoxA
+\def\uwd#1{%
+  \ifmmode\setbox\TempBox=\hbox{$#1$}\else\setbox\TempBox=\hbox{#1}\fi%
+  \setbox\TempBoxA=\hbox to \wd\TempBox{\hss\char'176\hss}%
+  \rlap{\copy\TempBox}\smash{\lower10pt\hbox{\copy\TempBoxA}}%
+}
+\def\mathunderaccent#1{\let\theaccent#1\mathpalette\putaccentunder}
+\def\putaccentunder#1#2{\oalign{$#1#2$\crcr\hidewidth
+\vbox to.2ex{\hbox{$#1\theaccent{}$}\vss}\hidewidth}}
+\def\ttilde#1{\tilde{\tilde{#1}}}
+
+\newcommand{\bfgamma}{\mbox{\boldmath $\gamma$}}
+
+%\def\doublespace{\baselineskip=19pt minus 1pt}
+\def\singlespace{\baselineskip=12pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{rem}{Remark}
+\newtheorem{example}{Example}
+\newtheorem{proof}{Proof}
+\newtheorem{sol}{Solution}
+\newtheorem{claim}{Claim}
+\newtheorem{definition}{Definition}
+\newtheorem{assumption}{Assumption}
+{\bf}{\it}
+\newtheorem{remark}{Remark}
+{\bf}{\it}
+\newtheorem{corollary}{Corollary}
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{proposition}{Proposition}[section]
+%\newtheorem{corollary}{Corollary}[section]
+%\newtheorem{lemma}{Lemma}[section]
+
+\setlength{\parskip }{ 1.5ex}
+
+%\renewcommand{\baselinestretch}{2.0}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\nc}{\newcommand}
+\def\nr{\par \noindent}
+%\newcommand{}{\ensuremath{\Box}}
+
+
+
+
+%%---------------------------
+
+\title{Sample size analysis for the NIH HEAL proposal}
+\author{Zheyang Wu}
+\date{ \today }
+
+\begin{document}
+
+\maketitle 
+
+
+%\begin{figure}[H]
+%\includegraphics[width=4in]{Figures/Fig_}
+%\caption{ Caption....}
+%\label{}
+%\end{figure}
+
+\tableofcontents
+
+\section{Overview}
+This document clarify the methods and assumptions and provides results in studying sample sizes for the NIH HEAL proposal. 
+
+Overall considerations:
+\begin{itemize}
+\item The design is a one-arm clinical trial -- all individuals will be treated by mindfulness therapy. 
+
+\item The sample size is planned as: about 50 patient subjects to be recruited in the first stage (UG3), followed by 300 subjects in the second stage (UH3). Longitudinal measurements for each individuals will be collected over 4 time points (baseline, 4-week, 8-week, 6-months). This study aims to address what statistical power and prediction capacity could be reached accordingly. 
+
+\item Sample sizes are estimated based on two different criteria: 
+1) Statistical power; 
+2) Predictive accuracy. 
+
+\item Quantitative response: PEG, a pain relief score between 0 -- 10; mean = 5.85 and SD = 2.43 (by Morone data at the baseline). %mean = 6.1, SD=2.2 \citep{krebs2009development}. 
+
+\item Binary response: Consider 30\%, 50\%, and 70\% pain relief/improvement after mindfulness treatment (\citep{morone2016mind} and Morone's proposal). %clinically meaningful  
+
+\item The proposal involves detecting useful predictors; the number of candidate factors is at least 50. % (according to Morone). 
+
+%\item Ethnic group clustering is not considered (as suggested by Morone). 
+
+\item We can consider a dropping/attrition rate (e.g.,  20\% in Morone's proposal), so the final sample size = (calculated sample size)/(1 - attrition rate). 
+\end{itemize}
+
+The effect sizes of the predictors are unknown. We assume a series of values. 
+
+
+An effect size can be described by any one of these: 
+
+1) The slope/coefficient and standard deviation of the predictor (for the binary predictor of 1 and 0, the slope gives the change of responses, for which a large magnitude indicates the scientific significance of the predictor). For description purpose, we can state the amount of changes (for quantitative response) or the odds ratio (for binary response) per unit increase of the predictor (the unit can be original data unit or the SD unit). 
+
+2) A scaled effect size: coefficient of determinant / Cohen's $f^2$ / correlation coefficient, etc.
+
+%Binary predictor: difference between two comparative groups = 1--3 with SD-2.5, according to Morone's proposal. -> not appropriate because those were for the effect of the mindfulness treatment, not other predictors. 
+ 
+%========================
+\section{Sample size by statistical power}
+
+%%----------------------------------
+%\subsubsection{Quantitative outcomes}
+%
+%Consider one continuous predictor (the independent variable). Apply simple linear regression model and the following assumptions: 
+%
+% 
+%  %----------------------------------
+%\subsubsection{Binary outcomes}
+%
+%Consider one continuous predictor (the independent variable). Apply simple logistic regression model and the following assumptions: 
+
+
+
+%{\color{red}
+%Predictor: log odds  (between the mean predictor and one SD above) = ? (or apply two pieces of equivalent information: 1) the log odds for one unit increase of the predictor; 2) the SD of the the predictor.)}
+
+
+%-----------------------
+Analyze sample size by statistical power. Consider longitudinal analysis with each individual measured over 4 time points (0, 1, 2, and 6 months). Apply the generalized linear mixed models (GLMM) and R package SIMR for power analysis \citep{green2016simr}. 
+
+
+Fixed effects: intercept, predictor, time, the interaction of predictor by time (imitating \cite{morone2016mind} and Morone proposal without group clustering of subjects). Consider the time is a continuous variable. 
+
+Random effects: intra-subject longitudinal measurements (assume correlation=0.1). 
+
+Studies: 
+1) Type of responses: continuous or binary; 
+2) Type of predictors: continuous (assuming N(0,1)) or binary (assuming balanced distribution over subjects). 
+
+
+Results
+
+%\begin{figure}[H]
+%\center
+%\includegraphics[width=4in]{output/{Pow_binaryRespo_contiPredi_b.predi_0.2_b.time_0.2_b.predi.time_0.1_prediN_50}.png}
+%\caption{Binary response ($\sim$70\% positive outcome); continuous predictors. Fixed effects: ... Bonferroni control for multiple-hypothesis testing of 50 (left) or 200 (right) predictor candidates.}
+%\label{Fig:scatter_reg}
+%\end{figure}
+
+
+%-----------------------
+\section{Sample size by predictive model-related criteria}
+
+A ``minimum" sample size can be calculated based on some generic model-fitting and prediction-related criteria  \citep{riley2019minimum,riley2019minimums}. 
+
+\subsection{Quantitative outcomes}
+
+Apply multiple regression model. 
+The minimum sample size is calculated to satisfy all four recommended predictive model-related criteria:
+\begin{enumerate}
+\item Small overfitting is defined by an expected shrinkage of predictor effects by 10\% or less.
+\item Small absolute difference of 0.05 in the model's apparent and adjusted R-squared value.
+\item Precise estimation of the residual standard deviation with a multiplicative margin of error (MMOE) less than 1.1.
+\item Precise estimation of the average outcome value within 95\% confidence interval.
+\end{enumerate}
+
+See Table ? for the sample sizes over $R^2$ and the number of predictors.
+
+\subsection{Binary outcomes}
+
+Apply multivariable logistic model. The minimum sample size is calculated to satisfy all three recommended predictive model-related criteria:
+\begin{enumerate}
+\item Small overfitting defined by an expected shrinkage of predictor effects by 15\% or less.
+\item Small absolute difference of 10\% in the model's apparent and adjusted Nagelkerke's $R^2$.
+\item Precise estimation (within +/- 10\%) of the average outcome risk in the cohort of the study. 
+\end{enumerate}
+
+See Table ? for the sample sizes over AUC and the number of predictors.
+
+
+%=================
+\section{Sample size by predictive accuracy}
+
+It is difficult to analytically calculate sample size based on 1) direct prediction accuracy and 2) complex predictive model (to my best knowledge, such calculations are not available in literature yet). Therefore, we utilize simulations to estimate the sample size under these challenging scenarios. 
+
+Here, we utilize the linear mixed model (LMM) and the the generalized linear mixed model (GLMM) to account for data heterogeneity (e.g., the clustering effects among diverse ethnic groups).  
+The predictions were carried out based on a 5-fold cross-validation procedure. 
+
+We can study how the prediction accuracy depends on the sample size and the percentage of all possible predictors included into the prediction model. 
+
+
+\begin{itemize}
+\item ``Basic" predictors: 1) gender, 2) age, 3) education level (high/low), 4) long duration of pain (yes/no), 5) baseline pain score, 6) presence of certain concomitant diseases (yes/no). \cite{cherkin2016effect, morone2016mind}. 
+
+\item Extra biopsychosocial predictors: number = 50. 
+
+\item Assuming all predictors, if we can find, can explain most the data variations. We can study how the prediction accuracy depends on the sample size and the percentage of predictors included into the prediction model. 
+%We study  the prediction accuracy when proportion of the predictors can be utilized. 
+\end{itemize}
+
+
+Prediction accuracy measures: 
+\begin{itemize}
+\item Quantitative response: the correlation coefficient between the predicted and the observed outcomes. 
+
+\item Binary response: AUC. 
+\end{itemize}
+
+%2) the relative mean-squared predictive error (RMSPE, i.e., the ratio between the mean-squared predictive error and the observed variance of the responses). Large correlation and small RMSPE indicate accurate prediction. 
+
+
+%Seems no need to make this assumption: "We assumed that in total these predictors accounted for 45\% of total variation \cite{baker2008factors}." 
+%(Note that no modifiers can be included here because all individuals will be treated, so the data cannot distinguish the predictors' influences to treatment vs. non-treatment). 
+
+
+%$$E(P(Y_{ij}=1|X)) = \frac{1}{1+exp(-\eta_{ij}(X))},$$
+%where $X$ is the matrix of covariate data, and $\eta_{ij}(X)$ is same as above (except that the coefficient values could be different)
+
+%{\color{red}
+%\begin{itemize}
+%\item The prevalence of the binary outcome = 0.3/0.5/0.7 
+%\item Basic predictors:  ORs = ? 
+%\item Extra biopsychosocial predictors (pain markers): number = ? and ORs = ? 
+%\end{itemize}
+%} 
+%
+%Prediction accuracy is measured by the 
+
+%Considerations: 
+%
+%We use AUC to measure how well the factors explains / contributes to the model. AUC and Cox and Snell R2 are connected (https://onlinelibrary.wiley.com/doi/full/10.1002/sim.8806). Both are used to represent how well the factors explains the model (Cox and Snell R2  is an extension of R2 for measuring the percentage of variation explained in regression). Both are interchangeably used for calculating the minimum sample size based on the criterion regarding Nagelkerke's R-squared value. See The formula by given in Fig 5 of paper \cite{riley2020calculating}: https://www.research.manchester.ac.uk/portal/files/161373531/bmj.m441.full.pdf
+
+
+
+%%===========================
+%\bibliographystyle{imsart-nameyear}
+\bibliographystyle{ims}
+\bibliography{allMyReferences}
+
+\end{document}
+
+

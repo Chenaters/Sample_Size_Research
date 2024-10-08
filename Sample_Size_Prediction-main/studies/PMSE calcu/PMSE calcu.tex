@@ -1,0 +1,233 @@
+\documentclass[11pt]{article}
+%common citations: yu1989fixed,
+%Page Format control
+%-------------------------------------
+%formatting post: 
+%https://texblog.org/2012/03/01/latex-page-line-and-font-settings/
+\usepackage[top=1in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\onehalfspacing
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage{ytableau}
+
+
+
+
+
+%Packages
+\usepackage{amssymb,amsmath, amsthm, graphicx, color,subfigure, cancel,commath,ifthen,natbib, bm,alltt, graphicx,float}
+%external definitions
+%-------------------------------------
+%\input{HeaderBH}
+%multiline comment
+\newcommand\commentout[1]{}
+\graphicspath{ {./images/} }
+%-------------------------------------
+
+%-------
+%controllig equation numbering
+%https://tex.stackexchange.com/questions/42726/align-but-show-one-equation-%number-at-the-end
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+%or use align with \nonumber
+%-------
+
+\usepackage{xr} %These two lines allow cross  reference from the supplementary file. 
+\externaldocument{CombDiscreteTests_Suppl}
+\newcommand{\nc}{\newcommand}
+%\newcommand{\E}{\mathrm{E}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\SD}{\mathrm{SD}}
+\newcommand{\SNR}{\text{SNR}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Cor}{\mathrm{Cor}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\SIGMA}{\bm{\Sigma}}
+\newcommand{\BETA}{\bm{\beta}}
+\newcommand{\GAMMA}{\bm{\gamma}}
+
+
+%environments
+%=======================
+\newtheorem{defi}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{obs}{Observation}
+\newtheorem{cor}{Corollary}
+\newtheorem{lem}{Lemma}
+\newtheorem{ass}{Assumption}
+%=======================
+
+
+\begin{document}
+\thispagestyle{fancy}
+
+%===================================================
+\title{\bf Prediction Mean Square Error Calculation based on PMSE Improvement}
+%\author{...
+%\and
+%...
+%}
+\date{}
+\maketitle
+% 
+% \begin{abstract}
+%...
+%
+%
+%\bigskip 
+%
+%\noindent \textbf{KEYWORDS:} 
+% \end{abstract}
+%%===================================================
+%%END: frontmatter
+%
+%%BEGIN: \section{Introduction}\label{sec:Intro}
+%%===================================================
+%\newpage
+%
+
+%=======================
+\section{Aim}
+
+The report will summarize the degree of influence of the new predictors on the prediction accuracy of the model, reflected in $rPMSEp$ or $cohen's f^2$, corresponding to the efficient sample size required to achieve a certain prediction accuracy as a reference. Calculations based on data in \cite{baker2008chronicpain} are provided.
+
+
+ %=======================
+
+
+ %=======================
+   
+\section{Calculation}
+
+The calculation is based on the document "Sample size, the number of predictors and effects influence PMSE". The coefficients used to generate data refer to the result of the paper  \cite{baker2008chronicpain}. Since the paper gives only the correlation matrix and the regression coefficients are seen as standardized, the correlation matrix is used as the standardized covariance matrix $$\bm{\Sigma}^* = diag(SD)*Corr*diag(SD)$$
+where $SD$ is standard deviation vector.
+
+
+Consider a sample of $n=181$,  total $k=12$ predictors, of which $p=3$ predictors are ``basic predictors".The response and the predictors follow a multivariate normal distribution. That is, 
+$$
+(\boldsymbol{Y}, \boldsymbol{Z}) \sim MVN(\boldsymbol{\mu^*}, \boldsymbol{\Sigma}^*),
+$$
+where unknown mean vector$\boldsymbol{\mu^{*}}=(\mu_{0},\boldsymbol{\mu^{'}})'$, and unknown covariance matrix 
+$ \boldsymbol{\Sigma^{*}}  =    
+ \begin{pmatrix} 
+    \sigma_{00} & \boldsymbol{\sigma^{'}} \\  
+    \boldsymbol{\sigma} & \boldsymbol{\Sigma}
+\end{pmatrix}$. 
+
+Based on the distribution of $(Y, \boldsymbol{Z})$, the ``full regression" model containing $k$ predictors is  
+$$
+y_i = \alpha + \boldsymbol{z_i}'\boldsymbol{\beta} + \epsilon_i,
+$$
+where the error term $\epsilon_i \overset{\mathrm{iid}}{\sim} N(0, \sigma^2_k)$ is independent of $\boldsymbol{z_i}$ for each $i$, 
+and $\sigma^2_k = \sigma_{00} - \boldsymbol{\sigma}' \boldsymbol{\Sigma}^{-1} \boldsymbol{\sigma}$. The reduced model can be written as
+
+$$
+y_i = \alpha + \boldsymbol{z_{1i}}'\boldsymbol{\beta}_1^\sharp + \epsilon_i^\sharp,
+$$
+where, the error term $\epsilon_i^\sharp \overset{\mathrm{iid}}{\sim} N(0, \sigma^2_p)$ is independent of $\boldsymbol{z_{1i}}$ for each $i$, and $\sigma^2_p = \sigma_{00} - \boldsymbol{\sigma_1}' \boldsymbol{\Sigma}_{11}^{-1} \boldsymbol{\sigma}_1$. 
+
+The response $Pain  intensity$ and the $k = 12$ predictors follow a multivariate normal distribution with $\bm{\mu}^* = \boldsymbol{0}$ and
+
+\scriptsize{
+$$
+\bm{\Sigma}^* =
+\left[\begin{array}{ccccccccccccc}
+  1&   -0.24& 0.00 &-0.03& 0.45 &0.33 &0.26& 0.39 &-0.21& -0.05& 0.10& 0.16 &0.34\\
+  &1 &-0.21& -0.05 &-0.27 &-0.21& -0.09& 0.00 &0.27& 0.09 &0.34& 0.00 &-0.05 \\
+  & & 1&0.46& -0.19& 0.00& -0.19 &-0.14 &0.12& -0.24 &-0.29& -0.02& -0.13\\
+  & & & 1&-0.30& -0.04 &-0.18& -0.16& 0.16 &-0.05& -0.02& 0.07& -0.10 \\
+  & & & & 1&0.20& 0.64 &0.34 &-0.14& 0.20& 0.00 &0.03& 0.14 \\
+  & & & & & 1&0.33 &0.34& -0.07 &0.02& -0.1& -0.07& 0.11\\
+  & & & & & & 1& 0.46& -0.25 &0.15& -0.05 &-0.07 &0.18\\
+  & & & & & & & 1&-0.17& 0.13& 0.13 &-0.03& 0.26\\
+  & & & & & & & & 1& -0.03 &0.08 &0.03 &-0.57\\
+  & & & & & & & & & 1&0.68 &0.19& 0.10\\
+  & & & & & & & & & & 1&0.20 &0.09\\
+  & & & & & & & & & & & 1& 0.05\\
+ & & & & & & & & & & & &1
+ \end{array}\right]
+ $$
+ }
+ \normalsize
+ 
+ 
+ 
+ 
+The predictors are divided into demographic, health, and psychological factors according to \cite{baker2008chronicpain}. The reduced regression model contains demographic factors. The full regression model considered psychological factors while controlling the reduced predictors fixed. The variance of the error term in full regression $\sigma_k^2$ and that in reduced regression $\sigma_p^2$ is calculated by $\sigma^2_k = \sigma_{00} - \boldsymbol{\sigma}' \boldsymbol{\Sigma}^{-1} \boldsymbol{\sigma} = 0.4687399$ and $\sigma^2_p = \sigma_{00} - \boldsymbol{\sigma_1}' \boldsymbol{\Sigma_{11}}^{-1} \boldsymbol{\sigma_1} = 0.9393167$ in which the variance of response $\sigma_{00} = 1$ as standardized. 
+
+
+\subsection{Effects}
+The ``full model effects" by \cite{narula1974predictive}are \begin{equation}\begin{aligned}
+\label{eq:full.reg.coeff}
+\boldsymbol{\beta} &= \boldsymbol{\Sigma}^{-1}\boldsymbol{\sigma} \\
+&= (-0.13,  0.07,  0.10,  0.50,  0.23, -0.15,  0.18, -0.05, -0.47,  0.43,  0.14,  0.21). 
+\end{aligned}\end{equation}
+
+The coefficients here are not the same as those given in \cite{baker2008chronicpain}
+$$\boldsymbol{\beta^*} = (-0.20, -0.03, -0.02, -0.04, 0.12, 0.18, 0.26, 0.25, -0.01, 0.08, -0.26, 0.21)$$
+since the ``full model effects" is calculated only considering all of the predictors in the full model. Meanwhile, the model calculates the effect with added-up predictors controlling the former block of predictors fixed that is, therefore, closer to marginal effect.  
+
+Consider $p$ ``basic predictors" i.e. demographic predictors with a partitioned covariance matrix, the ``reduced-model effects" are 
+\begin{equation}\begin{aligned}
+\label{eq:redu.reg.coeff}
+\boldsymbol{\beta}_1^\sharp &= \boldsymbol{\Sigma}_{11}^{-1}\boldsymbol{\sigma}_1\\
+&=(-0.25 , -0.04,  -0.02).
+\end{aligned}\end{equation}
+The effects for demographic factors in $\boldsymbol{\beta}_1^\sharp$ is close to effect for demographic factors in $\boldsymbol{\beta^*}$
+
+
+\subsection{PMSE}
+The “improvement” of prediction by adding the new $k-p$ psychological predictors can be measured by the “percentage of PMSE reduction”:
+\begin{equation}\begin{aligned}
+\label{eq:pPMSEr}
+pPMSEr &= \left(\frac{PMSE_1 - PMSE}{PMSE_1} \right)\times 100\%\\
+&= \left(1 - \frac{\sigma_k^2}{\sigma_p^2} \cdot \frac{n-p-2}{n-k-2}\right)\times 100\% = 47.41\%.
+\end{aligned}\end{equation}
+The prediction mean square error measures the expected squared distance between what your predictor predicts for a specific value and what the true value is whereas $pPMSEr$ is used to demonstrate how much accuracy the new $k-p = 8$ predictors bring to the model. In this example, the introduction of psychological predictors into the model increased the model's prediction accuracy by 47\%.
+
+Generally speaking, PMSE will decrease as the sample size increases, so pPMSEr will increase as the sample size increases, that is, the larger the sample size, the better the prediction effect. However, the positive impact of sample size increase on prediction accuracy is limited illustrated by Prof. Wu in the report for SampleSizeAnalysis EPPIC.
+It shows that the prediction accuracy is stable when the sample size equals or exceeds a threshold. After the threshold, the increase in sample size is not cost-efficient to increase prediction accuracy. 
+
+The threshold as ``efficient sample size" with specific ``efficiency" $1-\alpha = 0.1$(e.g., 90\% of the largest pPMSEr at $n=\infty$). 
+$$
+n^* = p+2+(k-p)\left(\frac{EVR}{\alpha(1-EVR)}+1\right) = 103.6\approx 104
+$$
+where $EVR = \frac{\sigma_k^2}{\sigma_p^2}=0.499$.
+The actual used sample size in the paper is 181, which means the $rPMSEp$ should be greater than 0.1. On the flip side, with 181 sample size, the ``efficiency" $1-\alpha = 0.953$. The pPMSEr we obtained with sample size 181 could reach 95.3\% of the largest pPMSEr at $n=\infty$.
+
+
+\subsection{Cohen's $f^2$}
+
+Cohen's $f^2$ for the effects of new predictors conditional on the known predictors is defined as
+\begin{equation}
+\label{eq:f2}
+f_2^2 = \frac{R^2 - R_1^2}{1- R^2} = \frac{\sigma_p^2 - \sigma_k^2}{\sigma_k^2} = \frac{1 - \sigma_k^2/\sigma_p^2}{\sigma_k^2/\sigma_p^2}.
+\end{equation}
+which gives 
+\begin{equation}
+\label{eq:errorVarRatio-f2}
+\frac{\sigma_k^2}{\sigma_p^2}=\frac{1}{f_2^2 + 1}.
+\end{equation}
+
+The $R^2$ for full and reduced regression models are 
+$R^2 = \frac{\sigma_{00}-\sigma^2_k}{\sigma_{00}} = \frac{\boldsymbol{\sigma}' \boldsymbol{\Sigma}^{-1} \boldsymbol{\sigma}}{\sigma_{00}} = 0.53126$, $R_1^2 = \frac{\sigma_{00}-\sigma^2_p}{\sigma_{00}} = \frac{\boldsymbol{\sigma_1}' \boldsymbol{\Sigma}_{11}^{-1} \boldsymbol{\sigma}_1}{\sigma_{00}} = 0.0606$,
+corresponding to $R^2$ given in paper
+$$R^2 = 0.44, R_1^2 = 0.06$$
+By the definition of the squared multiple correlations $R^2$ and (\ref{eq:errorVarRatio-f2}), Cohen's $f^2$ can be calculated $f_2^2 = 0.3328571$, that is, the new $k-p = 8$ predictors have large effect size since $f^2\ge 0.15$.
+
+%----------------------------------
+\bibliographystyle{ims}
+\bibliography{PredictionSampleSize}
+%----------------------------------
+
+
+
+
+\end{document}
+

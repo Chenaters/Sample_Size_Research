@@ -1,0 +1,21 @@
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Literature Review}{4}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Analytical Result}{8}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Linear Model and Properties}{8}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Percentage of PMSE Reduction}{11}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Efficient Sample Size}{13}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Effect sizes}{14}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Example}{16}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Data}{16}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Calculation}{17}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Predictor Effects}{18}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}pPMSEr}{18}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Efficient Sample Size}{20}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Cohen's $f^2$}{20}{subsection.4.2.4}%
+\contentsline {section}{\numberline {4.3}Simulation}{21}{section.4.3}%
+\contentsline {chapter}{\numberline {5}Discussion}{26}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Appendix}{30}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Proof for Subset PMSE}{30}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Distribution Approximation of PMSE}{37}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Analytical Result}{37}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Approximation Simulation}{40}{subsection.6.2.2}%

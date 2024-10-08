@@ -1,0 +1,68 @@
+\begin{thebibliography}{8}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Baker~TA(2008)}]{baker2008chronicpain}
+\textsc{Baker~TA, C.~N., Buchanan~NT} (2008).
+\newblock Factors influencing chronic pain intensity in older black women:
+  examining depression, locus of control, and physical health.
+\newblock \textit{Womens Health (Larchmt)}.
+
+\bibitem[{Kerridge(1967)}]{kerridge1967errors}
+\textsc{Kerridge, D.} (1967).
+\newblock Errors of prediction in multiple regression with stochastic regressor
+  variables.
+\newblock \textit{Technometrics}, \textbf{9} 309--311.
+
+\bibitem[{Narula(1974)}]{narula1974predictive}
+\textsc{Narula, S.~C.} (1974).
+\newblock Predictive mean square error and stochastic regressor variables.
+\newblock \textit{Journal of the Royal Statistical Society: Series C (Applied
+  Statistics)}, \textbf{23} 11--17.
+
+\bibitem[{Riley et~al.(2019{\natexlab{a}})Riley, Snell, Ensor, Burke,
+  Harrell~Jr, Moons and Collins}]{riley2019minimum}
+\textsc{Riley, R.~D.}, \textsc{Snell, K.~I.}, \textsc{Ensor, J.},
+  \textsc{Burke, D.~L.}, \textsc{Harrell~Jr, F.~E.}, \textsc{Moons, K.~G.} and
+  \textsc{Collins, G.~S.} (2019{\natexlab{a}}).
+\newblock Minimum sample size for developing a multivariable prediction model:
+  Part i--continuous outcomes.
+\newblock \textit{Statistics in medicine}, \textbf{38} 1262--1275.
+
+\bibitem[{Riley et~al.(2019{\natexlab{b}})Riley, Snell, Ensor, Burke,
+  Harrell~Jr, Moons and Collins}]{riley2019minimums}
+\textsc{Riley, R.~D.}, \textsc{Snell, K.~I.}, \textsc{Ensor, J.},
+  \textsc{Burke, D.~L.}, \textsc{Harrell~Jr, F.~E.}, \textsc{Moons, K.~G.} and
+  \textsc{Collins, G.~S.} (2019{\natexlab{b}}).
+\newblock Minimum sample size for developing a multivariable prediction model:
+  Part ii-binary and time-to-event outcomes.
+\newblock \textit{Statistics in medicine}, \textbf{38} 1276--1296.
+
+\bibitem[{Sawyer(1982)}]{sawyer1982sample}
+\textsc{Sawyer, R.} (1982).
+\newblock Sample size and the accuracy of predictions made from multiple
+  regression equations.
+\newblock \textit{Journal of Educational Statistics}, \textbf{7} 91--104.
+
+\bibitem[{van~der Ploeg et~al.(2014)van~der Ploeg, Austin and
+  Steyerberg}]{van2014modern}
+\textsc{van~der Ploeg, T.}, \textsc{Austin, P.~C.} and \textsc{Steyerberg,
+  E.~W.} (2014).
+\newblock Modern modelling techniques are data hungry: a simulation study for
+  predicting dichotomous endpoints.
+\newblock \textit{BMC medical research methodology}, \textbf{14} 1--13.
+
+\bibitem[{van Smeden et~al.(2019)van Smeden, Moons, de~Groot, Collins, Altman,
+  Eijkemans and Reitsma}]{van2019sample}
+\textsc{van Smeden, M.}, \textsc{Moons, K.~G.}, \textsc{de~Groot, J.~A.},
+  \textsc{Collins, G.~S.}, \textsc{Altman, D.~G.}, \textsc{Eijkemans, M.~J.}
+  and \textsc{Reitsma, J.~B.} (2019).
+\newblock Sample size for binary logistic prediction models: beyond events per
+  variable criteria.
+\newblock \textit{Statistical methods in medical research}, \textbf{28}
+  2455--2474.
+
+\end{thebibliography}

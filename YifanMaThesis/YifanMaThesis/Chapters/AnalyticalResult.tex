@@ -1,0 +1,175 @@
+\chapter{Analytical Result}
+\section{Linear Model and Properties}
+We consider a sample size of $n$ independent individuals for $k$ predictors. For each individual $i = 1, ..., n$, we have a vector of all predictors $\boldsymbol{z_i}' = (z_{i1},..., z_{ik})$. We define the design matrix as $\boldsymbol{Z} = (\boldsymbol{z_1}', ..., \boldsymbol{z_n}')'$.
+
+Among the total $k$ predictors, $p$ of them are seen as basic predictors, corresponding to $\boldsymbol{z_{1i}}' = (z_{i1},..., z_{ip})$. The remaining $k-p$ predictors are called non-basic predictors (i.e., factors to be discovered in a newly proposed study), corresponding to $\boldsymbol{z_{2i}}' = (z_{i,(p+1)},..., z_{ik})$. Therefore, the partition can be written as $\boldsymbol{z_i}' = (\boldsymbol{z_{1i}}', \boldsymbol{z_{2i}}')$.
+
+We assume that the response and predictor variables follow a multivariate normal distribution, i.e.,
+$$
+(y_i, \boldsymbol{z_i}')' \sim MVN(\boldsymbol{\mu^*}, \boldsymbol{\Sigma^*}),
+$$
+where $\boldsymbol{\mu^{}}=(\mu_{0},\boldsymbol{\mu^{'}})'$ and ${\boldsymbol{\Sigma}^*}$ is the covariance matrix is defined by
+
+$${\boldsymbol{\Sigma}^*} = \begin{pmatrix}
+\sigma_{00} & \boldsymbol{\sigma^{'}} \\
+\boldsymbol{\sigma} & \boldsymbol{\Sigma}
+\end{pmatrix},$$
+where $\boldsymbol{\sigma}$ is the covariance vector, $\boldsymbol{\Sigma}$ is the covariance matrix among predictor variables, and $\sigma_{00}$ is the variance of response variable $\bm y$. 
+We further partition the covariance vector as $\boldsymbol{\sigma} = Cov(y_i, \boldsymbol{z_i}) = (\boldsymbol{\sigma_1}', \boldsymbol{\sigma_2}')'$, 
+and the variance matrix as
+$${\boldsymbol{\Sigma}} =
+\begin{pmatrix}
+{\boldsymbol{\Sigma}_{11}} & {\boldsymbol{\Sigma}_{12}} \\
+{\boldsymbol{\Sigma}_{21}} & {\boldsymbol{\Sigma}_{22}}
+\end{pmatrix}.$$
+Based on the distribution of the random variables $(y_i, \boldsymbol{z_i}')'$, we introduce the full regression model as follows:
+ 
+$$
+y_i = \alpha + \boldsymbol{z_i}'\boldsymbol{\beta} + \epsilon_i.
+$$
+
+The error term $\epsilon_i$ follows a normal distribution $N(0, \sigma_k^2)$, \begin{equation}\label{eq:sigmak2}
+\sigma_k^2 = \sigma_{00} - \boldsymbol{\sigma}' \boldsymbol{\Sigma}^{-1} \boldsymbol{\sigma},
+\end{equation} which is independent of $\boldsymbol{z_i}$.
+Additionally, $\boldsymbol{\beta}$ denotes the full-model effects and is given by:
+
+\begin{equation}
+\label{eq:full.reg.coeff}
+\boldsymbol{\beta} = \boldsymbol{\Sigma}^{-1}\boldsymbol{\sigma}. 
+\end{equation}
+where $\boldsymbol{\sigma}$ and $\boldsymbol{\Sigma}$ are the covariance vector and covariance matrix, respectively, of the random variables $(y_i, \boldsymbol{z_i}')'$. In particular, $\boldsymbol{\sigma}$ is the vector of covariances between $y_i$ and each element of $\boldsymbol{z_i}$, while $\boldsymbol{\Sigma}$ contains the covariances between the elements of $\boldsymbol{z_i}$.
+
+Similarly, we can partition $\boldsymbol{\beta}$ as $\boldsymbol{\beta} = (\boldsymbol{\beta}_1', \boldsymbol{\beta}_2')'$, where $\boldsymbol{\beta}_1$ and $\boldsymbol{\beta}_2$ denote the effects of the predictors in the first and second subsets of $\boldsymbol{z_i}$, respectively. Using matrix algebra, we obtain the following expressions for $\boldsymbol{\beta}_1$ and $\boldsymbol{\beta}_2$:
+\begin{equation}
+\begin{aligned}
+\boldsymbol{\beta}_1 &= ( \boldsymbol{\Sigma_{11}} -  \boldsymbol{\Sigma_{12}} \boldsymbol{\Sigma_{22}}^{-1}  \boldsymbol{\Sigma_{21}})^{-1}[\boldsymbol{\sigma}_1 -  \boldsymbol{\Sigma_{12}} \boldsymbol{\Sigma_{22}}^{-1}\boldsymbol{\sigma}_2]; \\
+\boldsymbol{\beta}_2 &= ( \boldsymbol{\Sigma_{22}} -  \boldsymbol{\Sigma_{21}} \boldsymbol{\Sigma_{11}}^{-1}  \boldsymbol{\Sigma_{12}})^{-1}[\boldsymbol{\sigma}_2 -  \boldsymbol{\Sigma_{21}} \boldsymbol{\Sigma_{11}}^{-1}\boldsymbol{\sigma}_1].
+\end{aligned}
+\end{equation}
+
+Furthermore, based on the distribution of the random variables $(y_i, \boldsymbol{z_{1i}}')'$, we consider the reduced regression model:
+\begin{equation}
+y_i = \alpha + \boldsymbol{z_{1i}}'\boldsymbol{\beta}_1^\sharp + \epsilon_i^\sharp,
+\end{equation}
+where $\epsilon_i^\sharp$ follows a normal distribution $N(0,\sigma_p^2)$,
+\begin{equation}\label{eq:sigmap2}
+\sigma_p^2 = \sigma_{00} - \boldsymbol{\sigma_1'\Sigma^{-1}_{11}\sigma_1},
+\end{equation}
+which is independent of $\boldsymbol{z_{1i}}$. In this case, the effects of the predictors in the first subset of $\boldsymbol{z_i}$ are denoted by $\boldsymbol{\beta}_1^\sharp$, and are given by:
+\begin{equation}
+\label{eq:redu.reg.coeff}
+\boldsymbol{\beta}_1^\sharp = \boldsymbol{\Sigma_{11}}^{-1}\boldsymbol{\sigma_1},
+\end{equation} 
+
+note that $\epsilon_i^\sharp$ is not independent of $\boldsymbol{z_{2i}}$ and they are multivariate normal.
+
+We can obtain the joint effects based on the marginal effects. Specifically, consider the marginal model regarding the $j$th predictor, $j=1, ..., k$,
+\begin{equation}
+y_i = \alpha + z_{ij}\beta_j^* + \epsilon_i^*.
+\end{equation}
+We have $\sigma_j = Cov(y_i, z_{ij}) = \Sigma_{jj} \beta_j^*$. 
+Denote the vector of the marginal coefficients/effects $\boldsymbol{\beta}^* = (\beta_1^*, ..., \beta_k^*)'$. We have
+\begin{equation}
+\label{eq:cov-y-Z}
+\boldsymbol{\sigma} = (\Sigma_{11}\beta^*_1, ...,  \Sigma_{kk}\beta^*_k)' = {\rm diag}(\boldsymbol{\Sigma})\boldsymbol{\beta}^*.
+\end{equation}
+
+Following Equation(\ref{eq:cov-y-Z}), the coefficients/effects in joint models Equation(\ref{eq:full.reg.coeff}) and Equation(\ref{eq:redu.reg.coeff}) can be obtained.
+\begin{align}
+\label{eq:jointBetaByMarg}
+\boldsymbol{\beta} &= \boldsymbol{\Sigma}^{-1}{\rm diag}(\boldsymbol{\Sigma})\boldsymbol{\beta}^*; \\
+\boldsymbol{\beta}_1^\sharp &= \boldsymbol{\Sigma}_{11}^{-1} {\rm diag}(\boldsymbol{\Sigma}_{11})\boldsymbol{\beta}^*_1.
+\end{align}
+In practice, $\beta_j^*$ and $\boldsymbol{\Sigma}$ may come from literature, prior studies or be estimated by data.
+
+\section{Percentage of PMSE Reduction}
+
+The predictive mean squared error (PMSE) based on the least squares estimator (LSE) of the full regression can be calculated using the formula presented by Kerridge in \cite{kerridge1967errors}. This formula is as follows:
+\begin{equation}\label{equation:PMSE}
+PMSE = E(y_0 - \hat{y}_0)^2 = \sigma_k^2 \frac{(n+1)(n-2)}{n(n-k-2)}.
+\end{equation}
+Here, $y_0$ is the true response value, $\hat{y}_0$ is the estimated response value, $\sigma_k^2$ is the error variance, and $n$ and $k$ are the sample size and the number of predictors, respectively.
+Similarly, the PMSE based on the LSE of the reduced regression can be calculated using the following formula:
+\begin{equation}\label{equation:PMSE1}
+PMSE_1 = E(y_0 - \tilde{y}_0)^2 = \sigma_p^2 \frac{(n+1)(n-2)}{n(n-p-2)}.
+\end{equation}
+Here, $\tilde{y}_0$ is the estimated response value based on the reduced regression, and $\sigma_k^2$ is the error variance of the reduced regression. 
+The present study includes an investigation into the approximation distribution for PMSE, which, although not utilized in the current analysis, is nevertheless explicated comprehensively with supporting evidence, proof, and simulation results, all of which are provided in the Appendix.
+
+To measure the improvement in the prediction that occurs by adding predictors, we use the percentage of PMSE reduction measure, which is given by the following equation:
+
+\begin{equation}
+\label{eq:pPMSEr}
+pPMSEr = \left(\frac{PMSE_1 - PMSE}{PMSE_1} \right)\times 100\%
+%\left(1 - \frac{E(y_0 - \hat{y}_0)^2}{E(y_0 - \tilde{y}_0)^2} \right)\times 100\%
+= \left(1 - \frac{\sigma_k^2}{\sigma_p^2} \cdot \frac{n-p-2}{n-k-2}\right)\times 100\%.
+\end{equation}
+which calculates the percentage difference between the PMSE of the reduced regression and the PMSE of the full regression. 
+The percentage of PMSE reduction can also be expressed in terms of the error variance ratio (EVR), which is defined as the ratio of the error variances of the full and reduced regressions:
+$$
+EVR = \frac{\sigma_k^2}{\sigma_p^2}. 
+$$
+Additionally, an inflation factor called $\lambda(n;p,p_2)$ can be defined as follows:$$
+\lambda(n; p, p_2) = \frac{n-p-2}{n-k-2} =  \frac{1}{1 - \frac{k-p}{n-p-2}} = \frac{1}{1 - \frac{p_2}{n-p-2}}, 
+$$
+where $p_2$ represents the number of non-basic predictors added to the reduced model to form the full model.
+The inflation factor $\lambda(n; p, p_2)$ is related to estimation error and uncertainty (analog to the inflation factor $K = \frac{(n+1)(n-2)}{n(n-k-2)}$ in \cite{sawyer1982sample}).  It should be noted that the percentage reduction measure can be negative, i.e., $E(y_0 - \hat{y}_0)^2 > E(y_0 - \tilde{y}_0)^2$, in certain situations, such as when the new and basic predictors are negatively correlated.
+
+
+
+\section{Efficient Sample Size}
+
+The reduction of prediction mean squared error (PMSE) in Equation(\ref{eq:pPMSEr}) is determined by several factors, including the sample size $n$, the number of known predictors $p$, and the number of new predictors $k-p$. A larger sample size $n$ tends to make the inflation factor $\lambda(n;p,p_2)$ approach 1, particularly while $k$ and $p$ remain fixed. This reflects the fact that the sample size has a limited impact on PMSE in the absence of estimation error or uncertainty.
+
+When considering the influence of the number of new predictors $p_2$ on PMSE, it is important to note that while increasing $p_2$ tends to increase the inflation factor, it may also decrease the full model variance $\sigma_k^2$. It is therefore desirable to have the reduction in variance outweigh the increase in inflation, assuming the effect sizes of the new predictors are not too small. However, if the new predictors have no effect (i.e., are false), the inflation increases while $\sigma_k^2$ remains constant, resulting in an increase in PMSE. From a sample size perspective, a larger $n$ is needed to effectively control inflation when a small or moderate number of false predictors are present. In other words, at any given $p_2$, a sufficiently large sample size can always ensure that the inflation factor is equal to 1. Assuming that the addition of new predictors always results in a decrease in $\sigma_k^2$ relative to $\sigma_p^2$, a large enough sample size is needed to ensure that the addition of new predictors does not worsen prediction accuracy.
+
+In this study, we observe that the pPMSEr is increasing as the sample size $n$ increases. To define an efficient sample size, denoted as $n^*$, we seek the smallest sample size such that the ratio of pPMSEr at $n^*$ to pPMSEr at infinity is greater than or equal to a specified efficiency level of $1-\alpha$, where $\alpha$ represents the complement of the efficiency level (e.g., 90\% of the largest pPMSEr at $n=\infty$).
+We can determine the efficient sample size by using the equations:
+$$
+\frac{pPMSEr(n^*)}{pPMSEr(\infty)} \geq 1-\alpha, 
+$$
+By 
+$$
+\frac{1 - EVR\cdot \lambda^*}{1 - EVR} = 1- \alpha 
+\text{ and } 
+\lambda^*=\frac{1}{1 - \frac{p_2}{n^*-p-2}},
+$$
+Solving for $\lambda^*$ and substituting into the first equation yields:\begin{equation}
+\label{eq:effi.n}
+n^* = p+2 + p_2 \cdot \frac{\lambda^*}{\lambda^*-1}, \text{ where } 
+\lambda^*= 1+ \alpha(\frac{1}{EVR} - 1 ). 
+\end{equation}
+Equation(\ref{eq:effi.n}) gives us the efficient sample size $n^*$, which we can use to obtain accurate predictions while minimizing sample size and associated costs.
+
+\section{Effect sizes}
+
+The reduction of PMSE in Equation(\ref{eq:pPMSEr}) is determined by the variances $\sigma_k^2$ and $\sigma_p^2$, which are relavent to the effect sizes and covariances of the predictors. There are various measures and interpretations regarding effect sizes. One representative measure is Cohen's $f^2$, which is based on the proportion of the variation explained by the predictors. 
+Let the proportion of the response's variance accounted for by all $k$ predictors defined by
+$$R^2 = \frac{\sigma_{00}-\sigma^2_k}{\sigma_{00}} = \frac{\boldsymbol{\sigma}' \boldsymbol{\Sigma}^{-1} \boldsymbol{\sigma}}{\sigma_{00}},$$ and the proportion of the response's variance accounted for by $p$ basic predictors 
+$$R_1^2 = \frac{\sigma_{00}-\sigma^2_p}{\sigma_{00}} = \frac{\boldsymbol{\sigma_1}' \boldsymbol{\Sigma}_{11}^{-1} \boldsymbol{\sigma}1}{\sigma{00}}.$$ 
+Cohen's $f^2$ for the effects of all predictors is 
+$$f^2 = \frac{R^2}{1-R^2},$$ 
+while Cohen's $f^2$ for the effects of new predictors conditional on the basic predictors is given by
+
+\begin{equation}
+\label{eq:f2}
+f_2^2 = \frac{R^2 - R_1^2}{1- R^2} = \frac{\sigma_p^2 - \sigma_k^2}{\sigma_k^2} = \frac{1 - \sigma_k^2/\sigma_p^2}{\sigma_k^2/\sigma_p^2}.
+\end{equation}
+which yields
+\begin{equation}
+\label{eq:errorVarRatio-f2}
+\frac{\sigma_k^2}{\sigma_p^2}=\frac{1}{f_2^2 + 1}.
+\end{equation}
+
+Another meaningful measure is regression coefficients, which provide a practical interpretation based on the original data scale (unstandardized measures). Using the joint or marginal regression coefficients, we can calculate $f_2^2$ from  Equation(\ref{eq:f2}) and Equation(\ref{eq:errorVarRatio-beta}) as follows:
+\begin{equation}
+\label{eq:errorVarRatio-beta}
+\frac{\sigma_k^2}{\sigma_p^2}
+=\frac{\sigma_{00} - \boldsymbol{\sigma}' \boldsymbol{\Sigma}^{-1} \boldsymbol{\sigma}}{\sigma_{00} - \boldsymbol{\sigma}_1' \boldsymbol{\Sigma}_{11}^{-1} \boldsymbol{\sigma}_1}
+=\frac{\sigma_{00} - \boldsymbol{\beta}' \boldsymbol{\Sigma} \boldsymbol{\beta}}{\sigma_{00} - \boldsymbol{\beta}_1^{\sharp\prime} \boldsymbol{\Sigma}_{11} \boldsymbol{\beta}_1^\sharp}
+=\frac{
+\sigma_{00} - \boldsymbol{\beta}^{*\prime} {\rm diag}(\boldsymbol{\Sigma}) \boldsymbol{\Sigma}^{-1} {\rm diag}(\boldsymbol{\Sigma})\boldsymbol{\beta}^*
+}{
+\sigma_{00} - \boldsymbol{\beta}_1^{*\prime} {\rm diag}(\boldsymbol{\Sigma}_{11})\boldsymbol{\Sigma}_{11}^{-1} {\rm diag}(\boldsymbol{\Sigma}_{11})\boldsymbol{\beta}_1^*
+}.
+\end{equation}
